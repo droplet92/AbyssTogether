@@ -8,11 +8,12 @@ public class ScreenResolutionSetting : MonoBehaviour
 
     public enum ScreenResolution
     {
-        VGA,        // 640x480
-        DoubleVGA,  // 960x640
-        XGA,        // 1024x768
+        nHD,        // 640x360
+        SD,         // 854x480
+        qHD,        // 960x540
         HD,         // 1280x720
-        FullXGA,    // 1366x768
+        FWXGA,      // 1366x768
+        HDPlus,     // 1600x900
         FullHD,     // 1920x1080
         WideQHD,    // 2560x1440
         UltraHD     // 3840x2160
@@ -31,20 +32,23 @@ public class ScreenResolutionSetting : MonoBehaviour
 
         switch (selection)
         {
-            case ScreenResolution.VGA:
-                Screen.SetResolution(640, 480, Screen.fullScreenMode);
+            case ScreenResolution.nHD:
+                Screen.SetResolution(640, 360, Screen.fullScreenMode);
                 break;
-            case ScreenResolution.DoubleVGA:
-                Screen.SetResolution(960, 640, Screen.fullScreenMode);
+            case ScreenResolution.SD:
+                Screen.SetResolution(854, 480, Screen.fullScreenMode);
                 break;
-            case ScreenResolution.XGA:
-                Screen.SetResolution(1024, 768, Screen.fullScreenMode);
+            case ScreenResolution.qHD:
+                Screen.SetResolution(960, 540, Screen.fullScreenMode);
                 break;
             case ScreenResolution.HD:
                 Screen.SetResolution(1280, 720, Screen.fullScreenMode);
                 break;
-            case ScreenResolution.FullXGA:
+            case ScreenResolution.FWXGA:
                 Screen.SetResolution(1366, 768, Screen.fullScreenMode);
+                break;
+            case ScreenResolution.HDPlus:
+                Screen.SetResolution(1600, 900, Screen.fullScreenMode);
                 break;
             case ScreenResolution.FullHD:
                 Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
