@@ -108,11 +108,6 @@ public class HandUI : MonoBehaviour
     {
         nFreeze = n;
     }
-    // public void ReduceCost(int delta)
-    // {
-    //     foreach (var card in handCards)
-    //         card.GetComponent<CardUI>().ReduceCost(delta);
-    // }
 
     private void ArrangeHand()
     {

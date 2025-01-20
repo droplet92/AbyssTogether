@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RestButton : CampExitButton
+public class CampRestButton : CampExitButton
 {
     public override void OnClick()
     {

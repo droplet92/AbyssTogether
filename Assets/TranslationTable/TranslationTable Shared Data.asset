@@ -239,6 +239,14 @@ MonoBehaviour:
     m_Key: Character Select
     m_Metadata:
       m_Items: []
+  - m_Id: 2876879971667968
+    m_Key: RemoveCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2876882198843392
+    m_Key: CopyCard
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

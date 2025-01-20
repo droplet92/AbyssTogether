@@ -4,11 +4,11 @@ public class BaseButton : MonoBehaviour
 {
     public virtual void OnClick()
     {
-        SfxManager.Instance.PlayClickSound();
+        // SfxManager.Instance.PlayClickSound();
     }
 
     public virtual void OnFocus()
     {
-        SfxManager.Instance.PlayFocusSound();
+        // SfxManager.Instance.PlayFocusSound();
     }
 }

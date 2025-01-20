@@ -83,7 +83,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10290305814528
-    m_Localized: Duplicate and remove 1 card from your deck.
+    m_Localized: Remove and copy 1 card
     m_Metadata:
       m_Items: []
   - m_Id: 10287994753024
@@ -240,6 +240,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1704988296728576
     m_Localized: Character Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2876879971667968
+    m_Localized: Select 1 card to remove from your deck
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2876882198843392
+    m_Localized: Select 1 card to copy from your deck
     m_Metadata:
       m_Items: []
   references:

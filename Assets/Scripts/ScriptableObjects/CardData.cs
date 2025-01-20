@@ -8,7 +8,6 @@ public class CardData : ScriptableObject
     public Sprite cardImage;
     public Sprite cardContentFrame;
     public string cardName;
-    public int cost;
     public LocalizedString description;
     public string targetType;
 }

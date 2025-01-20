@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 public class DeckManager : MonoBehaviour
 {
@@ -26,19 +25,13 @@ public class DeckManager : MonoBehaviour
             DeckDataJson temp = new DeckDataJson()
             {
                 cards = new List<string>()
+                {
+                    "Attack", "Attack", "AttackAll",
+                    "Shield", "Shield", "ShieldAll",
+                    "Heal", "Heal", "HealAll",
+                    "Buff", "Debuff", "Skill"
+                }
             };
-            temp.cards.Add("Attack");
-            temp.cards.Add("Attack");
-            temp.cards.Add("AttackAll");
-            temp.cards.Add("Shield");
-            temp.cards.Add("Shield");
-            temp.cards.Add("ShieldAll");
-            temp.cards.Add("Heal");
-            temp.cards.Add("Heal");
-            temp.cards.Add("HealAll");
-            temp.cards.Add("Buff");
-            temp.cards.Add("Debuff");
-            temp.cards.Add("Skill");
             File.WriteAllText(path, JsonUtility.ToJson(temp));
         }
         var data = File.ReadAllText(path);
@@ -76,18 +69,5 @@ public class DeckManager : MonoBehaviour
         hand.Add(drawnCard);
         
         return drawnCard;
-    }
-    public void PlayCard(CardData card)
-    {
-        if (hand.Contains(card))
-        {
-            // 카드 효과 적용 로직 등
-            // ...
-            hand.Remove(card);
-        }
-    }
-    public void ClearHand()
-    {
-        hand.Clear();
     }
 }

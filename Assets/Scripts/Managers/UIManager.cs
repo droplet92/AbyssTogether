@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -14,7 +15,10 @@ public class UIManager : MonoBehaviour
             settingsPanel.gameObject.SetActive(false);
 
             videoController.OnAllVideoEnd += ActivateStartCanvas;
-        }        
+        }
+        var path = Path.Combine(Application.dataPath, "Deck.json");
+        File.Delete(path);
+        
         PlayerPrefs.SetInt("level", 1);
         PlayerPrefs.SetInt("HpHealer", 30);
         PlayerPrefs.SetInt("HpMagician", 30);

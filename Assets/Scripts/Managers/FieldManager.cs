@@ -280,10 +280,6 @@ public class FieldManager : MonoBehaviour
 
         healer.AnimateSpell();
         healer.UpdateAttack(1);
-        // hand.ReduceCost(1);
-            
-        // foreach (var character in characterList)
-        //     character.AnimateSpell();
     }
     private void GreenPotion(object _, Character target)
     {

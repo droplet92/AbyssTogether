@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class CampExitButton : BaseButton
 {
-    [SerializeField] private Image image;
+    [SerializeField] private Image fadeOut;
 
     public override void OnClick()
     {
@@ -14,8 +14,12 @@ public class CampExitButton : BaseButton
         int level = PlayerPrefs.GetInt("level");
 
         PlayerPrefs.SetInt("level", level + 1);
-        image.gameObject.SetActive(true);
-        image.DOFade(1f, 1.5f)
+        fadeOut.gameObject.SetActive(true);
+        fadeOut.DOFade(1f, 1f)
             .OnComplete(() => SceneManager.LoadScene("LevelScene"));
+    }
+    protected void BaseOnClick()
+    {
+        base.OnClick();
     }
 }

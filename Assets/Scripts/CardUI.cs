@@ -16,7 +16,6 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     [SerializeField] private Image cardContentFrame;
     [SerializeField] private TextMeshProUGUI cardNameText;
     [SerializeField] private TextMeshProUGUI cardNameShadowText;
-    [SerializeField] private TextMeshProUGUI cardCostText;
     [SerializeField] private TextMeshProUGUI cardDescriptionText;
 
     private Character owner;
@@ -32,7 +31,6 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     private int originSiblingIndex;
     private ICardTarget hoveredTarget;
     private bool isFreeze = false;
-    private int itemCost = 0;
     private bool uiOnly = false;
 
     void Start()
@@ -41,9 +39,6 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         fieldPanel = canvas.GetComponentInChildren<FieldManager>();
         handPanel = GetComponentInParent<HandUI>();
         currentRectTransform = GetComponent<RectTransform>();
-        
-        // if (PlayerPrefs.GetInt("ItemMagicBook") == 1)
-        //     itemCost = 1;
     }
     void OnDestroy()
     {
@@ -153,7 +148,6 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         cardContentFrame.sprite = data.cardContentFrame;
         cardNameText.text = data.cardName;
         cardNameShadowText.text = data.cardName;
-        cardCostText.text = (data.cost - itemCost).ToString();
         targetType = data.targetType;
 
         localizedDescription = data.description;
@@ -169,12 +163,6 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         isFreeze = true;
         cardFrame.color = Color.black;
     }
-    // public void ReduceCost(int delta)
-    // {
-    //     var updatedCost = math.max(Int32.Parse(cardCostText.text) - delta, 0);
-    //     itemCost += delta;
-    //     cardCostText.text = updatedCost.ToString();
-    // }
     public void Exhibit()
     {
         uiOnly = isFreeze = true;
