@@ -17,21 +17,21 @@ public class SceneTransitionManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void LoadSceneWithCrossfade(string sceneName, bool toCombat)
+    public void LoadSceneWithCrossfade(string sceneName, bool toBattle)
     {
-        StartCoroutine(TransitionScene(sceneName, toCombat));
+        StartCoroutine(TransitionScene(sceneName, toBattle));
     }
     public void LoadOpeningSceneWithCrossfade()
     {
         StartCoroutine(TransitionOpeningScene());
     }
 
-    private IEnumerator TransitionScene(string sceneName, bool toCombat)
+    private IEnumerator TransitionScene(string sceneName, bool toBattle)
     {
-        if (toCombat)
-            BgmManager.Instance.SwitchToCombatBGM();
+        if (toBattle)
+            BgmManager.Instance.SwitchToBattleBGM();
         else
-            BgmManager.Instance.SwitchToNonCombatBGM();
+            BgmManager.Instance.SwitchToNonBattleBGM();
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         asyncLoad.allowSceneActivation = false;

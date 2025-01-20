@@ -107,19 +107,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1680742388453376
-    m_Localized: Damage {0} (Target)
+    m_Localized: Damage <color=#4E9F3D>{0}</color> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1682143718002688
-    m_Localized: Damage {0} (Target)
+    m_Localized: Damage <color=#4E9F3D>{0}</color> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1680775640895488
-    m_Localized: Damage {0} (All)
+    m_Localized: Damage <color=#4E9F3D>{0}</color> (All)
     m_Metadata:
       m_Items: []
   - m_Id: 1680796415283200
-    m_Localized: Attack +3 (Target)
+    m_Localized: Attack <color=#4E9F3D>+3</color> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1680815407091712
@@ -127,27 +127,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1681965237784576
-    m_Localized: Heal +{0} (Target)
+    m_Localized: Heal <color=#4E9F3D>+{0}</color> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1681969230761984
-    m_Localized: Heal +{0} (Party)
+    m_Localized: Heal <color=#4E9F3D>+{0}</color> (Party)
     m_Metadata:
       m_Items: []
   - m_Id: 1681971613126656
-    m_Localized: Defense +{0} (Target)
+    m_Localized: Defense <color=#4E9F3D>+{0}</color> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1681973362151424
-    m_Localized: Defense +{0} (Party)
+    m_Localized: Defense <color=#4E9F3D>+{0}</color> (Party)
     m_Metadata:
       m_Items: []
   - m_Id: 1683936636162048
-    m_Localized: Attack {0}
+    m_Localized: Attack <color=#4E9F3D>{0}</color>
     m_Metadata:
       m_Items: []
   - m_Id: 1683955695079424
-    m_Localized: Defense {0}
+    m_Localized: Defense <color=#4E9F3D>{0}</color>
     m_Metadata:
       m_Items: []
   - m_Id: 1684214173257728
@@ -243,11 +243,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2876879971667968
-    m_Localized: Select 1 card to remove from your deck
+    m_Localized: Select 1 card to <color=#FFD369>remove</color> from your deck
     m_Metadata:
       m_Items: []
   - m_Id: 2876882198843392
-    m_Localized: Select 1 card to copy from your deck
+    m_Localized: Select 1 card to <color=#FFD369>copy</color> from your deck
     m_Metadata:
       m_Items: []
   references:

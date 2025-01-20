@@ -17,12 +17,6 @@ public class RewardPanel : MonoBehaviour
 
     private LocalizedString localizedDescription;
 
-    void Start()
-    {
-        localizedDescription.StringChanged += OnStringChanged;
-
-        localizedDescription.RefreshString();
-    }
     void OnDestroy()
     {
         localizedDescription.StringChanged -= OnStringChanged;

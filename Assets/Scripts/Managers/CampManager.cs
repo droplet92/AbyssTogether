@@ -5,7 +5,7 @@ public class CampManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text levelText;
 
-    void Start()
+    void Awake()
     {
         int level = PlayerPrefs.GetInt("level");
         levelText.text = level.ToString();

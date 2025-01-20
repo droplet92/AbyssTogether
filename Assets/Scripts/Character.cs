@@ -23,7 +23,7 @@ public class Character : MonoBehaviour, ICardTarget
     public delegate void OnAttackChanged();
     public event OnAttackChanged attackChanged = () => {};
 
-    void Start()
+    void Awake()
     {
         CurrentHealth = PlayerPrefs.GetInt($"Hp{gameObject.name}", maxHealth);
         

@@ -31,7 +31,12 @@ public class FieldManager : MonoBehaviour
             itemHealerAttack = 1;
         
         foreach (var character in characterList)
-            character.buffs.UpdateContents(itemAttack, itemDefense);
+        {
+            if (character.gameObject.activeSelf)
+                character.buffs.UpdateContents(itemAttack, itemDefense);
+        }
+        if (characterList[3].gameObject.activeSelf)
+            characterList[3].buffs.UpdateContents(itemHealerAttack, 0);
     }
     void Update()
     {
@@ -66,7 +71,6 @@ public class FieldManager : MonoBehaviour
     }
     public void ApplyEffect(string targetType, object from, ICardTarget target, string functionName)
     {
-        Debug.Log($"{targetType}, {from}, {target}, {functionName}");
         Type type = typeof(FieldManager);
         MethodInfo methodInfo = type.GetMethod(functionName, BindingFlags.Instance | BindingFlags.NonPublic);
 
@@ -91,8 +95,6 @@ public class FieldManager : MonoBehaviour
         {
             if (targetType == "Monster" || targetType == "MonsterAll")
                 monsterList.Remove((Monster)target);
-            // else
-            //     characterList.Remove((Character)target);
         }
     }
 

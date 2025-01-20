@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<GameObject> levels;
     [SerializeField] private TMP_Text levelText;
 
-    void Start()
+    void Awake()
     {
         int level = PlayerPrefs.GetInt("level");
         levelText.text = level.ToString();

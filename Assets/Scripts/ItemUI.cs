@@ -8,6 +8,7 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private Transform statusBar;
     [SerializeField] private EquipmentDatabase db;
     [SerializeField] private Image portrait;
+    [SerializeField] private Image marker;
     [SerializeField] private Image image;
     [SerializeField] private GameObject tooltipPrefab;
     [SerializeField] private string itemName;
@@ -30,6 +31,8 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             var rectTransform = image.GetComponent<RectTransform>();
             tooltip.GetComponent<RectTransform>().position = rectTransform.position + new Vector3(230f, -25f, 0);
         }
+        if (name == $"ItemSlot{5 - PlayerPrefs.GetInt("PlayerCharacter")}")
+            marker.gameObject.SetActive(true);
     }
     void Update()
     {

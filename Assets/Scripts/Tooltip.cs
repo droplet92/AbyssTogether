@@ -1,4 +1,3 @@
-using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -13,18 +12,13 @@ public class Tooltip : MonoBehaviour
     private LocalizedString localizedName;
     private LocalizedString localizedDescription;
 
-    void Start()
-    {
-        // localizedName.StringChanged += OnNameChanged;
-        // localizedDescription.StringChanged += OnDescriptionChanged;
-
-        // localizedName.RefreshString();
-        // localizedDescription.RefreshString();
-    }
     void OnDestroy()
     {
-        localizedName.StringChanged -= OnNameChanged;
-        localizedDescription.StringChanged -= OnDescriptionChanged;
+        if (localizedName != null)
+            localizedName.StringChanged -= OnNameChanged;
+        
+        if (localizedDescription != null)
+            localizedDescription.StringChanged -= OnDescriptionChanged;
     }
 
     public void SetTooltipData(LocalizedString name, LocalizedString description)

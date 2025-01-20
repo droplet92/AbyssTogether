@@ -16,11 +16,11 @@ public class TurnManager : MonoBehaviour
     private int nDraws = 4;
     private int playerCharacter;
 
-    void Start()
+    void Awake()
     {
         int level = PlayerPrefs.GetInt("level");
         levelText.text = level.ToString();
-        playerCharacter = PlayerPrefs.GetInt("PlayerCharacter");
+        playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
 
         StartCoroutine(StartTurn());
     }

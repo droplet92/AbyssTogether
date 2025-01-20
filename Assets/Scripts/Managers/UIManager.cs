@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasRenderer settingsPanel;
     [SerializeField] private VideoController videoController;
 
-    void Start()
+    void Awake()
     {
         if (canvas != null)
         {
@@ -17,7 +18,11 @@ public class UIManager : MonoBehaviour
             videoController.OnAllVideoEnd += ActivateStartCanvas;
         }
         var path = Path.Combine(Application.dataPath, "Deck.json");
-        File.Delete(path);
+        DeckDataJson temp = new DeckDataJson()
+        {
+            cards = new List<string>()
+        };
+        File.WriteAllText(path, JsonUtility.ToJson(temp));
         
         PlayerPrefs.SetInt("level", 1);
         PlayerPrefs.SetInt("HpHealer", 30);

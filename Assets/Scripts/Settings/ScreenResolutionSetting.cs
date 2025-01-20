@@ -19,7 +19,7 @@ public class ScreenResolutionSetting : MonoBehaviour
         UltraHD     // 3840x2160
     }
 
-    private void Start()
+    void Awake()
     {
         int value = PlayerPrefs.GetInt("ScreenMode", (int)ScreenResolution.FullHD);
         

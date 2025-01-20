@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.Audio; // AudioMixer
-using UnityEngine.UI;    // Slider
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class VolumeSettings : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class VolumeSettings : MonoBehaviour
     private readonly string BGM_VOL = "BGMVolume";
     private readonly string SFX_VOL = "SFXVolume";
 
-    private void Start()
+    void Awake()
     {
         float defaultMaster = PlayerPrefs.GetFloat(MASTER_VOL, 1f);
         float defaultBGM    = PlayerPrefs.GetFloat(BGM_VOL,    1f);

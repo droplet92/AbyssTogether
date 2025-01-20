@@ -9,10 +9,8 @@ public class VideoController : MonoBehaviour
     public delegate void AllVideoEndHandler();
     public event AllVideoEndHandler OnAllVideoEnd;
     
-    void Start()
+    void Awake()
     {
-        Debug.Log("Video starts.");
-        
         logoPlayer.loopPointReached += OnLogoEnd;
         introPlayer.loopPointReached += OnIntroEnd;
     }

@@ -15,7 +15,7 @@ public class ScreenModeSetting : MonoBehaviour
         Window
     }
 
-    private void Start()
+    void Awake()
     {
         int value = PlayerPrefs.GetInt("ScreenMode", (int)ScreenMode.FullScreenWindow);
         

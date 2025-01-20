@@ -19,6 +19,7 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     [SerializeField] private TextMeshProUGUI cardDescriptionText;
 
     private Character owner;
+    private int itemAttack = 0;
     private LocalizedString localizedDescription;
     private string targetType;
     private Canvas canvas;
@@ -33,7 +34,7 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     private bool isFreeze = false;
     private bool uiOnly = false;
 
-    void Start()
+    void Awake()
     {
         canvas = GetComponentInParent<Canvas>();
         fieldPanel = canvas.GetComponentInChildren<FieldManager>();
@@ -153,10 +154,18 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         localizedDescription = data.description;
         localizedDescription.StringChanged += OnStringChanged;
 
-        localizedDescription.RefreshString();
-
         if (owner != null)
+        {
+            if (owner.gameObject.activeSelf)
+            {
+                itemAttack = PlayerPrefs.GetInt("ItemSword");
+
+                if (owner.name == "Healer")
+                    itemAttack += PlayerPrefs.GetInt("ItemMagicBook");
+            }
             owner.attackChanged += () => localizedDescription.RefreshString();
+        }
+        localizedDescription.RefreshString();
     }
     public void Freeze()
     {
@@ -176,7 +185,7 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     private void OnStringChanged(string value)
     {
         if (owner != null)
-            cardDescriptionText.text = value.FormatSmart(owner.Attack);
+            cardDescriptionText.text = value.FormatSmart(owner.Attack + itemAttack);
 
         else if (cardNameText.text == "Shield" || cardNameText.text == "ShieldAll")
             cardDescriptionText.text = value.FormatSmart(6);

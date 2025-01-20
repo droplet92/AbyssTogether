@@ -26,10 +26,12 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void Start()
     {
+        tooltip = Instantiate(tooltipPrefab, statusBar).GetComponent<Tooltip>();
         canvas = GetComponentInParent<Canvas>();
         fieldPanel = canvas.GetComponentInChildren<FieldManager>();
         currentRectTransform = GetComponent<RectTransform>();
 
+        tooltip.gameObject.SetActive(false);
         SetPotionData();
     }
     public void OnPointerEnter(PointerEventData eventData)
@@ -124,18 +126,15 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             var potion = db.GetPotion(name);
 
-            tooltip = Instantiate(tooltipPrefab, statusBar).GetComponent<Tooltip>();
             image.sprite = potion.potionImage;
             image.color = Color.white;
             potionName = potion.name;
             targetType = potion.targetType;
             isActive = true;
 
-            tooltip.SetTooltipData(potion.potionName, potion.description);
-            tooltip.gameObject.SetActive(false);
-
-            var rectTransform = image.GetComponent<RectTransform>();
+            var rectTransform = GetComponent<RectTransform>();
             tooltip.GetComponent<RectTransform>().position = rectTransform.position + new Vector3(230f, -25f, 0);
+            tooltip.SetTooltipData(potion.potionName, potion.description);
         }
     }
 

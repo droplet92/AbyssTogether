@@ -4,8 +4,8 @@ using UnityEngine;
 public class BgmManager : MonoBehaviour
 {
     [SerializeField] private AudioSource openingBGM;
-    [SerializeField] private AudioSource combatBGM;
-    [SerializeField] private AudioSource nonCombatBGM;
+    [SerializeField] private AudioSource battleBGM;
+    [SerializeField] private AudioSource nonBattleBGM;
 
     public static BgmManager Instance { get; private set; }
 
@@ -15,6 +15,8 @@ public class BgmManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            battleBGM.Play();
+            nonBattleBGM.Play();
         }
         else
             Destroy(gameObject);
@@ -26,25 +28,23 @@ public class BgmManager : MonoBehaviour
     }
     public void StopOpeningBGM()
     {
-        StartCoroutine(CrossFade(nonCombatBGM, openingBGM));
+        StartCoroutine(CrossFade(nonBattleBGM, openingBGM));
     }
     public void SwitchToOpeningBGM()
     {
-        StartCoroutine(CrossFade(openingBGM, combatBGM));
+        StartCoroutine(CrossFade(openingBGM, battleBGM));
     }
-    public void SwitchToCombatBGM()
+    public void SwitchToBattleBGM()
     {
-        StartCoroutine(CrossFade(combatBGM, nonCombatBGM));
+        StartCoroutine(CrossFade(battleBGM, nonBattleBGM));
     }
-    public void SwitchToNonCombatBGM()
+    public void SwitchToNonBattleBGM()
     {
-        StartCoroutine(CrossFade(nonCombatBGM, combatBGM));
+        StartCoroutine(CrossFade(nonBattleBGM, battleBGM));
     }
 
     private IEnumerator CrossFade(AudioSource fadeInSource, AudioSource fadeOutSource)
     {
-        fadeInSource.Play();
-
         const float duration = 1f;
         float elapsedTime = 0f;
 
@@ -60,6 +60,5 @@ public class BgmManager : MonoBehaviour
         }
         fadeInSource.volume = 1f;
         fadeOutSource.volume = 0f;
-        fadeOutSource.Stop();
     }
 }

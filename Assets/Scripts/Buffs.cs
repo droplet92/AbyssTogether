@@ -13,8 +13,10 @@ public class Buffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private int attack = 0;
     private int defense = 0;
     
-    void Start()
+    void Awake()
     {
+        tooltip = Instantiate(tooltipPrefab, transform).GetComponent<BuffTooltip>();
+        tooltip.gameObject.SetActive(false);
         UpdateContents(0, 0);
     }
     public void UpdateContents(int da, int dd)
@@ -25,8 +27,11 @@ public class Buffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (attack != 0 || defense != 0)
         {
             isActive = true;
-            tooltip = Instantiate(tooltipPrefab, transform).GetComponent<BuffTooltip>();
 
+            Debug.Log(this);
+            Debug.Log(tooltip);
+            Debug.Log(tooltip.gameObject);
+            tooltip.gameObject.SetActive(true);
             tooltip.SetTooltipData(attack, defense);
             tooltip.gameObject.SetActive(false);
 

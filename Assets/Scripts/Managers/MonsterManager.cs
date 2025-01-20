@@ -30,7 +30,7 @@ public class MonsterManager : MonoBehaviour
         new List<string>{"HeavensDeadAngel"},
     };
 
-    void Start()
+    void Awake()
     {
         var level = PlayerPrefs.GetInt("level");
         var monsters = levelMap[level - 1];

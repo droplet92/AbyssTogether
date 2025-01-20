@@ -15,7 +15,7 @@ public class BuffTooltip : MonoBehaviour
     private int attack = 0;
     private int defense = 0;
 
-    void Start()
+    void Awake()
     {
         localizedAttack.StringChanged += OnAttackChanged;
         localizedDefense.StringChanged += OnDefenseChanged;
