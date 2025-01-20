@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a09e819569b75941aac80d8b87f7ecf, type: 3}
+  m_Name: BluePotion
+  m_EditorClassIdentifier: 
+  potionName:
+    m_TableReference:
+      m_TableCollectionName: GUID:9d3efb68ec8fa064a8086ddd09c64eb1
+    m_TableEntryReference:
+      m_KeyId: 1687057227698176
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  potionImage: {fileID: 21300000, guid: 10876d86c0d0c7948ab7c3f219be6325, type: 3}
+  description:
+    m_TableReference:
+      m_TableCollectionName: GUID:9d3efb68ec8fa064a8086ddd09c64eb1
+    m_TableEntryReference:
+      m_KeyId: 1687730509959168
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  targetType: CharacterAll
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae5220cfb870c0448c3c3d949e52de4, type: 3}
+  m_Name: Criven
+  m_EditorClassIdentifier: 
+  body: {fileID: 21300000, guid: de7e08b244a5fe54398a282d58a56708, type: 3}
+  bodyHightlight: {fileID: 21300000, guid: eb790177e92940f469c7b61c5f3b712b, type: 3}
+  health: 12
+  attack: 8
+  defense: 0
+  actions:
+  - ActionAttack
