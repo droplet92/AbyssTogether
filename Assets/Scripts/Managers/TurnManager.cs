@@ -14,11 +14,13 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private List<Monster> monsterList;
 
     private int nDraws = 4;
+    private int playerCharacter;
 
     void Start()
     {
         int level = PlayerPrefs.GetInt("level");
         levelText.text = level.ToString();
+        playerCharacter = PlayerPrefs.GetInt("PlayerCharacter");
 
         StartCoroutine(StartTurn());
     }
@@ -53,7 +55,8 @@ public class TurnManager : MonoBehaviour
                 break;
             }
         }
-        if (isOver)
+        bool isPlayerDied = !characterList[playerCharacter].gameObject.activeSelf || characterList[playerCharacter].isDied();
+        if (isOver || isPlayerDied)
         {
             resultPanel.gameObject.SetActive(true);
             resultPanel.ShowDefeat();
