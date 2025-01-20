@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CharacterSelectButton : MonoBehaviour
+public class CharacterSelectButton : BaseButton
 {
-    public void OnClick()
+    public override void OnClick()
     {
+        base.OnClick();
         SceneManager.LoadScene("LevelScene");
     }
 }

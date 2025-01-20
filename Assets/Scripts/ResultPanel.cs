@@ -43,13 +43,13 @@ public class ResultPanel : MonoBehaviour
         PlayerPrefs.SetInt("level", level + 1);
 
         if (level == 17)
-            SceneManager.LoadScene("OpeningScene");
+            SceneTransitionManager.Instance.LoadOpeningSceneWithCrossfade();
         else
-            SceneManager.LoadScene("LevelScene");
+            SceneTransitionManager.Instance.LoadSceneWithCrossfade("LevelScene", false);
     }
 
     private void Defeat()
     {
-        SceneManager.LoadScene("OpeningScene");
+        SceneTransitionManager.Instance.LoadOpeningSceneWithCrossfade();
     }
 }

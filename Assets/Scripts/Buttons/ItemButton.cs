@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class PotionButton : MonoBehaviour
+public class ItemButton : BaseButton
 {
     [SerializeField] private RewardPanel panel;
 
-    public void OnClick()
+    public override void OnClick()
     {
+        base.OnClick();
         panel.gameObject.SetActive(true);
-        panel.ShowPotion();
+        panel.ShowItem();
     }
 }

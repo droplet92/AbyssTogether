@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class GameSettingsButton : MonoBehaviour
+public class GameSettingsButton : BaseButton
 {
     [SerializeField] private CanvasRenderer settingsPanel;
 
-    public void OnClick()
+    public override void OnClick()
     {
+        base.OnClick();
         settingsPanel.gameObject.SetActive(!settingsPanel.gameObject.activeSelf);
     }
 }

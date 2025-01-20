@@ -2109,6 +2109,7 @@ GameObject:
   - component: {fileID: 235635163}
   - component: {fileID: 235635162}
   - component: {fileID: 235635161}
+  - component: {fileID: 235635165}
   - component: {fileID: 235635164}
   m_Layer: 5
   m_Name: ItemButton
@@ -2244,6 +2245,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1782282435}
+--- !u!114 &235635165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235635159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 235635164}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
 --- !u!1 &236580997
 GameObject:
   m_ObjectHideFlags: 0
@@ -3987,8 +4017,8 @@ GameObject:
   - component: {fileID: 428666257}
   - component: {fileID: 428666256}
   - component: {fileID: 428666255}
-  - component: {fileID: 428666254}
   - component: {fileID: 428666253}
+  - component: {fileID: 428666254}
   m_Layer: 5
   m_Name: OkButton
   m_TagString: Untagged
@@ -4033,9 +4063,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: OnButtonEnter
+        - m_Target: {fileID: 428666254}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4102,18 +4132,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 428666254}
         m_TargetAssemblyTypeName: OkButton, Assembly-CSharp
         m_MethodName: OnClick
@@ -4532,8 +4550,8 @@ GameObject:
   - component: {fileID: 478908545}
   - component: {fileID: 478908544}
   - component: {fileID: 478908543}
-  - component: {fileID: 478908542}
   - component: {fileID: 478908541}
+  - component: {fileID: 478908542}
   m_Layer: 5
   m_Name: OkButton
   m_TagString: Untagged
@@ -4578,9 +4596,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: OnButtonEnter
+        - m_Target: {fileID: 478908542}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4647,18 +4665,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 478908542}
         m_TargetAssemblyTypeName: OkButton, Assembly-CSharp
         m_MethodName: OnClick
@@ -5434,6 +5440,7 @@ GameObject:
   - component: {fileID: 586849908}
   - component: {fileID: 586849907}
   - component: {fileID: 586849906}
+  - component: {fileID: 586849909}
   m_Layer: 5
   m_Name: EndTurnButton
   m_TagString: Untagged
@@ -5555,6 +5562,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586849904}
   m_CullTransparentMesh: 1
+--- !u!114 &586849909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586849904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1052320354}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
 --- !u!1 &587467988
 GameObject:
   m_ObjectHideFlags: 0
@@ -5642,8 +5678,8 @@ GameObject:
   - component: {fileID: 607681505}
   - component: {fileID: 607681504}
   - component: {fileID: 607681503}
-  - component: {fileID: 607681502}
   - component: {fileID: 607681501}
+  - component: {fileID: 607681502}
   m_Layer: 5
   m_Name: CancelButton
   m_TagString: Untagged
@@ -5688,9 +5724,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: OnButtonEnter
+        - m_Target: {fileID: 607681502}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -5761,18 +5797,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 607681502}
         m_TargetAssemblyTypeName: CancelButton, Assembly-CSharp
         m_MethodName: OnClick
@@ -8540,6 +8564,7 @@ GameObject:
   - component: {fileID: 897286236}
   - component: {fileID: 897286235}
   - component: {fileID: 897286234}
+  - component: {fileID: 897286237}
   - component: {fileID: 897286233}
   m_Layer: 5
   m_Name: OkButton
@@ -8675,6 +8700,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897286230}
   m_CullTransparentMesh: 1
+--- !u!114 &897286237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897286230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 897286233}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
 --- !u!1 &921434473
 GameObject:
   m_ObjectHideFlags: 0
@@ -9361,6 +9415,7 @@ GameObject:
   - component: {fileID: 956902739}
   - component: {fileID: 956902738}
   - component: {fileID: 956902737}
+  - component: {fileID: 956902741}
   - component: {fileID: 956902740}
   m_Layer: 5
   m_Name: PotionButton
@@ -9496,6 +9551,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1782282435}
+--- !u!114 &956902741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956902735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 956902740}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
 --- !u!1 &976839840
 GameObject:
   m_ObjectHideFlags: 0
@@ -9620,6 +9704,7 @@ GameObject:
   - component: {fileID: 997336059}
   - component: {fileID: 997336058}
   - component: {fileID: 997336057}
+  - component: {fileID: 997336061}
   - component: {fileID: 997336060}
   m_Layer: 5
   m_Name: SettingsButton
@@ -9754,6 +9839,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 1148538938}
+--- !u!114 &997336061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997336055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 997336060}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
 --- !u!1 &999186706
 GameObject:
   m_ObjectHideFlags: 0
@@ -10592,6 +10706,7 @@ GameObject:
   - component: {fileID: 1052320351}
   - component: {fileID: 1052320353}
   - component: {fileID: 1052320357}
+  - component: {fileID: 1052320358}
   - component: {fileID: 1052320354}
   - component: {fileID: 1052320356}
   m_Layer: 5
@@ -10727,6 +10842,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &1052320358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052320350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1052320354}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
 --- !u!1 &1066113551
 GameObject:
   m_ObjectHideFlags: 0
@@ -12718,8 +12862,8 @@ GameObject:
   - component: {fileID: 1236298959}
   - component: {fileID: 1236298958}
   - component: {fileID: 1236298957}
-  - component: {fileID: 1236298956}
   - component: {fileID: 1236298955}
+  - component: {fileID: 1236298956}
   m_Layer: 5
   m_Name: OkButton
   m_TagString: Untagged
@@ -12764,9 +12908,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: OnButtonEnter
+        - m_Target: {fileID: 1236298956}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -12833,18 +12977,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1236298956}
         m_TargetAssemblyTypeName: OkButton, Assembly-CSharp
         m_MethodName: OnClick

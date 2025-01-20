@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class OkButton : MonoBehaviour
+public class OkButton : BaseButton
 {
     [SerializeField] private CanvasRenderer settingsPanel;
 
-    public void OnClick()
+    public override void OnClick()
     {
+        base.OnClick();
         settingsPanel.gameObject.SetActive(false);
     }
 }

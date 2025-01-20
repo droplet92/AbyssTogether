@@ -380,18 +380,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1250705358}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 747764589}
         m_TargetAssemblyTypeName: CharacterSelectButton, Assembly-CSharp
         m_MethodName: OnClick
@@ -429,9 +417,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1250705358}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: OnButtonEnter
+        - m_Target: {fileID: 747764589}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -488,9 +476,9 @@ RectTransform:
   - {fileID: 1897309380}
   m_Father: {fileID: 479204457}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 960, y: 640}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 960, y: -80}
   m_SizeDelta: {x: 640, y: 1280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &809431611
@@ -537,18 +525,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1250705358}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 809431615}
         m_TargetAssemblyTypeName: CharacterSelectButton, Assembly-CSharp
         m_MethodName: OnClick
@@ -586,9 +562,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1250705358}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: OnButtonEnter
+        - m_Target: {fileID: 809431615}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -694,18 +670,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1250705358}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 852409056}
         m_TargetAssemblyTypeName: CharacterSelectButton, Assembly-CSharp
         m_MethodName: OnClick
@@ -743,9 +707,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1250705358}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: OnButtonEnter
+        - m_Target: {fileID: 852409056}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1002,18 +966,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1250705358}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnButtonClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1129235850}
         m_TargetAssemblyTypeName: CharacterSelectButton, Assembly-CSharp
         m_MethodName: OnClick
@@ -1051,9 +1003,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1250705358}
-          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-          m_MethodName: OnButtonEnter
+        - m_Target: {fileID: 1129235850}
+          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
+          m_MethodName: OnFocus
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1107,9 +1059,6 @@ MonoBehaviour:
   canvas: {fileID: 0}
   settingsPanel: {fileID: 0}
   videoController: {fileID: 0}
-  clickSound: {fileID: 8300000, guid: bc3cdbbbcc4672247835b2a49a8bc564, type: 3}
-  enterSound: {fileID: 8300000, guid: d385ac7b49160794f8fbe07677327c3f, type: 3}
-  sfxMixer: {fileID: 0}
 --- !u!4 &1250705359
 Transform:
   m_ObjectHideFlags: 0

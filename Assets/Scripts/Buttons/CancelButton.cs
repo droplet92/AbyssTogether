@@ -4,7 +4,7 @@ using Language = LanguageSetting.Language;
 using ScreenMode = ScreenModeSetting.ScreenMode;
 using ScreenResolution = ScreenResolutionSetting.ScreenResolution;
 
-public class CancelButton : MonoBehaviour
+public class CancelButton : BaseButton
 {
     [SerializeField] private CanvasRenderer settingsPanel;
     [SerializeField] private LanguageSetting languageSetting;
@@ -29,15 +29,15 @@ public class CancelButton : MonoBehaviour
         sfxVolume = PlayerPrefs.GetFloat("SFXVolume");
     }
     
-    public void OnClick()
+    public override void OnClick()
     {
+        base.OnClick();
         languageSetting.SetLanguage(language);
         screenModeSetting.SetScreenMode(screenMode);
         screenResolutionSetting.SetScreenResolution(screenResolution);
         volumeSettings.SetMasterVolume(masterVolume);
         volumeSettings.SetBGMVolume(bgmVolume);
         volumeSettings.SetSFXVolume(sfxVolume);
-
         settingsPanel.gameObject.SetActive(false);
     }
 }
