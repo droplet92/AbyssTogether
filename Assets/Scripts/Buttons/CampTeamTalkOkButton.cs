@@ -38,16 +38,15 @@ public class CampTeamTalkOkButton : CampExitButton
         }
         else if (copyIndex >= 0)
         {
-            var path = Path.Combine(Application.dataPath, "Deck.json");
+            var data = PlayerPrefs.GetString("Deck");
 
-            if (File.Exists(path))
+            if (data.Length > 0)
             {
-                var data = File.ReadAllText(path);
                 var deck = JsonUtility.FromJson<DeckDataJson>(data);
                 var copy = deck.cards[copyIndex];
                 deck.cards.RemoveAt(removeIndex);
                 deck.cards.Insert(removeIndex, copy);
-                File.WriteAllText(path, JsonUtility.ToJson(deck));
+                PlayerPrefs.SetString("Deck", JsonUtility.ToJson(deck));
             }
             teamTalkPanel.SetActive(false);
             base.OnClick();

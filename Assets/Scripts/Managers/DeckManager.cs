@@ -12,35 +12,11 @@ public class DeckManager : MonoBehaviour
 
     void Awake()
     {
-        Initialize();
+        LoadDeck();
         ResetDeck();
         ShuffleDeck();
     }
     
-    private void Initialize()
-    {
-        var path = Path.Combine(Application.dataPath, "Deck.json");
-
-        if (!File.Exists(path))
-        {
-            DeckDataJson temp = new DeckDataJson()
-            {
-                cards = new List<string>()
-                {
-                    "Attack", "Attack", "AttackAll",
-                    "Shield", "Shield", "ShieldAll",
-                    "Heal", "Heal", "HealAll",
-                    "Buff", "Debuff", "Skill"
-                }
-            };
-            File.WriteAllText(path, JsonUtility.ToJson(temp));
-        }
-        var data = File.ReadAllText(path);
-        var deck = JsonUtility.FromJson<DeckDataJson>(data);
-
-        foreach (var cardName in deck.cards)
-            cardList.Add(db.GetCard(cardName));
-    }
     public List<CardData> GetCardList()
     {
         return cardList;
@@ -70,5 +46,30 @@ public class DeckManager : MonoBehaviour
         hand.Add(drawnCard);
         
         return drawnCard;
+    }
+    
+    private void LoadDeck()
+    {
+        var data = PlayerPrefs.GetString("Deck");
+
+        if (data.Length == 0)
+        {
+            DeckDataJson newData = new DeckDataJson()
+            {
+                cards = new List<string>()
+                {
+                    "Attack", "Attack", "AttackAll",
+                    "Shield", "Shield", "ShieldAll",
+                    "Heal", "Heal", "HealAll",
+                    "Buff", "Debuff", "Skill"
+                }
+            };
+            data = JsonUtility.ToJson(newData);
+            PlayerPrefs.SetString("Deck", data);
+        }
+        var deck = JsonUtility.FromJson<DeckDataJson>(data);
+
+        foreach (var cardName in deck.cards)
+            cardList.Add(db.GetCard(cardName));
     }
 }

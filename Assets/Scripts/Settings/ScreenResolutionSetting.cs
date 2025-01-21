@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -21,9 +20,13 @@ public class ScreenResolutionSetting : MonoBehaviour
 
     void Awake()
     {
+    #if UNITY_WEBGL
+        enabled = false;
+        dropdown.enabled = false;
+    #else
         int value = PlayerPrefs.GetInt("ScreenMode", (int)ScreenResolution.FullHD);
-        
         SetScreenResolution(value);
+    #endif
     }
     public void SetScreenResolution(int value)
     {

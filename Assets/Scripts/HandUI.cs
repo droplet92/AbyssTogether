@@ -123,8 +123,11 @@ public class HandUI : MonoBehaviour
         if (count == 1)
         {
             RectTransform onlyCard = handCards[0];
-            onlyCard.DOAnchorPos(center, 0.3f).SetEase(Ease.OutQuad);
-            onlyCard.DOLocalRotateQuaternion(Quaternion.identity, 0.3f);
+            onlyCard.GetComponent<CardUI>().SetCardOrigin(transform.position, center, Vector3.zero);
+            DOTween.Sequence()
+                .Join(onlyCard.DOAnchorPos(center, 0.3f))
+                .Join(onlyCard.DOLocalRotateQuaternion(Quaternion.identity, 0.3f))
+                .SetEase(Ease.OutQuad);
             return;
         }
         float angleStep = totalArc / (count - 1);
@@ -136,11 +139,14 @@ public class HandUI : MonoBehaviour
             float rad = angle * Mathf.Deg2Rad;
             float x = center.x + radius * Mathf.Sin(rad);
             float y = center.y - radius - radius * Mathf.Cos(rad);
+            var anchorPos = new Vector2(x, y);
+            var localRotate = new Vector3(0, 0, angle + 180f);
 
             RectTransform cardRect = handCards[i];
+            cardRect.GetComponent<CardUI>().SetCardOrigin(transform.position, anchorPos, localRotate);
             DOTween.Sequence()
-                .Join(cardRect.DOAnchorPos(new Vector2(x, y), 0.3f))
-                .Join(cardRect.DOLocalRotate(new Vector3(0, 0, angle + 180f), 0.3f))
+                .Join(cardRect.DOAnchorPos(anchorPos, 0.3f))
+                .Join(cardRect.DOLocalRotate(localRotate, 0.3f))
                 .SetEase(Ease.InQuad);
         }
     }

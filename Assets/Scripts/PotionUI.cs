@@ -19,9 +19,9 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private string targetType;
     private Canvas canvas;
     private FieldManager fieldPanel;
-    private RectTransform currentRectTransform;
+    private RectTransform rectTransform;
     private Vector3 originPosition;
-    private Quaternion originRotation;
+    private Quaternion originLocalRotation;
     private ICardTarget hoveredTarget;
 
     void Start()
@@ -29,7 +29,10 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         tooltip = Instantiate(tooltipPrefab, statusBar).GetComponent<Tooltip>();
         canvas = GetComponentInParent<Canvas>();
         fieldPanel = canvas.GetComponentInChildren<FieldManager>();
-        currentRectTransform = GetComponent<RectTransform>();
+        rectTransform = GetComponent<RectTransform>();
+            
+        originPosition = transform.position;
+        originLocalRotation = rectTransform.localRotation;
 
         tooltip.gameObject.SetActive(false);
         SetPotionData();
@@ -48,23 +51,20 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (!isActive || !isDraggable)
             return;
-            
-        originPosition = currentRectTransform.position;
-        originRotation = transform.localRotation;
 
         tooltip.gameObject.SetActive(false);
         
         DOTween.Sequence()
-            .Join(transform.DOScale(0.5f, 0.2f))
-            .Join(currentRectTransform.DOMove(eventData.position, 0))
-            .Join(transform.DOLocalRotate(new Vector3(0, 0, 30f), 0.2f));
+            .Join(rectTransform.DOScale(0.5f, 0.2f))
+            .Join(rectTransform.DOMove(eventData.position, 0))
+            .Join(rectTransform.DOLocalRotate(new Vector3(0, 0, 30f), 0.2f));
     }
     public void OnDrag(PointerEventData eventData)
     {
         if (!isActive || !isDraggable)
             return;
             
-        currentRectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
         ICardTarget target = GetTargetUnderMouse();
 
@@ -107,14 +107,11 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         else
         {
             DOTween.Sequence()
-                .Join(transform.DOScale(1f, 0.1f))
-                .Join(currentRectTransform.DOMove(originPosition, 0.1f))
-                .Join(transform.DOLocalRotateQuaternion(originRotation, 0.1f))
+                .Join(rectTransform.DOScale(1f, 0.1f))
+                .Join(rectTransform.DOMove(originPosition, 0.1f))
+                .Join(rectTransform.DOLocalRotateQuaternion(originLocalRotation, 0.1f))
                 .SetEase(Ease.OutQuad)
-                .OnComplete(() =>
-                {
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(statusBar.GetComponent<RectTransform>());
-                });
+                .OnComplete(() => LayoutRebuilder.ForceRebuildLayoutImmediate(statusBar.GetComponent<RectTransform>()));
         }
     }
 
@@ -132,9 +129,10 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             targetType = potion.targetType;
             isActive = true;
 
-            var rectTransform = GetComponent<RectTransform>();
-            tooltip.GetComponent<RectTransform>().position = rectTransform.position + new Vector3(230f, -25f, 0);
+            tooltip.gameObject.SetActive(true);
+            tooltip.transform.position = transform.position + new Vector3(115f, -20f, 0);
             tooltip.SetTooltipData(potion.potionName, potion.description);
+            tooltip.gameObject.SetActive(false);
         }
     }
 

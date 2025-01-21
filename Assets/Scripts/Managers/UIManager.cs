@@ -1,24 +1,26 @@
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
     [SerializeField] private CanvasRenderer settingsPanel;
+#if UNITY_WEBGL == false
     [SerializeField] private VideoController videoController;
+#endif
 
-    void Awake()
+    void Start()
     {
         if (canvas != null)
         {
             canvas.gameObject.SetActive(false);
             settingsPanel.gameObject.SetActive(false);
 
+        #if UNITY_WEBGL
+            ActivateStartCanvas();
+        #else
             videoController.OnAllVideoEnd += ActivateStartCanvas;
+        #endif
         }
-        var path = Path.Combine(Application.dataPath, "Deck.json");
-        File.Delete(path);
         PlayerPrefs.SetInt("level", 1);
         PlayerPrefs.SetInt("HpHealer", 30);
         PlayerPrefs.SetInt("HpMagician", 30);
@@ -31,6 +33,7 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetString("Potion1", null);
         PlayerPrefs.SetString("Potion2", null);
         PlayerPrefs.SetString("Potion3", null);
+        PlayerPrefs.SetString("Deck", null);
     }
     private void ActivateStartCanvas()
     {

@@ -17,9 +17,13 @@ public class ScreenModeSetting : MonoBehaviour
 
     void Awake()
     {
+    #if UNITY_WEBGL
+        enabled = false;
+        dropdown.enabled = false;
+    #else
         int value = PlayerPrefs.GetInt("ScreenMode", (int)ScreenMode.FullScreenWindow);
-        
         SetScreenMode(value);
+    #endif
     }
     void OnEnable()
     {

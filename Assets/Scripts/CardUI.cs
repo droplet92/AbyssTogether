@@ -27,10 +27,10 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     private Canvas canvas;
     private FieldManager fieldPanel;
     private HandUI handPanel;
-    private RectTransform currentRectTransform;
-    private float originLocalY;
-    private Vector3 originPosition;
-    private Quaternion originRotation;
+    private RectTransform rectTransform;
+    private Vector3 originPos;
+    private Vector2 originAnchorPos;
+    private Vector3 originLocalRotation;
     private int originSiblingIndex;
     private ICardTarget hoveredTarget;
     private bool isFreeze = false;
@@ -41,7 +41,7 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         canvas = GetComponentInParent<Canvas>();
         fieldPanel = canvas.GetComponentInChildren<FieldManager>();
         handPanel = GetComponentInParent<HandUI>();
-        currentRectTransform = GetComponent<RectTransform>();
+        rectTransform = GetComponent<RectTransform>();
     }
     void OnDestroy()
     {
@@ -53,16 +53,12 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
             return;
 
         originSiblingIndex = transform.GetSiblingIndex();
-        originPosition = currentRectTransform.position;
-        originLocalY = transform.localPosition.y;
-        originRotation = transform.localRotation;
-
         transform.SetAsLastSibling();
 
         DOTween.Sequence()
-            .Join(transform.DOScale(2f, 0.2f))
-            .Join(transform.DOLocalMoveY(360f, 0.2f))
-            .Join(transform.DOLocalRotate(Vector3.zero, 0.2f));
+            .Join(rectTransform.DOScale(2f, 0.2f))
+            .Join(rectTransform.DOLocalMoveY(360f, 0.2f))
+            .Join(rectTransform.DOLocalRotate(Vector3.zero, 0.2f));
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -72,9 +68,10 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         transform.SetSiblingIndex(originSiblingIndex);
         
         DOTween.Sequence()
-            .Join(transform.DOScale(1f, 0.2f))
-            .Join(transform.DOLocalMoveY(originLocalY, 0.2f))
-            .Join(transform.DOLocalRotateQuaternion(originRotation, 0.2f));
+            .Join(rectTransform.DOScale(1f, 0.2f))
+            .Join(rectTransform.DOMove(originPos, 0.2f))
+            .Join(rectTransform.DOAnchorPos(originAnchorPos, 0.2f))
+            .Join(rectTransform.DOLocalRotate(originLocalRotation, 0.2f));
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -82,16 +79,16 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
             return;
 
         DOTween.Sequence()
-            .Join(transform.DOScale(0.5f, 0.2f))
-            .Join(currentRectTransform.DOMove(eventData.position, 0))
-            .Join(transform.DOLocalRotate(new Vector3(0, 0, 30f), 0.2f));
+            .Join(rectTransform.DOScale(0.5f, 0.2f))
+            .Join(rectTransform.DOMove(eventData.position, 0))
+            .Join(rectTransform.DOLocalRotate(new Vector3(0, 0, 30f), 0.2f));
     }
     public void OnDrag(PointerEventData eventData)
     {
         if (isFreeze)
             return;
             
-        currentRectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
         ICardTarget target = GetTargetUnderMouse();
 
@@ -123,7 +120,7 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         {
             fieldPanel.SetHighlight(targetType, hoveredTarget, false);
             fieldPanel.ApplyEffect(targetType, null, hoveredTarget, cardNameText.text);
-            handPanel.Discard(currentRectTransform);
+            handPanel.Discard(rectTransform);
 
             hoveredTarget = null;
         }
@@ -132,15 +129,12 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
             transform.SetSiblingIndex(originSiblingIndex);
 
             DOTween.Sequence()
-                .Join(transform.DOScale(1f, 0.1f))
-                .Join(currentRectTransform.DOMove(originPosition, 0.1f))
-                .Join(transform.DOLocalMoveY(originLocalY, 0.1f))
-                .Join(transform.DOLocalRotateQuaternion(originRotation, 0.1f))
+                .Join(rectTransform.DOScale(1f, 0.1f))
+                .Join(rectTransform.DOMove(originPos, 0.1f))
+                .Join(rectTransform.DOAnchorPos(originAnchorPos, 0.1f))
+                .Join(rectTransform.DOLocalRotate(originLocalRotation, 0.1f))
                 .SetEase(Ease.OutQuad)
-                .OnComplete(() =>
-                {
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(handPanel.GetComponent<RectTransform>());
-                });
+                .OnComplete(() => LayoutRebuilder.ForceRebuildLayoutImmediate(handPanel.GetComponent<RectTransform>()));
         }
     }
     public void SetCardData(CardData data, Character cardOwner)
@@ -168,6 +162,12 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
             owner.attackChanged += () => localizedDescription.RefreshString();
         }
         localizedDescription.RefreshString();
+    }
+    public void SetCardOrigin(Vector3 parentPos, Vector2 anchorPos, Vector3 localRotation)
+    {
+        originPos = parentPos;
+        originAnchorPos = anchorPos;
+        originLocalRotation = localRotation;
     }
     public void Freeze()
     {

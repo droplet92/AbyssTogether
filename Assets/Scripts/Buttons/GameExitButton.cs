@@ -1,3 +1,9 @@
+#if UNITY_EDITOR
+using UnityEditor;
+#elif !UNITY_WEBGL
+using UnityEngine;
+#endif
+
 public class GameExitButton : BaseButton
 {
     public override void OnClick()
@@ -5,7 +11,8 @@ public class GameExitButton : BaseButton
         base.OnClick();
         
     #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+        EditorApplication.isPlaying = false;
+    #elif UNITY_WEBGL
     #else
         Application.Quit();
     #endif

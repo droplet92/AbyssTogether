@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
-    [SerializeField] private Image nextTurn;
+    [SerializeField] private CanvasGroup nextTurn;
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private ResultPanel resultPanel;
     [SerializeField] private HandUI handUI;
@@ -24,6 +24,7 @@ public class TurnManager : MonoBehaviour
         levelText.text = level.ToString();
         playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
 
+        turnEndButton.SetActive(false);
         StartCoroutine(StartTurn());
     }
     void Update()
@@ -67,6 +68,7 @@ public class TurnManager : MonoBehaviour
     }
     public void EndTurn()
     {
+        turnEndButton.SetActive(false);
         StartCoroutine(EndTurnRoutine());
     }
     public void ReduceDraw(int n)
@@ -75,10 +77,12 @@ public class TurnManager : MonoBehaviour
     }
     private IEnumerator StartTurn()
     {
-        nextTurn.DOFade(1f, 1f);
-        yield return new WaitForSeconds(1f);
+        nextTurn.gameObject.SetActive(true);
+        nextTurn.DOFade(1f, 0.2f);
+        yield return new WaitForSeconds(1.5f);
 
-        turnEndButton.SetActive(false);
+        nextTurn.DOFade(0f, 0.2f)
+            .OnComplete(() => nextTurn.gameObject.SetActive(false));
 
         foreach (var character in characterList)
             character.UpdateDefense(-character.Defense);
@@ -89,7 +93,6 @@ public class TurnManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         nDraws = 4;
-
         turnEndButton.SetActive(true);
     }
     private IEnumerator EndTurnRoutine()

@@ -22,14 +22,12 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             var item = db.GetEquipment(itemName);
             isActive = true;
-            tooltip = Instantiate(tooltipPrefab, statusBar).GetComponent<Tooltip>();
 
+            image.gameObject.SetActive(true);
+            tooltip = Instantiate(tooltipPrefab, statusBar).GetComponent<Tooltip>();
+            tooltip.transform.position = image.transform.position + new Vector3(115f, -20f, 0);
             tooltip.SetTooltipData(item.equipmentName, item.description);
             tooltip.gameObject.SetActive(false);
-            image.gameObject.SetActive(true);
-
-            var rectTransform = image.GetComponent<RectTransform>();
-            tooltip.GetComponent<RectTransform>().position = rectTransform.position + new Vector3(230f, -25f, 0);
         }
         if (name == $"ItemSlot{PlayerPrefs.GetInt("PlayerCharacter")}")
             marker.gameObject.SetActive(true);
