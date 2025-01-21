@@ -31,40 +31,39 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             var rectTransform = image.GetComponent<RectTransform>();
             tooltip.GetComponent<RectTransform>().position = rectTransform.position + new Vector3(230f, -25f, 0);
         }
-        if (name == $"ItemSlot{5 - PlayerPrefs.GetInt("PlayerCharacter")}")
+        if (name == $"ItemSlot{PlayerPrefs.GetInt("PlayerCharacter")}")
             marker.gameObject.SetActive(true);
     }
     void Update()
     {
-        if (isActive)
+        bool isDied = false;
+        
+        if (character != null)
+            isDied = !character.gameObject.activeSelf || character.isDied();
+
+        else if (itemName == "MagicBook")
+            isDied = PlayerPrefs.GetInt("HpHealer") == 0;
+
+        else if (itemName == "Ring")
+            isDied = PlayerPrefs.GetInt("HpMagician") == 0;
+
+        else if (itemName == "Sword")
+            isDied = PlayerPrefs.GetInt("HpSwordsman") == 0;
+
+        else if (itemName == "Necklace")
+            isDied = PlayerPrefs.GetInt("HpWarrior") == 0;
+
+        if (isDied)
         {
-            bool isDied = false;
-            
-            if (character != null)
-                isDied = character.isDied();
+            isActive = false;
+            image.color = Color.gray;
+            portrait.color = Color.gray;
 
-            else if (itemName == "MagicBook")
-                isDied = PlayerPrefs.GetInt("HpHealer") == 0;
-
-            else if (itemName == "Ring")
-                isDied = PlayerPrefs.GetInt("HpMagician") == 0;
-
-            else if (itemName == "Sword")
-                isDied = PlayerPrefs.GetInt("HpSwordsman") == 0;
-
-            else if (itemName == "Necklace")
-                isDied = PlayerPrefs.GetInt("HpWarrior") == 0;
-
-            if (isDied)
-            {
-                isActive = false;
-                image.color = Color.gray;
-                portrait.color = Color.gray;
-
+            if (tooltip != null)
                 tooltip.gameObject.SetActive(false);
-            }
         }
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (isActive)

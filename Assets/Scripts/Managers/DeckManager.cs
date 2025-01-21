@@ -20,18 +20,21 @@ public class DeckManager : MonoBehaviour
     private void Initialize()
     {
         var path = Path.Combine(Application.dataPath, "Deck.json");
-        DeckDataJson temp = new DeckDataJson()
-        {
-            cards = new List<string>()
-            {
-                "Attack", "Attack", "AttackAll",
-                "Shield", "Shield", "ShieldAll",
-                "Heal", "Heal", "HealAll",
-                "Buff", "Debuff", "Skill"
-            }
-        };
-        File.WriteAllText(path, JsonUtility.ToJson(temp));
 
+        if (!File.Exists(path))
+        {
+            DeckDataJson temp = new DeckDataJson()
+            {
+                cards = new List<string>()
+                {
+                    "Attack", "Attack", "AttackAll",
+                    "Shield", "Shield", "ShieldAll",
+                    "Heal", "Heal", "HealAll",
+                    "Buff", "Debuff", "Skill"
+                }
+            };
+            File.WriteAllText(path, JsonUtility.ToJson(temp));
+        }
         var data = File.ReadAllText(path);
         var deck = JsonUtility.FromJson<DeckDataJson>(data);
 

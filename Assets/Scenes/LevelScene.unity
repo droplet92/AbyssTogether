@@ -2192,7 +2192,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 442356962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9a1ea65503894b4a9757d9cecafd856, type: 3}
+  m_Script: {fileID: 11500000, guid: c7c38f534f6c72349b8a2440eab65018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 1381506343}
@@ -3591,7 +3591,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 619225271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 258c3539f9100984097d64afb47953ec, type: 3}
+  m_Script: {fileID: 11500000, guid: c6a60b6d54f0724418d7aee8c0c9ec8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   deckPanel: {fileID: 1817983254}

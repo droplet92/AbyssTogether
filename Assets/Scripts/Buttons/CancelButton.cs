@@ -1,9 +1,5 @@
 using UnityEngine;
 
-using Language = LanguageSetting.Language;
-using ScreenMode = ScreenModeSetting.ScreenMode;
-using ScreenResolution = ScreenResolutionSetting.ScreenResolution;
-
 public class CancelButton : BaseButton
 {
     [SerializeField] private CanvasRenderer settingsPanel;

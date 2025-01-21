@@ -27,10 +27,6 @@ public class Buffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (attack != 0 || defense != 0)
         {
             isActive = true;
-
-            Debug.Log(this);
-            Debug.Log(tooltip);
-            Debug.Log(tooltip.gameObject);
             tooltip.gameObject.SetActive(true);
             tooltip.SetTooltipData(attack, defense);
             tooltip.gameObject.SetActive(false);

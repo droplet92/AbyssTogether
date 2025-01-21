@@ -15,7 +15,7 @@ MonoBehaviour:
   body: {fileID: 21300000, guid: 256cd392cf561f2498dad2b405ae2817, type: 3}
   bodyHightlight: {fileID: 21300000, guid: 5e12318475ee8e145b794932b6c465dc, type: 3}
   health: 30
-  attack: 14
+  attack: 10
   defense: 0
   actions:
   - ActionShieldAttack

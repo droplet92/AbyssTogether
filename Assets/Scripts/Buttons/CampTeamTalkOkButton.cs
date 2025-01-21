@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.UI;
 
 public class CampTeamTalkOkButton : CampExitButton
 {
@@ -12,7 +10,7 @@ public class CampTeamTalkOkButton : CampExitButton
     [SerializeField] private LocalizedString removeString;
     [SerializeField] private LocalizedString copyString;
 
-    private Image selected;
+    private CardUI selected;
     private bool isRemoveCardPhase = true;
     private int removeIndex = -1;
     private int copyIndex = -1;
@@ -44,20 +42,12 @@ public class CampTeamTalkOkButton : CampExitButton
 
             if (File.Exists(path))
             {
-                DeckDataJson temp = new DeckDataJson()
-                {
-                    cards = new List<string>()
-                    {
-                        "Attack", "Attack", "AttackAll",
-                        "Shield", "Shield", "ShieldAll",
-                        "Heal", "Heal", "HealAll",
-                        "Buff", "Debuff", "Skill"
-                    }
-                };
-                var copy = temp.cards[copyIndex];
-                temp.cards.RemoveAt(removeIndex);
-                temp.cards.Insert(removeIndex, copy);
-                File.WriteAllText(path, JsonUtility.ToJson(temp));
+                var data = File.ReadAllText(path);
+                var deck = JsonUtility.FromJson<DeckDataJson>(data);
+                var copy = deck.cards[copyIndex];
+                deck.cards.RemoveAt(removeIndex);
+                deck.cards.Insert(removeIndex, copy);
+                File.WriteAllText(path, JsonUtility.ToJson(deck));
             }
             teamTalkPanel.SetActive(false);
             base.OnClick();
@@ -66,10 +56,10 @@ public class CampTeamTalkOkButton : CampExitButton
     public void SelectCard(CardUI card, int index)
     {
         if (selected != null)
-            selected.color = Color.white;
+            selected.SetOX(!isRemoveCardPhase, false);
 
-        selected = card.GetComponentInChildren<Image>();
-        selected.color = Color.black;
+        selected = card;
+        selected.SetOX(!isRemoveCardPhase, true);
 
         if (isRemoveCardPhase)
             removeIndex = index;

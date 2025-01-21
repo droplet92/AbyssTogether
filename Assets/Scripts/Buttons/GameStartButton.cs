@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class GameStartButton : BaseButton
 {
     public override void OnClick()

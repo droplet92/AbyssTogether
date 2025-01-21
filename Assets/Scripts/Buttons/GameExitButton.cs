@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class GameExitButton : BaseButton
 {
     public override void OnClick()

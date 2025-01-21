@@ -18,12 +18,7 @@ public class UIManager : MonoBehaviour
             videoController.OnAllVideoEnd += ActivateStartCanvas;
         }
         var path = Path.Combine(Application.dataPath, "Deck.json");
-        DeckDataJson temp = new DeckDataJson()
-        {
-            cards = new List<string>()
-        };
-        File.WriteAllText(path, JsonUtility.ToJson(temp));
-        
+        File.Delete(path);
         PlayerPrefs.SetInt("level", 1);
         PlayerPrefs.SetInt("HpHealer", 30);
         PlayerPrefs.SetInt("HpMagician", 30);

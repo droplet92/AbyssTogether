@@ -17,6 +17,8 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     [SerializeField] private TextMeshProUGUI cardNameText;
     [SerializeField] private TextMeshProUGUI cardNameShadowText;
     [SerializeField] private TextMeshProUGUI cardDescriptionText;
+    [SerializeField] private Image O;
+    [SerializeField] private Image X;
 
     private Character owner;
     private int itemAttack = 0;
@@ -180,6 +182,13 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     {
         Exhibit();
         cardFrame.color = Color.black;
+    }
+    public void SetOX(bool isO, bool activate)
+    {
+        if (isO)
+            O.gameObject.SetActive(activate);
+        else
+            X.gameObject.SetActive(activate);
     }
 
     private void OnStringChanged(string value)

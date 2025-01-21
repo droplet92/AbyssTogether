@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization.SmartFormat.Utilities;
+using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
+    [SerializeField] private Image nextTurn;
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private ResultPanel resultPanel;
     [SerializeField] private HandUI handUI;
@@ -73,6 +75,9 @@ public class TurnManager : MonoBehaviour
     }
     private IEnumerator StartTurn()
     {
+        nextTurn.DOFade(1f, 1f);
+        yield return new WaitForSeconds(1f);
+
         turnEndButton.SetActive(false);
 
         foreach (var character in characterList)

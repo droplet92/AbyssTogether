@@ -52,7 +52,7 @@ public class Monster : MonoBehaviour, ICardTarget
         maxHealth = currentHealth = data.health;
         attack = data.attack;
         defense = data.defense;
-        actions = data.actions;
+        actions = new List<string>(data.actions);
 
         body.sprite = data.body;
         bodyHighlight.sprite = data.bodyHightlight;
@@ -65,20 +65,23 @@ public class Monster : MonoBehaviour, ICardTarget
         string nextActionString = actions.First();
         var target = GetRandomCharacter();
         
-        fieldManager.ApplyEffect("Character", this, target, nextActionString);
-        actions.Add(nextActionString);
-        actions.RemoveAt(0);
-
-        nextAction.sprite = Resources.Load<Sprite>($"Images/Actions/{actions.First().ToLower()}");
-    
+        if (target != null)
+        {
+            fieldManager.ApplyEffect("Character", this, target, nextActionString);
+            actions.RemoveAt(0);
+            actions.Add(nextActionString);
+            nextAction.sprite = Resources.Load<Sprite>($"Images/Actions/{actions.First().ToLower()}");
+        }
         yield return new WaitForSeconds(1f);
     }
 
     public void UpdateHealth(int delta)
     {
         int value = math.min(delta, maxHealth);
+        currentHealth = math.min(currentHealth + value, maxHealth);
+
+        hpDiff.gameObject.SetActive(true);
         hpDiff.text = value.ToString();
-        currentHealth += value;
 
         healthBar.SetHealth(currentHealth, maxHealth);
 
@@ -96,8 +99,8 @@ public class Monster : MonoBehaviour, ICardTarget
         }
         else if (value > 0)
             hpDiff.color = new Color32(0x31, 0x62, 0x57, 0xFF);
-
-        hpDiff.gameObject.SetActive(true);
+        else
+            hpDiff.color = Color.white;
 
         var localY = hpDiff.transform.localPosition.y;
 
@@ -147,8 +150,10 @@ public class Monster : MonoBehaviour, ICardTarget
     {
         characterList.RemoveAll(x => x.isDied());
 
+        if (characterList.Count == 0)
+            return null;
+
         int randomIndex = UnityEngine.Random.Range(0, characterList.Count);
-        
         return characterList[randomIndex];
     }
 }

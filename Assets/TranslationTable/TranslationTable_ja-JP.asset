@@ -243,11 +243,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2876879971667968
-    m_Localized: "\u30C7\u30C3\u30AD\u304B\u3089<color=#FFD369>\u5916\u3059</color>\u30AB\u30FC\u30C9\u30921\u679A\u9078\u3093\u3067\u304F\u3060\u3055\u3044\u3002"
+    m_Localized: "\u30C7\u30C3\u30AD\u304B\u3089<color=#FFD369>\u5916\u3059</color>\u30AB\u30FC\u30C9\u30921\u679A\u9078\u3093\u3067\u304F\u3060\u3055\u3044"
     m_Metadata:
       m_Items: []
   - m_Id: 2876882198843392
-    m_Localized: "\u30C7\u30C3\u30AD\u304B\u3089<color=#FFD369>\u30B3\u30D4\u30FC</color>\u3059\u308B\u30AB\u30FC\u30C9\u30921\u679A\u9078\u3093\u3067\u304F\u3060\u3055\u3044\u3002"
+    m_Localized: "\u30C7\u30C3\u30AD\u304B\u3089<color=#FFD369>\u30B3\u30D4\u30FC</color>\u3059\u308B\u30AB\u30FC\u30C9\u30921\u679A\u9078\u3093\u3067\u304F\u3060\u3055\u3044"
     m_Metadata:
       m_Items: []
   references:
