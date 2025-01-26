@@ -44,9 +44,17 @@ public class TurnManager : MonoBehaviour
             foreach (var character in characterList)
                 PlayerPrefs.SetInt($"Hp{character.gameObject.name}", character.CurrentHealth);
 
-            resultPanel.gameObject.SetActive(true);
-            resultPanel.ShowWin();
-            gameObject.SetActive(false);
+            if (levelText.text == "17")
+            {
+                gameObject.SetActive(false);
+                SceneTransitionManager.Instance.LoadSceneWithCrossfade("EndingScene", false);
+            }
+            else
+            {
+                resultPanel.gameObject.SetActive(true);
+                resultPanel.ShowWin();
+                gameObject.SetActive(false);
+            }
         }
         isOver = true;
 

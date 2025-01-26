@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
             videoController.OnAllVideoEnd += ActivateStartCanvas;
         #endif
         }
+        PlayerPrefs.SetString("StartTime", null);
         PlayerPrefs.SetInt("level", 1);
         PlayerPrefs.SetInt("HpHealer", 30);
         PlayerPrefs.SetInt("HpMagician", 30);

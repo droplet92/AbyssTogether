@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class CharacterSelectButton : BaseButton
     {
         base.OnClick();
         PlayerPrefs.SetInt("PlayerCharacter", playerCharacter);
+        PlayerPrefs.SetString("StartTime", DateTime.Now.ToLongTimeString());
         SceneManager.LoadScene("LevelScene");
     }
 }
