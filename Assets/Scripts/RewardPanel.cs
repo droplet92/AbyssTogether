@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 
-public class RewardPanel : MonoBehaviour
+public class RewardPanel : AutoFieldValidator
 {
     [SerializeField] private PotionDatabase potionDatabase;
     [SerializeField] private EquipmentDatabase equipmentDatabase;
@@ -14,14 +15,23 @@ public class RewardPanel : MonoBehaviour
     [SerializeField] private Button itemButton;
     [SerializeField] private List<ItemUI> itemList;
     [SerializeField] private List<PotionUI> potionList;
+    [SerializeField] private Button okButton;
 
     private LocalizedString localizedDescription;
 
+    void Awake()
+    {
+        Debug.Assert(potionList.Count == 3, "SerializeField is empty: Potion List");
+    }
     void OnDestroy()
     {
         localizedDescription.StringChanged -= OnStringChanged;
     }
 
+    public void AddConfirmListener(Action action)
+    {
+        okButton.onClick.AddListener(() => action());
+    }
     public void ShowPotion()
     {
         var potion = potionDatabase.GetRandomPotion();

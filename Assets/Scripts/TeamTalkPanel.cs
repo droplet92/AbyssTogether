@@ -1,32 +1,41 @@
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
 using UnityEngine.UI;
 
-public class TeamTalkPanelPanel : MonoBehaviour
+public class TeamTalkPanelPanel : AutoFieldValidator
 {
-    [SerializeField] private CampTeamTalkOkButton okButton;
+    [SerializeField] private CampManager campManager;
     [SerializeField] private DeckManager deckManager;
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private Transform content;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private TMP_Text label;
+    [SerializeField] private LocalizedString removeString;
+    [SerializeField] private LocalizedString copyString;
+    [SerializeField] private Button okButton;
 
     private List<CardData> cardList;
+    private CardUI selected;
+    private bool isRemoveCardPhase = true;
+    private int removeIndex = -1;
+    private int copyIndex = -1;
 
+
+    void Awake()
+    {
+        removeString.StringChanged += OnLabelChanged;
+        removeString.RefreshString();
+        
+        okButton.onClick.AddListener(Confirm);
+    }
     void OnEnable()
     {
         cardList = deckManager.GetCardList();
-        Initialize();
-    }
-    void Update()
-    {
-        if (Input.mouseScrollDelta.y != 0)
-            scrollRect.verticalNormalizedPosition += Input.mouseScrollDelta.y * 0.1f;
-    }
-
-    public void Initialize()
-    {
+        
         for (int i = 0; i < cardList.Count; i++)
         {
             GameObject newCardObj = Instantiate(cardPrefab, content);
@@ -36,15 +45,68 @@ public class TeamTalkPanelPanel : MonoBehaviour
             cardUI.Exhibit();
             cardUI.AddComponent<EventTrigger>();
 
-            var entry = new EventTrigger.Entry
+            int index = i;
+            var entry = new EventTrigger.Entry()
             {
                 eventID = EventTriggerType.PointerClick
             };
-            int index = i;
-            entry.callback.AddListener((data) => okButton.SelectCard(cardUI, index));
+            entry.callback.AddListener((data) => SelectCard(cardUI, index));
             cardUI.GetComponent<EventTrigger>()
                 .triggers
                 .Add(entry);
         }
+    }
+    void Update()
+    {
+        if (Input.mouseScrollDelta.y != 0)
+            scrollRect.verticalNormalizedPosition += Input.mouseScrollDelta.y * 0.1f;
+    }
+    void OnDestroy()
+    {
+        copyString.StringChanged -= OnLabelChanged;
+    }
+    
+    private void OnLabelChanged(string value)
+    {
+        label.text = value;
+    }
+    private void Confirm()
+    {
+        if (isRemoveCardPhase && removeIndex >= 0)
+        {
+            selected = null;
+            isRemoveCardPhase = false;
+            removeString.StringChanged -= OnLabelChanged;
+            copyString.StringChanged += OnLabelChanged;
+            copyString.RefreshString();
+        }
+        else if (copyIndex >= 0)
+        {
+            var data = PlayerPrefs.GetString("Deck");
+
+            if (data.Length > 0)
+            {
+                var deck = JsonUtility.FromJson<DeckDataJson>(data);
+                var copy = deck.cards[copyIndex];
+                deck.cards.RemoveAt(removeIndex);
+                deck.cards.Insert(removeIndex, copy);
+                PlayerPrefs.SetString("Deck", JsonUtility.ToJson(deck));
+            }
+            gameObject.SetActive(false);
+            campManager.ExitCamp();
+        }
+    }
+    private void SelectCard(CardUI card, int index)
+    {
+        if (selected != null)
+            selected.SetOX(!isRemoveCardPhase, false);
+
+        selected = card;
+        selected.SetOX(!isRemoveCardPhase, true);
+
+        if (isRemoveCardPhase)
+            removeIndex = index;
+        else
+            copyIndex = index;
     }
 }

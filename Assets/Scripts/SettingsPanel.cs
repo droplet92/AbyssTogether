@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsPanel : MonoBehaviour
+public class SettingsPanel : AutoFieldValidator
 {
     [SerializeField] private LanguageSetting languageSetting;
     [SerializeField] private ScreenModeSetting screenModeSetting;
@@ -19,9 +19,6 @@ public class SettingsPanel : MonoBehaviour
 
     void Awake()
     {
-        Debug.Assert(okButton != null, "SerializeField is empty: Ok Button");
-        Debug.Assert(cancelButton != null, "SerializeField is empty: Cancel Button");
-        
         okButton.onClick.AddListener(Confirm);
         cancelButton.onClick.AddListener(Rollback);
     }

@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using BgmType = BgmManager.BgmType;
 
-public class OpeningCanvas : MonoBehaviour
+public class OpeningCanvas : AutoFieldValidator
 {
     [SerializeField] private CanvasRenderer settingsPanel;
     [SerializeField] private Button startButton;
@@ -14,13 +11,8 @@ public class OpeningCanvas : MonoBehaviour
     
     void Awake()
     {
-        Debug.Assert(settingsPanel != null, "SerializeField is empty: Settings Panel");
-        Debug.Assert(startButton != null, "SerializeField is empty: Start Button");
-        Debug.Assert(settingsButton != null, "SerializeField is empty: Settings Button");
-        Debug.Assert(exitButton != null, "SerializeField is empty: Exit Button");
-        
         startButton.onClick.AddListener(StartGame);
-        settingsButton.onClick.AddListener(ActivateSettingsPanel);
+        settingsButton.onClick.AddListener(ToggleSettingsPanel);
         exitButton.onClick.AddListener(ExitGame);
     }
 
@@ -29,7 +21,7 @@ public class OpeningCanvas : MonoBehaviour
         BgmManager.Instance.CrossFade(BgmType.Opening, BgmType.NonBattle);
         SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.CharacterSelect);
     }
-    private void ActivateSettingsPanel()
+    private void ToggleSettingsPanel()
     {
         settingsPanel.gameObject.SetActive(!settingsPanel.gameObject.activeSelf);
     }

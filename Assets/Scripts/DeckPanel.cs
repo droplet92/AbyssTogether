@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DeckPanel : MonoBehaviour
@@ -10,12 +8,14 @@ public class DeckPanel : MonoBehaviour
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private Transform content;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private Button okButton;
 
     private List<CardData> cardList;
 
     void OnEnable()
     {
         cardList = deckManager.GetCardList();
+        okButton.onClick.AddListener(ClosePanel);
         Initialize();
     }
     void Update()
@@ -34,5 +34,10 @@ public class DeckPanel : MonoBehaviour
             cardUI.SetCardData(cardList[i], null);
             cardUI.Exhibit();
         }
+    }
+
+    private void ClosePanel()
+    {
+        gameObject.SetActive(false);
     }
 }

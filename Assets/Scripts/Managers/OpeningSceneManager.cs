@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OpeningSceneManager : MonoBehaviour
+public class OpeningSceneManager : AutoFieldValidator
 {
     [SerializeField] private Canvas canvas;
     [SerializeField] private CanvasRenderer settingsPanel;
@@ -8,10 +8,6 @@ public class OpeningSceneManager : MonoBehaviour
 
     void Awake()
     {
-        Debug.Assert(canvas != null, "SerializeField is empty: Canvas");
-        Debug.Assert(settingsPanel != null, "SerializeField is empty: Settings Panel");
-        Debug.Assert(videoPlayerManager != null, "SerializeField is empty: Video Player Manager");
-    
         videoPlayerManager.OnAllVideoEnd += PlayGame;
     }
     void Start()
