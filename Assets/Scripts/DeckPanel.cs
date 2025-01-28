@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DeckPanel : MonoBehaviour
+public class DeckPanel : AutoFieldValidator
 {
     [SerializeField] private DeckManager deckManager;
     [SerializeField] private ScrollRect scrollRect;

@@ -300,6 +300,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a93ee680179f85409a318ebda98ab5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rewardPanel: {fileID: 903538178}
+  teamTalkPanel: {fileID: 884266604}
+  restButton: {fileID: 153870977}
+  searchAreaButton: {fileID: 1782827171}
+  teamTalkButton: {fileID: 130978377}
   fadeOut: {fileID: 2052333848}
   levelText: {fileID: 85679655}
 --- !u!1 &85679653
@@ -14019,7 +14024,6 @@ GameObject:
   - component: {fileID: 2067033589}
   - component: {fileID: 2067033593}
   - component: {fileID: 2067033595}
-  - component: {fileID: 2067033596}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -14139,24 +14143,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067033588}
   m_CullTransparentMesh: 1
---- !u!114 &2067033596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2067033588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bfe6878108910e418fd403eb6adb5b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  campManager: {fileID: 38796355}
-  rewardPanel: {fileID: 903538178}
-  teamTalkPanel: {fileID: 884266604}
-  restButton: {fileID: 153870977}
-  searchAreaButton: {fileID: 1782827171}
-  teamTalkButton: {fileID: 130978377}
 --- !u!1 &2087745809
 GameObject:
   m_ObjectHideFlags: 0

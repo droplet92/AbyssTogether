@@ -3,7 +3,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System.Collections;
 
-public class HandUI : MonoBehaviour
+public class HandUI : AutoFieldValidator
 {
     [SerializeField] private List<Character> characters;
     [SerializeField] private DeckManager deckManager;
@@ -75,13 +75,13 @@ public class HandUI : MonoBehaviour
     public void Discard(RectTransform card)
     {
         DOTween.Sequence()
-            .Join(card.DOMove(grave.position, 0.1f))
-            .Join(card.transform.DOScale(0.5f, 0.1f))
+            .Join(card.DOScale(0.5f, 0.1f))
+            .Join(card.DOLocalMove(grave.localPosition, 0.1f))
             .SetEase(Ease.OutQuad)
             .OnComplete(() =>
                 {
                     handCards.Remove(card);
-                    card.gameObject.SetActive(false);
+                    Destroy(card.gameObject);
                 });
     }
     public IEnumerator DiscardAll()
@@ -89,20 +89,18 @@ public class HandUI : MonoBehaviour
         foreach (var card in handCards)
         {
             Sequence seq = DOTween.Sequence()
-                .Join(card.DOMove(grave.position, 0.1f))
                 .Join(card.DOScale(0.5f, 0.1f))
+                .Join(card.DOLocalMove(grave.localPosition, 0.1f))
                 .SetEase(Ease.OutQuad);
 
             yield return seq.WaitForCompletion();
 
-            card.gameObject.SetActive(false);
+            Destroy(card.gameObject);
 
             yield return new WaitForSeconds(0.1f);
         }
-    }
-    public void ClearHand()
-    {
         handCards.Clear();
+        yield break;
     }
     public void SetFreeze(int n)
     {

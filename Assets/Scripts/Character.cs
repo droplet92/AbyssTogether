@@ -4,7 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Character : MonoBehaviour, ICardTarget
+public class Character : AutoFieldValidator, ICardTarget
 {
     [Header("캐릭터 기본 설정")]
     [SerializeField] private Image body;

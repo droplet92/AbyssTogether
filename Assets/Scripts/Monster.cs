@@ -7,7 +7,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Monster : MonoBehaviour, ICardTarget
+public class Monster : AutoFieldValidator, ICardTarget
 {
     [Header("몬스터 기본 설정")]
     [SerializeField] private Image body;

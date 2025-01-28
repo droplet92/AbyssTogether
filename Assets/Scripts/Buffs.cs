@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Buffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Buffs : AutoFieldValidator, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image attackImage;
     [SerializeField] private Image defenseImage;

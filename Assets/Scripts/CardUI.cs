@@ -4,12 +4,10 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using System.Collections.Generic;
-using System;
-using Unity.Mathematics;
 using UnityEngine.Localization;
 using UnityEngine.Localization.SmartFormat;
 
-public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private Image cardFrame;
     [SerializeField] private Image cardImage;
@@ -120,8 +118,9 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         {
             fieldPanel.SetHighlight(targetType, hoveredTarget, false);
             fieldPanel.ApplyEffect(targetType, null, hoveredTarget, cardNameText.text);
+            
+            Exhibit();
             handPanel.Discard(rectTransform);
-
             hoveredTarget = null;
         }
         else

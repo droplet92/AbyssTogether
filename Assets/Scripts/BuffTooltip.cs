@@ -4,7 +4,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.SmartFormat;
 using UnityEngine.UI;
 
-public class BuffTooltip : MonoBehaviour
+public class BuffTooltip : AutoFieldValidator
 {
     [SerializeField] private Image frameImage;
     [SerializeField] private TMP_Text attackText;

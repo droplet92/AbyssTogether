@@ -5,13 +5,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TurnManager : MonoBehaviour
+public class TurnManager : AutoFieldValidator
 {
     [SerializeField] private CanvasGroup nextTurn;
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private ResultPanel resultPanel;
     [SerializeField] private HandUI handUI;
-    [SerializeField] private GameObject turnEndButton;
+    [SerializeField] private Button endTurnButton;
     [SerializeField] private List<Character> characterList;
     [SerializeField] private List<Monster> monsterList;
 
@@ -24,7 +24,8 @@ public class TurnManager : MonoBehaviour
         levelText.text = level.ToString();
         playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
 
-        turnEndButton.SetActive(false);
+        endTurnButton.onClick.AddListener(EndTurn);
+        endTurnButton.gameObject.SetActive(false);
         StartCoroutine(StartTurn());
     }
     void Update()
@@ -56,16 +57,6 @@ public class TurnManager : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
-        isOver = true;
-
-        foreach (var character in characterList)
-        {
-            if (character.gameObject.activeSelf || !character.isDied())
-            {
-                isOver = false;
-                break;
-            }
-        }
         bool isPlayerDied = !characterList[playerCharacter].gameObject.activeSelf || characterList[playerCharacter].isDied();
         if (isOver || isPlayerDied)
         {
@@ -74,14 +65,16 @@ public class TurnManager : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-    public void EndTurn()
-    {
-        turnEndButton.SetActive(false);
-        StartCoroutine(EndTurnRoutine());
-    }
+
     public void ReduceDraw(int n)
     {
         nDraws -= n;
+    }
+    
+    private void EndTurn()
+    {
+        endTurnButton.gameObject.SetActive(false);
+        StartCoroutine(EndTurnRoutine());
     }
     private IEnumerator StartTurn()
     {
@@ -101,12 +94,11 @@ public class TurnManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         nDraws = 4;
-        turnEndButton.SetActive(true);
+        endTurnButton.gameObject.SetActive(true);
     }
     private IEnumerator EndTurnRoutine()
     {
         yield return StartCoroutine(handUI.DiscardAll());
-        handUI.ClearHand();
         
         foreach (var monster in monsterList)
         {

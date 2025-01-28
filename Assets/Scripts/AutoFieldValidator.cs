@@ -14,11 +14,18 @@ public class AutoFieldValidator : MonoBehaviour
 
         foreach (var field in fields)
         {
-            if (field.GetCustomAttribute<SerializeField>() != null)
+            if (IsRequired(field))
             {
                 var value = field.GetValue(this);
                 Debug.Assert(value != null, $"[AutoFieldValidator] SerializedField '{field.Name}' is null in '{name}'");
             }
         }
+    }
+    private bool IsRequired(FieldInfo fieldInfo)
+    {
+        if (fieldInfo.Name == "potionButton") return false;
+        if (fieldInfo.Name == "itemButton") return false;
+        if (fieldInfo.Name == "character" && name.StartsWith("ItemSlot")) return false;
+        return fieldInfo.GetCustomAttribute<SerializeField>() != null;
     }
 }

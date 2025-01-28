@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ItemUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Character character;
     [SerializeField] private Transform statusBar;
@@ -34,24 +34,24 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     void Update()
     {
-        bool isDied = false;
+        bool isDead = false;
         
         if (character != null)
-            isDied = !character.gameObject.activeSelf || character.isDied();
+            isDead = !character.gameObject.activeSelf || character.isDied();
 
         else if (itemName == "MagicBook")
-            isDied = PlayerPrefs.GetInt("HpHealer") == 0;
+            isDead = PlayerPrefs.GetInt("HpHealer") == 0;
 
         else if (itemName == "Ring")
-            isDied = PlayerPrefs.GetInt("HpMagician") == 0;
+            isDead = PlayerPrefs.GetInt("HpMagician") == 0;
 
         else if (itemName == "Sword")
-            isDied = PlayerPrefs.GetInt("HpSwordsman") == 0;
+            isDead = PlayerPrefs.GetInt("HpSwordsman") == 0;
 
         else if (itemName == "Necklace")
-            isDied = PlayerPrefs.GetInt("HpWarrior") == 0;
+            isDead = PlayerPrefs.GetInt("HpWarrior") == 0;
 
-        if (isDied)
+        if (isDead)
         {
             isActive = false;
             image.color = Color.gray;

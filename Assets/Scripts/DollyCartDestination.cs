@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class DollyCartDestination : MonoBehaviour
+public class DollyCartDestination : AutoFieldValidator
 {
     [SerializeField] private List<GameObject> levels;
     

@@ -1,17 +1,24 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ResultPanel : MonoBehaviour
+public class ResultPanel : AutoFieldValidator
 {
+    [SerializeField] private RewardPanel rewardPanel;
     [SerializeField] private TMP_Text labelWin;
     [SerializeField] private TMP_Text labelLose;
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Button potionButton;
     [SerializeField] private Button itemButton;
     [SerializeField] private Button okButton;
+
+    void Awake()
+    {
+        potionButton.onClick.AddListener(ActivatePotionReward);
+        itemButton.onClick.AddListener(ActivateItemReward);
+        rewardPanel.AddConfirmListener(() => rewardPanel.gameObject.SetActive(false));
+    }
 
     public void ShowWin()
     {
@@ -43,9 +50,18 @@ public class ResultPanel : MonoBehaviour
 
         SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.Level);
     }
-
     private void Defeat()
     {
         SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.Opening);
+    }
+    private void ActivatePotionReward()
+    {
+        rewardPanel.gameObject.SetActive(true);
+        rewardPanel.ShowPotion();
+    }
+    private void ActivateItemReward()
+    {
+        rewardPanel.gameObject.SetActive(true);
+        rewardPanel.ShowItem();
     }
 }

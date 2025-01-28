@@ -4,7 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
+public class HealthBar : AutoFieldValidator
 {
     [SerializeField] private GameObject cardTarget;
     [SerializeField] private Slider slider;
