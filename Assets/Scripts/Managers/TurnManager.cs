@@ -58,7 +58,7 @@ public class TurnManager : AutoFieldValidator
             }
         }
         bool isPlayerDied = !characterList[playerCharacter].gameObject.activeSelf || characterList[playerCharacter].isDied();
-        if (isOver || isPlayerDied)
+        if (isPlayerDied)
         {
             resultPanel.gameObject.SetActive(true);
             resultPanel.ShowDefeat();
