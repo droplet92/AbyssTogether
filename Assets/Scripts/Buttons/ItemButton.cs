@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class ItemButton : BaseButton
+public class ItemButton : MonoBehaviour
 {
     [SerializeField] private RewardPanel panel;
 
-    public override void OnClick()
+    public void OnClick()
     {
-        base.OnClick();
         panel.gameObject.SetActive(true);
         panel.ShowItem();
     }

@@ -8,13 +8,13 @@ public class SceneTransitionManager : MonoBehaviour
 {
     public static SceneTransitionManager Instance { get; private set; }
 
-    private Dictionary<string, BgmType> sceneToBgm = new Dictionary<string, BgmType>()
+    private Dictionary<SceneName, BgmType> sceneToBgm = new Dictionary<SceneName, BgmType>()
     {
-        { "OpeningScene", BgmType.Opening },
-        { "BattleScene", BgmType.Battle },
-        { "LevelScene", BgmType.NonBattle },
-        { "CharacterSelectScene", BgmType.NonBattle },
-        { "EndingScene", BgmType.NonBattle },
+        { SceneName.Opening, BgmType.Opening },
+        { SceneName.CharacterSelect, BgmType.NonBattle },
+        { SceneName.Level, BgmType.NonBattle },
+        { SceneName.Battle, BgmType.Battle },
+        { SceneName.Ending, BgmType.NonBattle },
     };
 
     void Awake()
@@ -30,18 +30,18 @@ public class SceneTransitionManager : MonoBehaviour
         }
     }
 
-    public void LoadSceneWithCrossfade(string sceneName)
+    public void LoadSceneWithCrossfade(SceneName sceneName)
     {
         StartCoroutine(TransitionScene(sceneName));
     }
 
-    private IEnumerator TransitionScene(string sceneName)
+    private IEnumerator TransitionScene(SceneName sceneName)
     {
-        var from = (sceneName == "BattleScene") ? BgmType.NonBattle : BgmType.Battle;
+        var from = (sceneName == SceneName.Battle) ? BgmType.NonBattle : BgmType.Battle;
         var to = sceneToBgm[sceneName];
         BgmManager.Instance.CrossFade(from, to);
         
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName.ToSceneString());
         asyncLoad.allowSceneActivation = false;
 
         yield return new WaitForSeconds(1f);

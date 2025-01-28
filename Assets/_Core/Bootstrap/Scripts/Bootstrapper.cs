@@ -11,8 +11,8 @@ public class Bootstrapper : MonoBehaviour
 
     IEnumerator Initialize()
     {
-        yield return GameManager.Instance.Initialize();
+        yield return DataManager.Instance.Initialize();
         yield return BgmManager.Instance.Initialize();
-        SceneManager.LoadSceneAsync("OpeningScene");
+        SceneManager.LoadSceneAsync(SceneName.Opening.ToSceneString());
     }
 }

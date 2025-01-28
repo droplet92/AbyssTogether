@@ -1,14 +1,14 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class BaseButton : MonoBehaviour
+public class BaseButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
 {
-    public virtual void OnClick()
-    {
-        SfxManager.Instance.PlayClickSound();
-    }
-
-    public virtual void OnFocus()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         SfxManager.Instance.PlayFocusSound();
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        SfxManager.Instance.PlayClickSound();
     }
 }

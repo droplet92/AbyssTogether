@@ -22,7 +22,7 @@ public class ScreenResolutionSetting : MonoBehaviour
     {
     #if UNITY_WEBGL
         enabled = false;
-        dropdown.enabled = false;
+        dropdown.interactable = false;
     #else
         int value = PlayerPrefs.GetInt("ScreenMode", (int)ScreenResolution.FullHD);
         SetScreenResolution(value);

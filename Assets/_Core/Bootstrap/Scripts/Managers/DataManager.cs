@@ -1,9 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using Language = LanguageSetting.Language;
+using ScreenMode = ScreenModeSetting.ScreenMode;
+using ScreenResolution = ScreenResolutionSetting.ScreenResolution;
 
-public class GameManager : MonoBehaviour
+public class DataManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static DataManager Instance { get; private set; }
 
     void Awake()
     {
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator Initialize()
     {
+        InitializeSettings();
         InitializePlayer();
         InitializeHealths();
         InitializeItems();
@@ -27,6 +31,15 @@ public class GameManager : MonoBehaviour
         yield break;
     }
 
+    private void InitializeSettings()
+    {
+        PlayerPrefs.SetInt("Language", (int)Language.English);
+        PlayerPrefs.SetInt("ScreenMode", (int)ScreenMode.FullScreenWindow);
+        PlayerPrefs.SetInt("ScreenResolution", (int)ScreenResolution.FullHD);
+        PlayerPrefs.SetFloat("MasterVolume", 1f);
+        PlayerPrefs.SetFloat("BGMVolume", 1f);
+        PlayerPrefs.SetFloat("SFXVolume", 1f);
+    }
     private void InitializePlayer()
     {
         PlayerPrefs.SetInt("level", 1);

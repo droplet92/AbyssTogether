@@ -41,11 +41,11 @@ public class ResultPanel : MonoBehaviour
         int level = PlayerPrefs.GetInt("level");
         PlayerPrefs.SetInt("level", level + 1);
 
-        SceneTransitionManager.Instance.LoadSceneWithCrossfade("LevelScene");
+        SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.Level);
     }
 
     private void Defeat()
     {
-        SceneTransitionManager.Instance.LoadSceneWithCrossfade("OpeningScene");
+        SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.Opening);
     }
 }

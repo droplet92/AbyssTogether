@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class DeckButton : BaseButton
+public class DeckButton : MonoBehaviour
 {
     [SerializeField] private CanvasRenderer deckPanel;
 
-    public override void OnClick()
+    public void OnClick()
     {
-        base.OnClick();
         deckPanel.gameObject.SetActive(!deckPanel.gameObject.activeSelf);
     }
 }

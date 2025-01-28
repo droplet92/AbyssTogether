@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public class CampTeamTalkButton : BaseButton
+public class CampTeamTalkButton : MonoBehaviour
 {
     [SerializeField] private GameObject teamTalkPanel;
 
-    public override void OnClick()
+    public void OnClick()
     {
-        base.OnClick();
         teamTalkPanel.SetActive(true);
     }
 }

@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CancelButton : BaseButton
+public class SettingsPanel : MonoBehaviour
 {
-    [SerializeField] private CanvasRenderer settingsPanel;
     [SerializeField] private LanguageSetting languageSetting;
     [SerializeField] private ScreenModeSetting screenModeSetting;
     [SerializeField] private ScreenResolutionSetting screenResolutionSetting;
     [SerializeField] private VolumeSettings volumeSettings;
+    [SerializeField] private Button okButton;
+    [SerializeField] private Button cancelButton;
         
     private int language;
     private int screenMode;
@@ -15,6 +17,14 @@ public class CancelButton : BaseButton
     private float bgmVolume;
     private float sfxVolume;
 
+    void Awake()
+    {
+        Debug.Assert(okButton != null, "SerializeField is empty: Ok Button");
+        Debug.Assert(cancelButton != null, "SerializeField is empty: Cancel Button");
+        
+        okButton.onClick.AddListener(Confirm);
+        cancelButton.onClick.AddListener(Rollback);
+    }
     void OnEnable()
     {
         language = PlayerPrefs.GetInt("Language");
@@ -24,16 +34,19 @@ public class CancelButton : BaseButton
         bgmVolume = PlayerPrefs.GetFloat("BGMVolume");
         sfxVolume = PlayerPrefs.GetFloat("SFXVolume");
     }
-    
-    public override void OnClick()
+
+    private void Confirm()
     {
-        base.OnClick();
+        gameObject.SetActive(false);
+    }
+    private void Rollback()
+    {
         languageSetting.SetLanguage(language);
         screenModeSetting.SetScreenMode(screenMode);
         screenResolutionSetting.SetScreenResolution(screenResolution);
         volumeSettings.SetMasterVolume(masterVolume);
         volumeSettings.SetBGMVolume(bgmVolume);
         volumeSettings.SetSFXVolume(sfxVolume);
-        settingsPanel.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

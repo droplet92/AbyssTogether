@@ -29,7 +29,7 @@ public class CampTeamTalkOkButton : CampExitButton
     {
         if (isRemoveCardPhase && removeIndex >= 0)
         {
-            BaseOnClick();
+            base.OnClick();
             selected = null;
             isRemoveCardPhase = false;
             removeString.StringChanged -= OnLabelChanged;

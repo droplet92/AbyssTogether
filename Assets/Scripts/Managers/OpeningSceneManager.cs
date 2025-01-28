@@ -8,9 +8,9 @@ public class OpeningSceneManager : MonoBehaviour
 
     void Awake()
     {
-        Debug.Assert(canvas != null, "SerializeField is empty: canvas");
-        Debug.Assert(settingsPanel != null, "SerializeField is empty: settingsPanel");
-        Debug.Assert(videoPlayerManager != null, "SerializeField is empty: videoPlayerManager");
+        Debug.Assert(canvas != null, "SerializeField is empty: Canvas");
+        Debug.Assert(settingsPanel != null, "SerializeField is empty: Settings Panel");
+        Debug.Assert(videoPlayerManager != null, "SerializeField is empty: Video Player Manager");
     
         videoPlayerManager.OnAllVideoEnd += PlayGame;
     }
