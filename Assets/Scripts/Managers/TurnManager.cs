@@ -47,7 +47,7 @@ public class TurnManager : MonoBehaviour
             if (levelText.text == "17")
             {
                 gameObject.SetActive(false);
-                SceneTransitionManager.Instance.LoadSceneWithCrossfade("EndingScene", false);
+                SceneTransitionManager.Instance.LoadSceneWithCrossfade("EndingScene");
             }
             else
             {

@@ -1,10 +1,21 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BgmType = BgmManager.BgmType;
 
 public class SceneTransitionManager : MonoBehaviour
 {
     public static SceneTransitionManager Instance { get; private set; }
+
+    private Dictionary<string, BgmType> sceneToBgm = new Dictionary<string, BgmType>()
+    {
+        { "OpeningScene", BgmType.Opening },
+        { "BattleScene", BgmType.Battle },
+        { "LevelScene", BgmType.NonBattle },
+        { "CharacterSelectScene", BgmType.NonBattle },
+        { "EndingScene", BgmType.NonBattle },
+    };
 
     void Awake()
     {
@@ -19,38 +30,21 @@ public class SceneTransitionManager : MonoBehaviour
         }
     }
 
-    public void LoadSceneWithCrossfade(string sceneName, bool toBattle)
+    public void LoadSceneWithCrossfade(string sceneName)
     {
-        StartCoroutine(TransitionScene(sceneName, toBattle));
-    }
-    public void LoadOpeningSceneWithCrossfade()
-    {
-        StartCoroutine(TransitionOpeningScene());
+        StartCoroutine(TransitionScene(sceneName));
     }
 
-    private IEnumerator TransitionScene(string sceneName, bool toBattle)
+    private IEnumerator TransitionScene(string sceneName)
     {
-        if (toBattle)
-            BgmManager.Instance.SwitchToBattleBGM();
-        else
-            BgmManager.Instance.SwitchToNonBattleBGM();
-
+        var from = (sceneName == "BattleScene") ? BgmType.NonBattle : BgmType.Battle;
+        var to = sceneToBgm[sceneName];
+        BgmManager.Instance.CrossFade(from, to);
+        
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         asyncLoad.allowSceneActivation = false;
 
         yield return new WaitForSeconds(1f);
-
-        asyncLoad.allowSceneActivation = true;
-    }
-    private IEnumerator TransitionOpeningScene()
-    {
-        BgmManager.Instance.SwitchToOpeningBGM();
-
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("OpeningScene");
-        asyncLoad.allowSceneActivation = false;
-
-        yield return new WaitForSeconds(1f);
-
         asyncLoad.allowSceneActivation = true;
     }
 }

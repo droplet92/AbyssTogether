@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
                 if (hit.collider.gameObject.name.StartsWith("camp"))
                     SceneManager.LoadScene("CampScene");
                 else
-                    SceneTransitionManager.Instance.LoadSceneWithCrossfade("BattleScene", true);
+                    SceneTransitionManager.Instance.LoadSceneWithCrossfade("BattleScene");
             }
         }
     }
