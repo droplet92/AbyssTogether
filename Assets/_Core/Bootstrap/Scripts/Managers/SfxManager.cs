@@ -15,7 +15,9 @@ public class SfxManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
+        {
             Destroy(gameObject);
+        }
     }
 
     public void PlayClickSound()

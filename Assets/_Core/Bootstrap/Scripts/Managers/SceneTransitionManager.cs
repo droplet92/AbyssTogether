@@ -14,7 +14,9 @@ public class SceneTransitionManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
+        {
             Destroy(gameObject);
+        }
     }
 
     public void LoadSceneWithCrossfade(string sceneName, bool toBattle)

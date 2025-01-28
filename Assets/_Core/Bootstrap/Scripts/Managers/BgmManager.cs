@@ -15,11 +15,18 @@ public class BgmManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            battleBGM.Play();
-            nonBattleBGM.Play();
         }
         else
+        {
             Destroy(gameObject);
+        }
+    }
+
+    public IEnumerator Initialize()
+    {
+        battleBGM.Play();
+        nonBattleBGM.Play();
+        yield break;
     }
 
     public void PlayOpeningBGM()

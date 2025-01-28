@@ -21,20 +21,6 @@ public class UIManager : MonoBehaviour
             videoController.OnAllVideoEnd += ActivateStartCanvas;
         #endif
         }
-        PlayerPrefs.SetString("StartTime", null);
-        PlayerPrefs.SetInt("level", 1);
-        PlayerPrefs.SetInt("HpHealer", 30);
-        PlayerPrefs.SetInt("HpMagician", 30);
-        PlayerPrefs.SetInt("HpSwordsman", 30);
-        PlayerPrefs.SetInt("HpWarrior", 30);
-        PlayerPrefs.SetInt("ItemMagicBook", 0);
-        PlayerPrefs.SetInt("ItemRing", 0);
-        PlayerPrefs.SetInt("ItemSword", 0);
-        PlayerPrefs.SetInt("ItemNecklace", 0);
-        PlayerPrefs.SetString("Potion1", null);
-        PlayerPrefs.SetString("Potion2", null);
-        PlayerPrefs.SetString("Potion3", null);
-        PlayerPrefs.SetString("Deck", null);
     }
     private void ActivateStartCanvas()
     {
