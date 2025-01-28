@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Video;
 
-public class VideoController : MonoBehaviour
+public class VideoPlayerManager : MonoBehaviour
 {
     [SerializeField] private VideoPlayer logoPlayer;
     [SerializeField] private VideoPlayer introPlayer;
@@ -9,26 +9,37 @@ public class VideoController : MonoBehaviour
     public delegate void AllVideoEndHandler();
     public event AllVideoEndHandler OnAllVideoEnd;
     
+    void Start()
+    {
+    #if !UNITY_WEBGL
+        logoPlayer.Play();
+    #else
+        OnAllVideoEnd?.Invoke();
+    #endif
+    }
+
+#if !UNITY_WEBGL
     void Awake()
     {
-        logoPlayer.loopPointReached += OnLogoEnd;
-        introPlayer.loopPointReached += OnIntroEnd;
+        logoPlayer.loopPointReached += PlayIntro;
+        introPlayer.loopPointReached += PlayGame;
     }
     void Update()
     {
         if (introPlayer.isPlaying && (Input.anyKeyDown || Input.GetMouseButtonDown(0)))
-            OnIntroEnd(introPlayer);
+            PlayGame(introPlayer);
     }
 
-    private void OnLogoEnd(VideoPlayer vp)
+    private void PlayIntro(VideoPlayer vp)
     {
         logoPlayer.gameObject.SetActive(false);
         introPlayer.Play();
     }
-    private void OnIntroEnd(VideoPlayer vp)
+    private void PlayGame(VideoPlayer vp)
     {
         introPlayer.gameObject.SetActive(false);
 
         OnAllVideoEnd?.Invoke();
     }
+#endif
 }

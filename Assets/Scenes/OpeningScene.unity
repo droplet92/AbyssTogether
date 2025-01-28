@@ -3467,7 +3467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &952752022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4504,7 +4504,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
@@ -7074,7 +7074,7 @@ GameObject:
   - component: {fileID: 1930522478}
   - component: {fileID: 1930522477}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: OpeningSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7094,6 +7094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 952752024}
   settingsPanel: {fileID: 443876569}
+  videoPlayerManager: {fileID: 894232495}
 --- !u!4 &1930522478
 Transform:
   m_ObjectHideFlags: 0
@@ -8637,7 +8638,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 894232494}
-  - {fileID: 952752025}
   - {fileID: 1950098245}
+  - {fileID: 894232494}
   - {fileID: 1930522478}
+  - {fileID: 952752025}
