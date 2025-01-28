@@ -578,8 +578,6 @@ GameObject:
   - component: {fileID: 713793276}
   - component: {fileID: 713793275}
   - component: {fileID: 713793274}
-  - component: {fileID: 713793273}
-  - component: {fileID: 713793272}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -607,47 +605,6 @@ RectTransform:
   m_AnchoredPosition: {x: 220, y: 200}
   m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &713793272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713793270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f529c89ec5956a40b85a17ded9bc189, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &713793273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 713793270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 713793272}
-          m_TargetAssemblyTypeName: BaseButton, Assembly-CSharp
-          m_MethodName: OnFocus
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 1
 --- !u!114 &713793274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,19 +648,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 713793275}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 713793272}
-        m_TargetAssemblyTypeName: GameExitButton, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &713793275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,6 +723,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5aa289612f0b400489465d6fcd93bd70, type: 3}
   - {fileID: 21300000, guid: bed48ca904acc5c4284c132f7987a7f1, type: 3}
   - {fileID: 21300000, guid: 2537c2fa7c61e334eaa473535b1434ea, type: 3}
+  openingButton: {fileID: 713793274}
 --- !u!4 &761848722
 Transform:
   m_ObjectHideFlags: 0

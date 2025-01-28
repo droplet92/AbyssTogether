@@ -41,11 +41,18 @@ public class BgmManager : MonoBehaviour
 
     public void PlayOpeningBGM()
     {
+        openingBGM.volume = 1f;
         openingBGM.Play();
     }
     public void CrossFade(BgmType from, BgmType to)
     {
         StartCoroutine(CrossFade(toAudioSource[from], toAudioSource[to]));
+    }
+    public void StopAll()
+    {
+        openingBGM.Stop();
+        battleBGM.volume = 0f;
+        nonBattleBGM.volume = 0f;
     }
 
     private IEnumerator CrossFade(AudioSource fadeOutSource, AudioSource fadeInSource)
