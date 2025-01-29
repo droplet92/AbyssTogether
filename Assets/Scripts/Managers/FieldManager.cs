@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Unity.Mathematics;
 using UnityEngine;
@@ -20,13 +19,11 @@ public class FieldManager : MonoBehaviour
     void Start()
     {
         UpdateItemEffects();
-        UpdateCharacterBuffs();
         monsterList.RemoveAll((Monster monster) => monster.IsDead());
     }
     void Update()
     {
         UpdateItemEffects();
-        UpdateCharacterBuffs();
     }
     public void SetHighlight(string targetType, ITarget target, bool isActive)
     {
@@ -73,10 +70,22 @@ public class FieldManager : MonoBehaviour
 
     private void UpdateItemEffects()
     {
-        itemDefense = !characterList[0].IsDead() ? PlayerPrefs.GetInt("ItemNecklace") : 0;
-        itemAttack = !characterList[1].IsDead() ? PlayerPrefs.GetInt("ItemSword") : 0;
-        itemResistDebuff = !characterList[2].IsDead() ? PlayerPrefs.GetInt("ItemRing") : 0;
-        itemHealerAttack = !characterList[3].IsDead() ? PlayerPrefs.GetInt("ItemMagicBook") : 0;
+        var nextItemDefense = !characterList[0].IsDead() ? PlayerPrefs.GetInt("ItemNecklace") : 0;
+        var nextItemAttack = !characterList[1].IsDead() ? PlayerPrefs.GetInt("ItemSword") : 0;
+        var nextItemResistDebuff = !characterList[2].IsDead() ? PlayerPrefs.GetInt("ItemRing") : 0;
+        var nextItemHealerAttack = !characterList[3].IsDead() ? PlayerPrefs.GetInt("ItemMagicBook") : 0;
+    
+        bool hasBuffChanged = itemDefense != nextItemDefense
+            || itemAttack != nextItemAttack
+            || itemHealerAttack != nextItemHealerAttack;
+
+        itemDefense = nextItemDefense;
+        itemAttack = nextItemAttack;
+        itemResistDebuff = nextItemResistDebuff;
+        itemHealerAttack = nextItemHealerAttack;
+
+        if (hasBuffChanged)
+            UpdateCharacterBuffs();
     }
     private void UpdateCharacterBuffs()
     {
