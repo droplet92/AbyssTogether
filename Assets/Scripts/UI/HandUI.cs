@@ -28,7 +28,8 @@ public class HandUI : AutoFieldValidator
 
         for (int i = 0; i < cardPrefix.Count; i++)
         {
-            if (drawnCard.cardName.StartsWith(cardPrefix[i]) || cardPrefix[i] == null)
+            bool isCharacters = cardPrefix[i] == null || drawnCard.cardName.StartsWith(cardPrefix[i]);
+            if (isCharacters)
             {
                 if (characters[i].IsDead())
                     cardUI.Disable();
