@@ -8,7 +8,7 @@ Abyss Together is a card-based roguelike RPG game. The player takes on the role 
 
 The core of the game design is centered on not losing party members. This concept started by subverting typical deck-building roguelikes. If a party member dies, the cards that member would have provided are no longer available, and the deck can quickly become depleted as if falling off a cliff.
 
-Developed using the Unity Engine and C#, generative AI was used to create some of the images. Coding focused mainly on implementing features, with a particular emphasis on producing animations using DOTween. This is a one-person development project where planning, design, and development were all carried out by a single individual, with a total development time of 14 days.
+Developed using the Unity Engine and C#, generative AI was used to create some of the images. Coding focused mainly on implementing features, with a particular emphasis on producing animations using DOTween. This is a one-person development project where planning, design, and development were all carried out by a single individual, with a total development time of 2 weeks.
 
 
 © 2025 Hansu Lee. All rights reserved.
