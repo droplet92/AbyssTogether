@@ -21,6 +21,11 @@ public class DeckManager : MonoBehaviour
         playDeck.Clear();
         playDeck.AddRange(CardList);
     }
+    public void ResetDeck(List<CardData> usedCards)
+    {
+        playDeck.Clear();
+        playDeck.AddRange(usedCards);
+    }
     public void ShuffleDeck()
     {
         for (int i = 0; i < playDeck.Count; i++)
@@ -33,6 +38,8 @@ public class DeckManager : MonoBehaviour
     }
     public CardData DrawCard()
     {
+        if (playDeck.Count == 0) return null;
+        
         CardData drawnCard = playDeck[0];
         playDeck.RemoveAt(0);
         hand.Add(drawnCard);

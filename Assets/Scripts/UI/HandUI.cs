@@ -13,30 +13,38 @@ public class HandUI : AutoFieldValidator
     
     private int nFreeze = 0;
     private List<RectTransform> handCards = new List<RectTransform>();
-    private static List<string> cardPrefix = new List<string>() { "Shield", "Attack", null, "Heal" };
+    private List<CardData> usedCards = new List<CardData>();
+    private static Dictionary<string, int> cardToCharacterIndex = new Dictionary<string, int>()
+    {
+        { "Shield",     0 },
+        { "ShieldAll",  0 },
+        { "Attack",     1 },
+        { "AttackAll",  1 },
+        { "Buff",       2 },
+        { "Debuff",     2 },
+        { "Skill",      2 },
+        { "Heal",       3 },
+        { "HealAll",    3 },
+    };
 
     public void DrawCard()
     {
         CardData drawnCard = deckManager.DrawCard();
-        deckManager.ResetDeck();
-        deckManager.ShuffleDeck();
-        drawnCard = deckManager.DrawCard();
-
+        if (drawnCard == null)
+        {
+            deckManager.ResetDeck(usedCards);
+            deckManager.ShuffleDeck();
+            drawnCard = deckManager.DrawCard();
+        }
         var cardUI = Instantiate(cardPrefab, transform).GetComponent<CardUI>();
         cardUI.transform.localScale = Vector3.one / 2;
         cardUI.transform.position = deckTransform.position;
 
-        for (int i = 0; i < cardPrefix.Count; i++)
-        {
-            bool isCharacters = cardPrefix[i] == null || drawnCard.cardName.StartsWith(cardPrefix[i]);
-            if (isCharacters)
-            {
-                if (characters[i].IsDead())
-                    cardUI.Disable();
+        var owner = characters[cardToCharacterIndex[drawnCard.cardName]];
+        cardUI.SetCardData(drawnCard, owner);
+        if (owner.IsDead())
+            cardUI.Disable();
 
-                cardUI.SetCardData(drawnCard, characters[i]);
-            }
-        }
         DOTween.Sequence()
             .Join(cardUI.transform.DOScale(1f, 0.5f))
             .Join(cardUI.transform.DOMove(transform.position, 0.5f))
@@ -58,6 +66,7 @@ public class HandUI : AutoFieldValidator
             .SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
+                usedCards.Add(card.GetComponent<CardUI>().CardData);
                 handCards.Remove(card);
                 Destroy(card.gameObject);
             });
@@ -72,6 +81,7 @@ public class HandUI : AutoFieldValidator
                 .SetEase(Ease.OutQuad);
             yield return seq.WaitForCompletion();
 
+            usedCards.Add(card.GetComponent<CardUI>().CardData);
             Destroy(card.gameObject);
             yield return new WaitForSeconds(0.1f);
         }

@@ -19,6 +19,8 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     [SerializeField] private Image O;
     [SerializeField] private Image X;
 
+    public CardData CardData { get; private set; }
+
     private Character owner;
     private int itemAttack = 0;
     private LocalizedString localizedDescription;
@@ -125,6 +127,7 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void SetCardData(CardData data, Character cardOwner)
     {
+        CardData = data;
         owner = cardOwner;
         cardFrame.sprite = data.cardFrame;
         cardImage.sprite = data.cardImage;

@@ -26,6 +26,7 @@ public class FieldManager : MonoBehaviour
     void Update()
     {
         UpdateItemEffects();
+        UpdateCharacterBuffs();
     }
     public void SetHighlight(string targetType, ITarget target, bool isActive)
     {
@@ -51,8 +52,6 @@ public class FieldManager : MonoBehaviour
 
         if (from == null)
             from = characterList;
-
-        hand.SetFreeze(0);
 
         if (targetType == "Character")
         {
@@ -81,13 +80,9 @@ public class FieldManager : MonoBehaviour
     }
     private void UpdateCharacterBuffs()
     {
+        characterList[3].buffs.UpdateContents(itemHealerAttack, 0);
         foreach (var character in characterList)
-        {
-            if (!character.IsDead())
-                character.buffs.UpdateContents(itemAttack, itemDefense);
-        }
-        if (!characterList[3].IsDead())
-            characterList[3].buffs.UpdateContents(itemHealerAttack, 0);
+            character.buffs.UpdateContents(itemAttack, itemDefense);
     }
 
     // Card effects

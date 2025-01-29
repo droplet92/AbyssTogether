@@ -86,6 +86,7 @@ public class TurnManager : AutoFieldValidator
             yield return new WaitForSeconds(0.5f);
         }
         nDraws = 4;
+        handUI.SetFreeze(0);
         endTurnButton.gameObject.SetActive(true);
     }
     private IEnumerator EndTurnRoutine()
