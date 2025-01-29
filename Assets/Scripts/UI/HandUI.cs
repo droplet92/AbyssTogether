@@ -35,6 +35,7 @@ public class HandUI : AutoFieldValidator
             deckManager.ResetDeck(usedCards);
             deckManager.ShuffleDeck();
             drawnCard = deckManager.DrawCard();
+            usedCards.Clear();
         }
         var cardUI = Instantiate(cardPrefab, transform).GetComponent<CardUI>();
         cardUI.transform.localScale = Vector3.one / 2;
