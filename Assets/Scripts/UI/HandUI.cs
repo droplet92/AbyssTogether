@@ -13,7 +13,7 @@ public class HandUI : AutoFieldValidator
     
     private int nFreeze = 0;
     private List<RectTransform> handCards = new List<RectTransform>();
-    private List<string> cardPrefix = new List<string>() { "Shield", "Attack", null, "Heal" };
+    private static List<string> cardPrefix = new List<string>() { "Shield", "Attack", null, "Heal" };
 
     public void DrawCard()
     {

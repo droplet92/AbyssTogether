@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -20,27 +21,19 @@ public class TurnManager : AutoFieldValidator
 
     void Awake()
     {
+        playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
+
         int level = PlayerPrefs.GetInt("level");
         levelText.text = level.ToString();
-        playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
 
         endTurnButton.onClick.AddListener(EndTurn);
         endTurnButton.gameObject.SetActive(false);
+
         StartCoroutine(StartTurn());
     }
     void Update()
     {
-        bool isOver = true;
-
-        foreach (var monster in monsterList)
-        {
-            if (!monster.IsDead())
-            {
-                isOver = false;
-                break;
-            }
-        }
-        if (isOver)
+        if (monsterList.All((Monster monster) => monster.IsDead()))
         {
             foreach (var character in characterList)
                 PlayerPrefs.SetInt($"Hp{character.gameObject.name}", character.CurrentHealth);
@@ -57,7 +50,7 @@ public class TurnManager : AutoFieldValidator
                 gameObject.SetActive(false);
             }
         }
-        if (characterList[playerCharacter].IsDead())
+        else if (characterList[playerCharacter].IsDead())
         {
             resultPanel.gameObject.SetActive(true);
             resultPanel.ShowDefeat();

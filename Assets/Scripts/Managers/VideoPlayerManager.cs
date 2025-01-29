@@ -24,14 +24,15 @@ public class VideoPlayerManager : MonoBehaviour
     }
     void Update()
     {
-        if (introPlayer.isPlaying && (Input.anyKeyDown || Input.GetMouseButtonDown(0)))
-            PlayGame(introPlayer);
+        if (!introPlayer.isPlaying) return;
+        if (!Input.anyKeyDown) return;
+        if (!Input.GetMouseButtonDown(0)) return;
+        PlayGame(introPlayer);
     }
 
     private void PlayGame(VideoPlayer vp)
     {
         introPlayer.gameObject.SetActive(false);
-
         OnAllVideoEnd?.Invoke();
     }
 #endif

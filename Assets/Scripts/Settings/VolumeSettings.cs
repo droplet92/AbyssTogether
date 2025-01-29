@@ -12,9 +12,9 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
 
-    private readonly string MASTER_VOL = "MasterVolume";
-    private readonly string BGM_VOL = "BGMVolume";
-    private readonly string SFX_VOL = "SFXVolume";
+    private static string MASTER_VOL = "MasterVolume";
+    private static string BGM_VOL = "BGMVolume";
+    private static string SFX_VOL = "SFXVolume";
 
     void Awake()
     {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Unity.Mathematics;
 using UnityEngine;
@@ -18,45 +19,17 @@ public class FieldManager : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.GetInt("ItemSword") == 1 && characterList[1].gameObject.activeSelf)
-            itemAttack = 1;
-
-        if (PlayerPrefs.GetInt("ItemNecklace") == 1 && characterList[0].gameObject.activeSelf)
-            itemDefense = 1;
-
-        if (PlayerPrefs.GetInt("ItemRing") == 1 && characterList[2].gameObject.activeSelf)
-            itemResistDebuff = 1;
-
-        if (PlayerPrefs.GetInt("ItemMagicBook") == 1 && characterList[3].gameObject.activeSelf)
-            itemHealerAttack = 1;
-        
-        foreach (var character in characterList)
-        {
-            if (character.gameObject.activeSelf)
-                character.buffs.UpdateContents(itemAttack, itemDefense);
-        }
-        if (characterList[3].gameObject.activeSelf)
-            characterList[3].buffs.UpdateContents(itemHealerAttack, 0);
-
+        UpdateItemEffects();
+        UpdateCharacterBuffs();
         monsterList.RemoveAll((Monster monster) => monster.IsDead());
     }
     void Update()
     {
-        if (itemAttack > 0 && !characterList[1].gameObject.activeSelf)
-            itemAttack = 0;
-        
-        if (itemDefense > 0 && !characterList[0].gameObject.activeSelf)
-            itemDefense = 0;
-
-        if (itemResistDebuff > 0 && !characterList[2].gameObject.activeSelf)
-            itemResistDebuff = 0;
-
-        if (itemHealerAttack > 0 && !characterList[3].gameObject.activeSelf)
-            itemHealerAttack = 0;
+        UpdateItemEffects();
     }
     public void SetHighlight(string targetType, ITarget target, bool isActive)
     {
-        if (targetType == "Character" || targetType == "Monster")
+        if (!targetType.EndsWith("All"))
         {
             target.SetHighlight(isActive);
         }
@@ -97,6 +70,24 @@ public class FieldManager : MonoBehaviour
         {
             methodInfo.Invoke(this, Array.Empty<object>());
         }
+    }
+
+    private void UpdateItemEffects()
+    {
+        itemDefense = !characterList[0].IsDead() ? PlayerPrefs.GetInt("ItemNecklace") : 0;
+        itemAttack = !characterList[1].IsDead() ? PlayerPrefs.GetInt("ItemSword") : 0;
+        itemResistDebuff = !characterList[2].IsDead() ? PlayerPrefs.GetInt("ItemRing") : 0;
+        itemHealerAttack = !characterList[3].IsDead() ? PlayerPrefs.GetInt("ItemMagicBook") : 0;
+    }
+    private void UpdateCharacterBuffs()
+    {
+        foreach (var character in characterList)
+        {
+            if (!character.IsDead())
+                character.buffs.UpdateContents(itemAttack, itemDefense);
+        }
+        if (!characterList[3].IsDead())
+            characterList[3].buffs.UpdateContents(itemHealerAttack, 0);
     }
 
     // Card effects

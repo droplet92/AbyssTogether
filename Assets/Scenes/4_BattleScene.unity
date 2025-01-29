@@ -3692,7 +3692,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   db: {fileID: 11400000, guid: 50227468ff0b34448a59f602bb138d06, type: 2}
-  hand: []
 --- !u!4 &328546557
 Transform:
   m_ObjectHideFlags: 0
@@ -14438,9 +14437,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   db: {fileID: 11400000, guid: dc6cbab17f6c58747ae7049c4f4107e3, type: 2}
   turnManager: {fileID: 2097129165}
-  monster1: {fileID: 1481074797}
-  monster2: {fileID: 733792896}
-  monster3: {fileID: 927390618}
+  monsterSlots:
+  - {fileID: 1481074797}
+  - {fileID: 733792896}
+  - {fileID: 927390618}
 --- !u!1 &1375130658
 GameObject:
   m_ObjectHideFlags: 0

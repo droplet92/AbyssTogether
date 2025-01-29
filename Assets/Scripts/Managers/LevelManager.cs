@@ -21,20 +21,23 @@ public class LevelManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            int level = PlayerPrefs.GetInt("level");
-            Vector2 screenPos = Input.mousePosition;
-            Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-            RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+        if (!Input.GetMouseButtonDown(0)) return;
+        
+        Vector2 screenPos = Input.mousePosition;
+        Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+        if (hit.collider == null) return;
+        
+        int level = PlayerPrefs.GetInt("level");
+        if (levels.IndexOf(hit.collider.gameObject) + 1 != level) return;
 
-            if (hit.collider != null && levels.IndexOf(hit.collider.gameObject) + 1 == level)
-            {
-                if (hit.collider.gameObject.name.StartsWith("camp"))
-                    SceneManager.LoadScene(SceneName.Camp.ToSceneString());
-                else
-                    SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.Battle);
-            }
+        if (hit.collider.gameObject.name.StartsWith("camp"))
+        {
+            SceneManager.LoadScene(SceneName.Camp.ToSceneString());
+        }
+        else
+        {
+            SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.Battle);
         }
     }
 }
