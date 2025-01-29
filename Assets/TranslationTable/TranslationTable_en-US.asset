@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en-US
   m_SharedData: {fileID: 11400000, guid: 9d3efb68ec8fa064a8086ddd09c64eb1, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 7564831983321743367
   m_TableData:
   - m_Id: 641288491008
     m_Localized: Exit
@@ -119,11 +120,12 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1680796415283200
-    m_Localized: Attack <color=#4E9F3D>+3</color> (Target)
+    m_Localized: Attack <color=#393E46>+3</color> (Target)
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 7564831983321743367
   - m_Id: 1680815407091712
-    m_Localized: Attack -1 (Target)
+    m_Localized: Attack <color=#393E46>-1</color> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1681965237784576
@@ -183,19 +185,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1685783610511360
-    m_Localized: Attack +1 (Healer)
+    m_Localized: Attack <color=#FFD369>+1</color> (Healer)
     m_Metadata:
       m_Items: []
   - m_Id: 1685788073250816
-    m_Localized: Attack +1 (Party)
+    m_Localized: Attack <color=#FFD369>+1</color> (Party)
     m_Metadata:
       m_Items: []
   - m_Id: 1685785451810816
-    m_Localized: Defense +1 (Party)
+    m_Localized: Defense <color=#FFD369>+1</color> (Party)
     m_Metadata:
       m_Items: []
   - m_Id: 1685786764627968
-    m_Localized: All Debuffs -1
+    m_Localized: All Debuffs <color=#FFD369>-1</color>
     m_Metadata:
       m_Items: []
   - m_Id: 1687064169271296
@@ -219,23 +221,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1687730509959168
-    m_Localized: Attack +1 (Healer)
+    m_Localized: Attack <color=#FFD369>+1</color> (Healer)
     m_Metadata:
       m_Items: []
   - m_Id: 1687736214212608
-    m_Localized: Defense +99 (Target)
+    m_Localized: Defense <color=#FFD369>+99</color> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1687738865012736
-    m_Localized: Defense +2 (Target)
+    m_Localized: Defense <color=#FFD369>+2</color> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1687743898177536
-    m_Localized: Attack +2 (Target)
+    m_Localized: Attack <color=#FFD369>+2</color> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1687820872044544
-    m_Localized: Attack -2 (Target)
+    m_Localized: Attack <color=#FFD369>-2</color> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1704988296728576
@@ -252,4 +254,8 @@ MonoBehaviour:
       m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7564831983321743367
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00d045e9acf80500
