@@ -18,10 +18,17 @@ public class RewardPanel : AutoFieldValidator
     [SerializeField] private Button okButton;
 
     private LocalizedString localizedDescription;
+    private Dictionary<string, int> toIndex = new Dictionary<string, int>()
+    {
+        { "MagicBook", 0 },
+        { "Ring",      1 },
+        { "Sword",     2 },
+        { "Necklace",  3 },
+    };
 
     void Awake()
     {
-        Debug.Assert(potionList.Count == 3, "SerializeField is empty: Potion List");
+        Debug.Assert(potionList.Count == 3, "SerializeField size changed: Potion List");
     }
     void OnDestroy()
     {
@@ -34,53 +41,38 @@ public class RewardPanel : AutoFieldValidator
     }
     public void ShowPotion()
     {
+        potionButton.gameObject.SetActive(false);
+
         var potion = potionDatabase.GetRandomPotion();
         image.sprite = potion.potionImage;
+
         localizedDescription = potion.description;
         localizedDescription.StringChanged += OnStringChanged;
-
-        if (PlayerPrefs.GetString("Potion1").Length == 0)
-        {
-            PlayerPrefs.SetString("Potion1", potion.name);
-            potionList[0].SetPotionData();
-        }
-        else if (PlayerPrefs.GetString("Potion2").Length == 0)
-        {
-            PlayerPrefs.SetString("Potion2", potion.name);
-            potionList[1].SetPotionData();
-        }
-        else if (PlayerPrefs.GetString("Potion3").Length == 0)
-        {
-            PlayerPrefs.SetString("Potion3", potion.name);
-            potionList[2].SetPotionData();
-        }
-        potionButton.gameObject.SetActive(false);
         localizedDescription.RefreshString();
+
+        for (int i = 0; i < 3; i++)
+        {
+            if (PlayerPrefs.GetString($"Potion{i + 1}").Length == 0)
+            {
+                PlayerPrefs.SetString($"Potion{i + 1}", potion.name);
+                potionList[i].SetPotionData();
+                return;
+            }
+        }
     }
     public void ShowItem()
     {
+        itemButton?.gameObject.SetActive(false);
+
         var item = equipmentDatabase.GetRandomEquipment();
         image.sprite = item.equipmentImage;
+
         localizedDescription = item.description;
         localizedDescription.StringChanged += OnStringChanged;
-
-        PlayerPrefs.SetInt($"Item{item.name}", 1);
         localizedDescription.RefreshString();
-
-        if (itemButton != null)
-            itemButton.gameObject.SetActive(false);
-
-        if (item.name == "MagicBook")
-            itemList[0].gameObject.SetActive(true);
-
-        else if (item.name == "Ring")
-            itemList[1].gameObject.SetActive(true);
-
-        else if (item.name == "Sword")
-            itemList[2].gameObject.SetActive(true);
-
-        else if (item.name == "Necklace")
-            itemList[3].gameObject.SetActive(true);
+        
+        PlayerPrefs.SetInt($"Item{item.name}", 1);
+        itemList[toIndex[item.name]].gameObject.SetActive(true);
     }
 
     private void OnStringChanged(string value)

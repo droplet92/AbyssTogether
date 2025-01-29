@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BgmManager : MonoBehaviour
+public class BgmManager : AutoFieldValidator
 {
     [SerializeField] private AudioSource openingBGM;
     [SerializeField] private AudioSource battleBGM;
@@ -30,9 +30,9 @@ public class BgmManager : MonoBehaviour
     {
         toAudioSource = new Dictionary<BgmType, AudioSource>()
         {
-            { BgmType.Opening, openingBGM },
-            { BgmType.Battle, battleBGM },
-            { BgmType.NonBattle, nonBattleBGM },
+            { BgmType.Opening,      openingBGM },
+            { BgmType.Battle,       battleBGM },
+            { BgmType.NonBattle,    nonBattleBGM },
         };
         battleBGM.Play();
         nonBattleBGM.Play();

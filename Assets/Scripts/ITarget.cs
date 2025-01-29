@@ -1,6 +1,6 @@
-public interface ICardTarget
+public interface ITarget
 {
     public bool CanApply(string targetType);
     public void SetHighlight(bool isActive);
-    public bool isDied();
+    public bool IsDead();
 }

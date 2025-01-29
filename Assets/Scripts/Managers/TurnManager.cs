@@ -34,7 +34,7 @@ public class TurnManager : AutoFieldValidator
 
         foreach (var monster in monsterList)
         {
-            if (monster.gameObject.activeSelf || !monster.isDied())
+            if (!monster.IsDead())
             {
                 isOver = false;
                 break;
@@ -57,8 +57,7 @@ public class TurnManager : AutoFieldValidator
                 gameObject.SetActive(false);
             }
         }
-        bool isPlayerDied = !characterList[playerCharacter].gameObject.activeSelf || characterList[playerCharacter].isDied();
-        if (isPlayerDied)
+        if (characterList[playerCharacter].IsDead())
         {
             resultPanel.gameObject.SetActive(true);
             resultPanel.ShowDefeat();
@@ -103,9 +102,7 @@ public class TurnManager : AutoFieldValidator
         foreach (var monster in monsterList)
         {
             monster.UpdateDefense(-monster.Defense);
-
-            if (!monster.isDied())
-                yield return StartCoroutine(monster.DoAction());
+            yield return StartCoroutine(monster.DoAction());
         }
         yield return StartCoroutine(StartTurn());
     }

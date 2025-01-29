@@ -12,6 +12,14 @@ public class Tooltip : AutoFieldValidator
     private LocalizedString localizedName;
     private LocalizedString localizedDescription;
 
+    static public Tooltip FromPrefab(GameObject prefab, Transform parent, Vector3 localPosition)
+    {
+        var obj = Instantiate(prefab, parent);
+        obj.transform.localPosition = localPosition + new Vector3(305f, -40f, 0);
+        obj.SetActive(false);
+        return obj.GetComponent<Tooltip>();
+    }
+
     void OnDestroy()
     {
         if (localizedName != null)
@@ -25,9 +33,10 @@ public class Tooltip : AutoFieldValidator
     {
         localizedName = name;
         localizedDescription = description;
+
         localizedName.StringChanged += OnNameChanged;
         localizedDescription.StringChanged += OnDescriptionChanged;
-
+        
         localizedName.RefreshString();
         localizedDescription.RefreshString();
     }

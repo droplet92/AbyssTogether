@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CharacterSelectCanvas : AutoFieldValidator
+public class CharacterSelectManager : AutoFieldValidator
 {
     [SerializeField] private List<Button> buttons;
     

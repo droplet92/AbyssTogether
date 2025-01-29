@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public enum SceneName
 {
     Opening,
@@ -10,17 +12,18 @@ public enum SceneName
 
 public static class Extenders
 {
+    private static Dictionary<SceneName, string> toString = new Dictionary<SceneName, string>()
+    {
+        { SceneName.Opening,            "1_OpeningScene" },
+        { SceneName.CharacterSelect,    "2_CharacterSelectScene" },
+        { SceneName.Level,              "3_LevelScene" },
+        { SceneName.Battle,             "4_BattleScene" },
+        { SceneName.Camp,               "5_CampScene" },
+        { SceneName.Ending,             "6_EndingScene" },
+    };
+
     public static string ToSceneString(this SceneName sceneName)
     {
-        switch (sceneName)
-        {
-        case SceneName.Opening:         return "1_OpeningScene";
-        case SceneName.CharacterSelect: return "2_CharacterSelectScene";
-        case SceneName.Level:           return "3_LevelScene";
-        case SceneName.Battle:          return "4_BattleScene";
-        case SceneName.Camp:            return "5_CampScene";
-        case SceneName.Ending:          return "6_EndingScene";
-        }
-        return null;    // never reached
+        return toString[sceneName];
     }
 }

@@ -24,13 +24,9 @@ public class ResultPanel : AutoFieldValidator
     {
         int level = PlayerPrefs.GetInt("level");
 
-        if (level == 4 || level == 8 || level == 12)
-            itemButton.gameObject.SetActive(true);
-        else
-            itemButton.gameObject.SetActive(false);
-
+        ActivateItemButton(level);
         labelLose.gameObject.SetActive(false);
-        okButton.onClick.AddListener(Win);
+        okButton.onClick.AddListener(() => Win(level));
         canvasGroup.DOFade(1f, 0.5f);
     }
 
@@ -43,11 +39,14 @@ public class ResultPanel : AutoFieldValidator
         canvasGroup.DOFade(1f, 0.5f);
     }
 
-    private void Win()
+    private void ActivateItemButton(int level)
     {
-        int level = PlayerPrefs.GetInt("level");
+        bool isBoss = level == 4 || level == 8 || level == 12;
+        itemButton.gameObject.SetActive(isBoss);
+    }
+    private void Win(int level)
+    {
         PlayerPrefs.SetInt("level", level + 1);
-
         SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.Level);
     }
     private void Defeat()

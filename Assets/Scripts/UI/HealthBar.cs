@@ -12,21 +12,27 @@ public class HealthBar : AutoFieldValidator
 
     public void Initialize(int maxHealth)
     {
-        value.text = $"{maxHealth}/{maxHealth}";
+        UpdateText(maxHealth, maxHealth);
     }
     public void SetHealth(float currentHealth, float maxHealth)
     {
         currentHealth = math.max(currentHealth, 0);
-        value.text = $"{currentHealth}/{maxHealth}";
+        UpdateText(currentHealth, maxHealth);
 
         slider.DOValue(currentHealth / maxHealth, .5f)
             .OnComplete(() => 
             {
-                if (cardTarget.GetComponent<ICardTarget>().isDied())
+                if (cardTarget.GetComponent<ITarget>().IsDead())
                 {
                     cardTarget.GetComponent<CanvasGroup>()
-                        .DOFade(0f, 0.5f).OnComplete(() => cardTarget.SetActive(false));
+                        .DOFade(0f, 0.5f)
+                        .OnComplete(() => cardTarget.SetActive(false));
                 }
             });
+    }
+
+    private void UpdateText(float currentHealth, float maxHealth)
+    {
+        value.text = $"{currentHealth}/{maxHealth}";
     }
 }

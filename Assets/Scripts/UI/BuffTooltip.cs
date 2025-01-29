@@ -15,11 +15,18 @@ public class BuffTooltip : AutoFieldValidator
     private int attack = 0;
     private int defense = 0;
 
+    static public BuffTooltip FromPrefab(GameObject prefab, Transform parent, Vector3 localPosition)
+    {
+        var obj = Instantiate(prefab, parent);
+        obj.transform.localPosition = localPosition + new Vector3(225f, 135f, 0);
+        obj.SetActive(false);
+        return obj.GetComponent<BuffTooltip>();
+    }
+
     void Awake()
     {
         localizedAttack.StringChanged += OnAttackChanged;
         localizedDefense.StringChanged += OnDefenseChanged;
-        
         localizedAttack.RefreshString();
         localizedDefense.RefreshString();
     }
@@ -29,11 +36,10 @@ public class BuffTooltip : AutoFieldValidator
         localizedDefense.StringChanged -= OnDefenseChanged;
     }
 
-    public void SetTooltipData(int attack, int defense)
+    public void SetTooltipData(int atk, int dfs)
     {
-        this.attack = attack;
-        this.defense = defense;
-
+        attack = atk;
+        defense = dfs;
         localizedAttack.RefreshString();
         localizedDefense.RefreshString();
     }

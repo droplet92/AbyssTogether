@@ -602,6 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ee478c21fab1a44bfb71200c579d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  field: {fileID: 138113539}
   attackImage: {fileID: 1799639212}
   defenseImage: {fileID: 1622732324}
   tooltipPrefab: {fileID: 3825664093749760716, guid: a6819f9639e5876408636d2f697c331d, type: 3}
@@ -1013,6 +1014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ee478c21fab1a44bfb71200c579d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  field: {fileID: 138113539}
   attackImage: {fileID: 938681875}
   defenseImage: {fileID: 1802615649}
   tooltipPrefab: {fileID: 3825664093749760716, guid: a6819f9639e5876408636d2f697c331d, type: 3}
@@ -14222,6 +14224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ee478c21fab1a44bfb71200c579d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  field: {fileID: 138113539}
   attackImage: {fileID: 1668388974}
   defenseImage: {fileID: 96231625}
   tooltipPrefab: {fileID: 3825664093749760716, guid: a6819f9639e5876408636d2f697c331d, type: 3}
@@ -17660,6 +17663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ee478c21fab1a44bfb71200c579d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  field: {fileID: 138113539}
   attackImage: {fileID: 815146809}
   defenseImage: {fileID: 1172004332}
   tooltipPrefab: {fileID: 3825664093749760716, guid: a6819f9639e5876408636d2f697c331d, type: 3}
@@ -17785,6 +17789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ee478c21fab1a44bfb71200c579d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  field: {fileID: 138113539}
   attackImage: {fileID: 169375551}
   defenseImage: {fileID: 1824823356}
   tooltipPrefab: {fileID: 3825664093749760716, guid: a6819f9639e5876408636d2f697c331d, type: 3}
@@ -20510,6 +20515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ee478c21fab1a44bfb71200c579d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  field: {fileID: 138113539}
   attackImage: {fileID: 1259622252}
   defenseImage: {fileID: 1138296268}
   tooltipPrefab: {fileID: 3825664093749760716, guid: a6819f9639e5876408636d2f697c331d, type: 3}
@@ -21129,6 +21135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ee478c21fab1a44bfb71200c579d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  field: {fileID: 138113539}
   attackImage: {fileID: 1864305983}
   defenseImage: {fileID: 1073272354}
   tooltipPrefab: {fileID: 3825664093749760716, guid: a6819f9639e5876408636d2f697c331d, type: 3}

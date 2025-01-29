@@ -37,6 +37,8 @@ public class FieldManager : MonoBehaviour
         }
         if (characterList[3].gameObject.activeSelf)
             characterList[3].buffs.UpdateContents(itemHealerAttack, 0);
+
+        monsterList.RemoveAll((Monster monster) => monster.IsDead());
     }
     void Update()
     {
@@ -52,7 +54,7 @@ public class FieldManager : MonoBehaviour
         if (itemHealerAttack > 0 && !characterList[3].gameObject.activeSelf)
             itemHealerAttack = 0;
     }
-    public void SetHighlight(string targetType, ICardTarget target, bool isActive)
+    public void SetHighlight(string targetType, ITarget target, bool isActive)
     {
         if (targetType == "Character" || targetType == "Monster")
         {
@@ -69,7 +71,7 @@ public class FieldManager : MonoBehaviour
                 monster.SetHighlight(isActive);
         }
     }
-    public void ApplyEffect(string targetType, object from, ICardTarget target, string functionName)
+    public void ApplyEffect(string targetType, object from, ITarget target, string functionName)
     {
         Type type = typeof(FieldManager);
         MethodInfo methodInfo = type.GetMethod(functionName, BindingFlags.Instance | BindingFlags.NonPublic);
@@ -80,21 +82,20 @@ public class FieldManager : MonoBehaviour
         hand.SetFreeze(0);
 
         if (targetType == "Character")
-            methodInfo.Invoke(this, new object[]{ from, target });
-
-        else if (targetType == "Monster")
-            methodInfo.Invoke(this, new object[]{ target });
-
-        else if (targetType == "CharacterAll")
-            methodInfo.Invoke(this, Array.Empty<object>());
-
-        else if (targetType == "MonsterAll")
-            methodInfo.Invoke(this, Array.Empty<object>());
-
-        if (target.isDied())
         {
-            if (targetType == "Monster" || targetType == "MonsterAll")
-                monsterList.Remove((Monster)target);
+            methodInfo.Invoke(this, new object[]{ from, target });
+        }
+        else if (targetType == "Monster")
+        {
+            methodInfo.Invoke(this, new object[]{ target });
+        }
+        else if (targetType == "CharacterAll")
+        {
+            methodInfo.Invoke(this, Array.Empty<object>());
+        }
+        else if (targetType == "MonsterAll")
+        {
+            methodInfo.Invoke(this, Array.Empty<object>());
         }
     }
 
@@ -177,11 +178,8 @@ public class FieldManager : MonoBehaviour
         
         foreach (var character in characterList)
         {
-            if (character.gameObject.activeSelf && !character.isDied())
-            {
-                character.AnimateSpell();
-                character.UpdateHealth(attack);
-            }
+            character.AnimateSpell();
+            character.UpdateHealth(attack);
         }
     }
 

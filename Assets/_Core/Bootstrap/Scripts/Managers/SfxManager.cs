@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SfxManager : MonoBehaviour
+public class SfxManager : AutoFieldValidator
 {
     [SerializeField] private AudioSource clickSound;
     [SerializeField] private AudioSource focusSound;

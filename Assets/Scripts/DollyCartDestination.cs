@@ -14,11 +14,11 @@ public class DollyCartDestination : AutoFieldValidator
         var destination = smoothPath.m_Waypoints[1];
         
         destination.position = new Vector3
-            (
-                destination.position.x,
-                Math.Max(levels[level - 1].transform.position.y - 800, -2180),
-                destination.position.z
-            );
+        (
+            destination.position.x,
+            Math.Max(levels[level - 1].transform.position.y - 800, -2180),
+            destination.position.z
+        );
         smoothPath.m_Waypoints[1] = destination;
     }
 }

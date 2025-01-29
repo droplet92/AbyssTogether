@@ -10,8 +10,12 @@ public class AutoFieldValidator : MonoBehaviour
 
     private void ValidateSerializedFields()
     {
-        var fields = GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-
+        var fields = GetType().GetFields
+        (
+            BindingFlags.Instance |
+            BindingFlags.Public |
+            BindingFlags.NonPublic
+        );
         foreach (var field in fields)
         {
             if (IsRequired(field))

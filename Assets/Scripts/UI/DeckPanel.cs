@@ -10,28 +10,22 @@ public class DeckPanel : AutoFieldValidator
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Button okButton;
 
-    private List<CardData> cardList;
-
     void OnEnable()
     {
-        cardList = deckManager.GetCardList();
-        okButton.onClick.AddListener(ClosePanel);
         Initialize();
+        okButton.onClick.AddListener(ClosePanel);
     }
     void Update()
     {
-        if (Input.mouseScrollDelta.y != 0)
-            scrollRect.verticalNormalizedPosition += Input.mouseScrollDelta.y * 0.1f;
+        scrollRect.verticalNormalizedPosition += Input.mouseScrollDelta.y * 0.1f;
     }
 
     public void Initialize()
     {
-        for (int i = 0; i < cardList.Count; i++)
+        foreach (var cardData in deckManager.CardList)
         {
-            GameObject newCardObj = Instantiate(cardPrefab, content);
-            CardUI cardUI = newCardObj.GetComponent<CardUI>();
-            
-            cardUI.SetCardData(cardList[i], null);
+            var cardUI = Instantiate(cardPrefab, content).GetComponent<CardUI>();
+            cardUI.SetCardData(cardData, null);
             cardUI.Exhibit();
         }
     }

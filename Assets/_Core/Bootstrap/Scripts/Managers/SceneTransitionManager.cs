@@ -10,11 +10,11 @@ public class SceneTransitionManager : MonoBehaviour
 
     private Dictionary<SceneName, BgmType> sceneToBgm = new Dictionary<SceneName, BgmType>()
     {
-        { SceneName.Opening, BgmType.Opening },
-        { SceneName.CharacterSelect, BgmType.NonBattle },
-        { SceneName.Level, BgmType.NonBattle },
-        { SceneName.Battle, BgmType.Battle },
-        { SceneName.Ending, BgmType.NonBattle },
+        { SceneName.Opening,            BgmType.Opening },
+        { SceneName.CharacterSelect,    BgmType.NonBattle },
+        { SceneName.Level,              BgmType.NonBattle },
+        { SceneName.Battle,             BgmType.Battle },
+        { SceneName.Ending,             BgmType.NonBattle },
     };
 
     void Awake()

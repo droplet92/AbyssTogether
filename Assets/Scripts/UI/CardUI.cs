@@ -6,6 +6,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine.Localization;
 using UnityEngine.Localization.SmartFormat;
+using System;
 
 public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -30,7 +31,7 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     private Vector2 originAnchorPos;
     private Vector3 originLocalRotation;
     private int originSiblingIndex;
-    private ICardTarget hoveredTarget;
+    private ITarget hoveredTarget;
     private bool isFreeze = false;
     private bool uiOnly = false;
 
@@ -47,8 +48,7 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (eventData.dragging || uiOnly)
-            return;
+        if (eventData.dragging || uiOnly) return;
 
         originSiblingIndex = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
@@ -60,8 +60,7 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (eventData.dragging || uiOnly)
-            return;
+        if (eventData.dragging || uiOnly) return;
 
         transform.SetSiblingIndex(originSiblingIndex);
         
@@ -73,8 +72,7 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (isFreeze)
-            return;
+        if (isFreeze) return;
 
         DOTween.Sequence()
             .Join(rectTransform.DOScale(0.5f, 0.2f))
@@ -83,45 +81,34 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (isFreeze)
-            return;
+        if (isFreeze) return;
             
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
-        ICardTarget target = GetTargetUnderMouse();
-
-        if (target != null)
+        ITarget target = ITargetUtil.GetTargetUnderMouse(canvas);
+        if (target != hoveredTarget)
         {
-            if (hoveredTarget != target)
-            {
-                if (hoveredTarget != null)
-                    fieldPanel.SetHighlight(targetType, hoveredTarget, false);
+            if (hoveredTarget != null)
+                fieldPanel.SetHighlight(targetType, hoveredTarget, false);
 
-                hoveredTarget = target;
+            hoveredTarget = target;
 
-                if (hoveredTarget.CanApply(targetType))
-                    fieldPanel.SetHighlight(targetType, hoveredTarget, true);
-            }
-        }
-        else if (hoveredTarget != null)
-        {
-            fieldPanel.SetHighlight(targetType, hoveredTarget, false);
-            hoveredTarget = null;
+            if (hoveredTarget?.CanApply(targetType) ?? false)
+                fieldPanel.SetHighlight(targetType, hoveredTarget, true);
         }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (isFreeze)
-            return;
+        if (isFreeze) return;
             
-        if (hoveredTarget != null && hoveredTarget.CanApply(targetType))
+        if (hoveredTarget?.CanApply(targetType) ?? false)
         {
             fieldPanel.SetHighlight(targetType, hoveredTarget, false);
             fieldPanel.ApplyEffect(targetType, null, hoveredTarget, cardNameText.text);
+            hoveredTarget = null;
             
             Exhibit();
             handPanel.Discard(rectTransform);
-            hoveredTarget = null;
         }
         else
         {
@@ -148,19 +135,19 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
 
         localizedDescription = data.description;
         localizedDescription.StringChanged += OnStringChanged;
-
-        if (owner != null)
-        {
-            if (owner.gameObject.activeSelf)
-            {
-                itemAttack = PlayerPrefs.GetInt("ItemSword");
-
-                if (owner.name == "Healer")
-                    itemAttack += PlayerPrefs.GetInt("ItemMagicBook");
-            }
-            owner.attackChanged += () => localizedDescription.RefreshString();
-        }
         localizedDescription.RefreshString();
+
+        if (owner == null) return;
+        if (!owner.IsDead())
+        {
+            itemAttack = PlayerPrefs.GetInt("ItemSword");
+
+            if (owner.name == "Healer")
+                itemAttack += PlayerPrefs.GetInt("ItemMagicBook");
+
+            localizedDescription.RefreshString();
+        }
+        owner.attackChanged += () => localizedDescription.RefreshString();
     }
     public void SetCardOrigin(Vector3 parentPos, Vector2 anchorPos, Vector3 localRotation)
     {
@@ -175,55 +162,40 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void Exhibit()
     {
-        uiOnly = isFreeze = true;
+        isFreeze = true;
+        uiOnly = true;
     }
     public void Disable()
     {
         Exhibit();
         cardFrame.color = Color.black;
     }
+    public void AddTeamTalkEvent(Action selectCard)
+    {
+        var eventTrigger = gameObject.AddComponent<EventTrigger>();
+        var clickEntry = new EventTrigger.Entry()
+        {
+            eventID = EventTriggerType.PointerClick
+        };
+        clickEntry.callback.AddListener((data) => selectCard());
+        eventTrigger.triggers.Add(clickEntry);
+    }
     public void SetOX(bool isO, bool activate)
     {
-        if (isO)
-            O.gameObject.SetActive(activate);
-        else
-            X.gameObject.SetActive(activate);
+        if (isO) O.gameObject.SetActive(activate);
+        else X.gameObject.SetActive(activate);
     }
 
     private void OnStringChanged(string value)
     {
-        if (owner != null)
-            cardDescriptionText.text = value.FormatSmart(owner.Attack + itemAttack);
-
-        else if (cardNameText.text == "Shield" || cardNameText.text == "ShieldAll")
-            cardDescriptionText.text = value.FormatSmart(6);
-
-        else if (cardNameText.text == "Attack" || cardNameText.text == "AttackAll")
-            cardDescriptionText.text = value.FormatSmart(6);
-
-        else if (cardNameText.text == "Heal" || cardNameText.text == "HealAll")
-            cardDescriptionText.text = value.FormatSmart(4);
-
-        else
-            cardDescriptionText.text = value.FormatSmart(12);
+        cardDescriptionText.text = value.FormatSmart(GetCardValue());
     }
-    private ICardTarget GetTargetUnderMouse()
+    private int GetCardValue()
     {
-        PointerEventData pointerData = new PointerEventData(EventSystem.current)
-        {
-            position = Input.mousePosition
-        };
-
-        List<RaycastResult> results = new List<RaycastResult>();
-        canvas.GetComponent<GraphicRaycaster>().Raycast(pointerData, results);
-
-        foreach (var result in results)
-        {
-            var cardTarget = result.gameObject.GetComponentInParent<ICardTarget>();
-
-            if (cardTarget != null)
-                return cardTarget;
-        }
-        return null;
+        if (owner != null) return owner.Attack + itemAttack;
+        if (cardNameText.text.StartsWith("Shield")) return 3;
+        if (cardNameText.text.StartsWith("Attack")) return 4;
+        if (cardNameText.text.StartsWith("Heal")) return 2;
+        return 9;
     }
 }
