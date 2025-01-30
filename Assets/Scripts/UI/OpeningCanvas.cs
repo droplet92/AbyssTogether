@@ -18,6 +18,7 @@ public class OpeningCanvas : AutoFieldValidator
 
     private void StartGame()
     {
+        PlayerPrefs.SetString("StartTime", null);
         BgmManager.Instance.CrossFade(BgmType.Opening, BgmType.NonBattle);
         SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.CharacterSelect);
     }

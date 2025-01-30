@@ -44,7 +44,6 @@ public class DataManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("level", 1);
         PlayerPrefs.SetString("Deck", null);
-        PlayerPrefs.SetString("StartTime", null);
     }
     private void InitializeHealths()
     {
