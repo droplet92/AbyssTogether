@@ -62,7 +62,7 @@ public class ItemUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
 
     private bool IsCharacterDead()
     {
-        if (character == null) return PlayerPrefs.GetInt(toPreferenceName[itemName]) == 0;
+        if (character == null) return PlayerPrefs.GetInt(toPreferenceName[itemName]) <= 0;
         return character.IsDead();
     }
     private void DisableColor()
