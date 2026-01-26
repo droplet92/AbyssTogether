@@ -7,6 +7,7 @@ using BgmType = BgmManager.BgmType;
 public class SceneTransitionManager : MonoBehaviour
 {
     public static SceneTransitionManager Instance { get; private set; }
+    private bool isTransitioning = false;
 
     private Dictionary<SceneName, BgmType> sceneToBgm = new Dictionary<SceneName, BgmType>()
     {
@@ -32,19 +33,29 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void LoadSceneWithCrossfade(SceneName sceneName)
     {
+        if (isTransitioning) return;
         StartCoroutine(TransitionScene(sceneName));
     }
 
     private IEnumerator TransitionScene(SceneName sceneName)
     {
-        var from = (sceneName == SceneName.Battle) ? BgmType.NonBattle : BgmType.Battle;
-        var to = sceneToBgm[sceneName];
-        BgmManager.Instance.CrossFade(from, to);
+        isTransitioning = true;
+        try
+        {
+            var from = (sceneName == SceneName.Battle) ? BgmType.NonBattle : BgmType.Battle;
+            var to = sceneToBgm[sceneName];
+            BgmManager.Instance.CrossFade(from, to);
         
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName.ToSceneString());
-        asyncLoad.allowSceneActivation = false;
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName.ToSceneString());
+            asyncLoad.allowSceneActivation = false;
+            yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(1f);
-        asyncLoad.allowSceneActivation = true;
+            asyncLoad.allowSceneActivation = true;
+            yield return asyncLoad;
+        }
+        finally
+        {
+            isTransitioning = false;
+        }
     }
 }
