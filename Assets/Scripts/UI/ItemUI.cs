@@ -26,15 +26,8 @@ public class ItemUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
 
     void Start()
     {
-        if (PlayerPrefs.GetInt($"Item{itemName}") == 1)
-        {
-            isActive = true;
-            image.gameObject.SetActive(true);
-
-            var item = db.GetEquipment(itemName);
-            tooltip = Tooltip.FromPrefab(tooltipPrefab, statusBar, transform.localPosition + new Vector3(150f, 0f));
-            tooltip.SetTooltipData(item.equipmentName, item.description);
-        }
+        SetItemData();
+        
         bool isPlayerCharacter = name == $"ItemSlot{PlayerPrefs.GetInt("PlayerCharacter")}";
         if (isPlayerCharacter)
             marker.gameObject.SetActive(true);
@@ -69,5 +62,16 @@ public class ItemUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     {
         image.color = Color.gray;
         portrait.color = Color.gray;
+    }
+    public void SetItemData()
+    {
+        if (PlayerPrefs.GetInt($"Item{itemName}") == 0) return;
+
+        isActive = true;
+        image.gameObject.SetActive(true);
+
+        var item = db.GetEquipment(itemName);
+        tooltip = Tooltip.FromPrefab(tooltipPrefab, statusBar, transform.localPosition + new Vector3(150f, 0f));
+        tooltip.SetTooltipData(item.equipmentName, item.description);
     }
 }

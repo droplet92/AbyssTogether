@@ -72,7 +72,7 @@ public class RewardPanel : AutoFieldValidator
         localizedDescription.RefreshString();
         
         PlayerPrefs.SetInt($"Item{item.name}", 1);
-        itemList[toIndex[item.name]].gameObject.SetActive(true);
+        itemList[toIndex[item.name]].SetItemData();
     }
 
     private void OnStringChanged(string value)
