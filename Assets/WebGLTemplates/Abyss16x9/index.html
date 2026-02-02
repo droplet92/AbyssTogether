@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes"
+    />
+
+    <title>Unity WebGL Player | {{{ PRODUCT_NAME }}}</title>
+
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: #000;
+      }
+
+      #unity-container {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000;
+        overflow: hidden;
+        touch-action: none;
+      }
+
+      #unity-canvas {
+        display: block;
+        background: #231F20;
+        max-width: 100%;
+        max-height: 100%;
+        touch-action: none;
+      }
+
+      #unity-loading {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.2px;
+        user-select: none;
+        text-align: center;
+        padding: 24px;
+        box-sizing: border-box;
+        white-space: pre-line;
+        background: rgba(0, 0, 0, 0.35);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="unity-container">
+      <!-- Default size helps itch.io auto-detect embed dimensions; runtime JS will resize for letterboxing. -->
+      <canvas id="unity-canvas" width="960" height="540" tabindex="-1"></canvas>
+    </div>
+    <div id="unity-loading">Loading…</div>
+
+    <script>
+      const targetAspect = 16 / 9;
+
+      const container = document.querySelector("#unity-container");
+      const canvas = document.querySelector("#unity-canvas");
+      const loading = document.querySelector("#unity-loading");
+
+      function getViewportSize() {
+        // visualViewport is more accurate on mobile when the address bar shows/hides.
+        const vv = window.visualViewport;
+        const w = vv ? vv.width : window.innerWidth;
+        const h = vv ? vv.height : window.innerHeight;
+        return {
+          w: Math.max(1, Math.floor(w)),
+          h: Math.max(1, Math.floor(h)),
+          dpr: window.devicePixelRatio || 1,
+        };
+      }
+
+      function computeLetterboxedSize() {
+        const { w, h, dpr } = getViewportSize();
+        const windowAspect = w / h;
+
+        let cssW;
+        let cssH;
+        if (windowAspect > targetAspect) {
+          cssH = h;
+          cssW = Math.floor(h * targetAspect);
+        } else {
+          cssW = w;
+          cssH = Math.floor(w / targetAspect);
+        }
+
+        // Clamp to at least 1px.
+        cssW = Math.max(1, cssW);
+        cssH = Math.max(1, cssH);
+
+        const bufferW = Math.max(1, Math.floor(cssW * dpr));
+        const bufferH = Math.max(1, Math.floor(cssH * dpr));
+
+        return { cssW, cssH, bufferW, bufferH };
+      }
+
+      function applyCanvasSize(unityInstance) {
+        const { cssW, cssH, bufferW, bufferH } = computeLetterboxedSize();
+
+        canvas.style.width = cssW + "px";
+        canvas.style.height = cssH + "px";
+
+        if (canvas.width !== bufferW) canvas.width = bufferW;
+        if (canvas.height !== bufferH) canvas.height = bufferH;
+
+        // If available, notify Unity runtime explicitly.
+        if (
+          unityInstance &&
+          unityInstance.Module &&
+          typeof unityInstance.Module.setCanvasSize === "function"
+        ) {
+          unityInstance.Module.setCanvasSize(bufferW, bufferH, true);
+        }
+      }
+
+      // Initial size before boot.
+      applyCanvasSize(null);
+
+      // Keep sizing stable on mobile browser UI changes.
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", () => applyCanvasSize(unityInstance));
+        window.visualViewport.addEventListener("scroll", () => applyCanvasSize(unityInstance));
+      }
+      window.addEventListener("orientationchange", () => {
+        setTimeout(() => applyCanvasSize(unityInstance), 150);
+      });
+
+      function unityShowBanner(msg, type) {
+        // Minimal banner: log to console.
+        if (type === "error") console.error(msg);
+        else if (type === "warning") console.warn(msg);
+        else console.log(msg);
+      }
+
+      const buildUrl = "Build";
+      const loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      const config = {
+        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
+        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
+        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "{{{ COMPANY_NAME }}}",
+        productName: "{{{ PRODUCT_NAME }}}",
+        productVersion: "{{{ PRODUCT_VERSION }}}",
+        showBanner: unityShowBanner,
+
+        // We control the render-buffer size ourselves.
+        matchWebGLToCanvasSize: false,
+      };
+
+      const script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        if (typeof createUnityInstance !== "function") {
+          loading.textContent = "Failed to start: createUnityInstance is missing.";
+          return;
+        }
+
+        createUnityInstance(canvas, config, (progress) => {
+          loading.textContent = `Loading… ${Math.round(progress * 100)}%`;
+        })
+          .then((instance) => {
+            loading.style.display = "none";
+            applyCanvasSize(instance);
+
+            let resizeTimeout = null;
+            window.addEventListener("resize", () => {
+              if (resizeTimeout) clearTimeout(resizeTimeout);
+              resizeTimeout = setTimeout(() => applyCanvasSize(instance), 50);
+            });
+          })
+          .catch((message) => {
+            loading.textContent = "Failed to load.";
+            alert(message);
+          });
+      };
+      script.onerror = () => {
+        loading.textContent = "Failed to load Unity loader.";
+      };
+      document.body.appendChild(script);
+    </script>
+  </body>
+</html>
