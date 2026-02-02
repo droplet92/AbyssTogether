@@ -26,7 +26,7 @@ public class VideoPlayerManager : MonoBehaviour
     {
         if (!introPlayer.isPlaying) return;
         if (!Input.anyKeyDown) return;
-        if (!Input.GetMouseButtonDown(0)) return;
+        if (!Input.GetMouseButtonUp(0)) return;
         PlayGame(introPlayer);
     }
 

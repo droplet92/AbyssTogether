@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
     }
     void Update()
     {
-        if (!Input.GetMouseButtonDown(0)) return;
+        if (!Input.GetMouseButtonUp(0)) return;
         
         Vector2 screenPos = Input.mousePosition;
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
