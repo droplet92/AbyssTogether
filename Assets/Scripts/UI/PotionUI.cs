@@ -87,6 +87,10 @@ public class PotionUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHa
             fieldPanel.SetHighlight(targetType, hoveredTarget, false);
             fieldPanel.ApplyEffect(targetType, null, hoveredTarget, potionName);
             hoveredTarget = null;
+
+            transform.position = originPosition;
+            transform.localRotation = originLocalRotation;
+            transform.localScale = Vector3.one;
         }
         else
         {
