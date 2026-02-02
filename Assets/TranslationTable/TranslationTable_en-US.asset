@@ -92,7 +92,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10289265627136
-    m_Localized: 1 random item.
+    m_Localized: 1 random item
     m_Metadata:
       m_Items: []
   - m_Id: 15403116253184
@@ -258,4 +258,6 @@ MonoBehaviour:
     - rid: 7564831983321743367
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00d045e9acf80500
+        m_Entries: 
+        m_SharedEntries:
+        - id: 1680796415283200
