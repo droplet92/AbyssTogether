@@ -22,7 +22,7 @@ public class CharacterSelectManager : AutoFieldValidator
     private void SetPlayerCharacter(int playerCharacter)
     {
         PlayerPrefs.SetInt("PlayerCharacter", playerCharacter);
-        PlayerPrefs.SetString("StartTime", DateTime.Now.ToLongTimeString());
+        PlayerPrefs.SetString("StartTime", DateTime.UtcNow.Ticks.ToString());
         SceneManager.LoadScene(SceneName.Level.ToSceneString());
     }
 }

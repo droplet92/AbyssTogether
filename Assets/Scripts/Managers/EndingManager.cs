@@ -15,7 +15,7 @@ public class EndingManager : MonoBehaviour
     void Awake()
     {
         string startTime = PlayerPrefs.GetString("StartTime");
-        var diff = DateTime.Now - DateTime.Parse(startTime);
+        var diff = DateTime.UtcNow - new DateTime(long.Parse(startTime), DateTimeKind.Utc);
         escapeTime.text = $"{(int)diff.TotalMinutes}:{diff.Seconds:D2}";
 
         int playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
