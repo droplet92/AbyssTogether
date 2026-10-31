@@ -100,7 +100,14 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (isFreeze) return;
+        if (isFreeze)
+        {
+            if (hoveredTarget != null)
+                fieldPanel.SetHighlight(targetType, hoveredTarget, false);
+
+            hoveredTarget = null;
+            return;
+        }
             
         if (hoveredTarget?.CanApply(targetType) ?? false)
         {
