@@ -40,15 +40,13 @@ public class CampManager : AutoFieldValidator
 
     private void Rest()
     {
-        int healerHp = Mathf.Min(PlayerPrefs.GetInt("HpHealer") + 6, 30);
-        int magicianHp = Mathf.Min(PlayerPrefs.GetInt("HpMagician") + 6, 30);
-        int swordsmanHp = Mathf.Min(PlayerPrefs.GetInt("HpSwordsman") + 6, 30);
-        int warriorHp = Mathf.Min(PlayerPrefs.GetInt("HpWarrior") + 6, 30);
-        
-        PlayerPrefs.SetInt($"HpHealer", healerHp);
-        PlayerPrefs.SetInt($"HpMagician", magicianHp);
-        PlayerPrefs.SetInt($"HpSwordsman", swordsmanHp);
-        PlayerPrefs.SetInt($"HpWarrior", warriorHp);
+        foreach (var key in new[] { "HpHealer", "HpMagician", "HpSwordsman", "HpWarrior" })
+        {
+            int hp = PlayerPrefs.GetInt(key);
+            if (hp <= 0) continue;
+
+            PlayerPrefs.SetInt(key, Mathf.Min(hp + 6, 30));
+        }
     }
     private void OpenRewardPanel()
     {
