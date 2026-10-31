@@ -16,6 +16,8 @@ public class FieldManager : MonoBehaviour
     private int itemResistDebuff = 0;
     private int itemHealerAttack = 0;
 
+    public event Action itemEffectsChanged = () => {};
+
     void Start()
     {
         UpdateItemEffects();
@@ -86,13 +88,26 @@ public class FieldManager : MonoBehaviour
         itemHealerAttack = nextItemHealerAttack;
 
         if (hasBuffChanged)
+        {
             UpdateCharacterBuffs(deltaAttack, deltaDefense, deltaHealerAttack);
+            itemEffectsChanged();
+        }
     }
     private void UpdateCharacterBuffs(int deltaAttack, int deltaDefense, int deltaHealerAttack)
     {
         characterList[3].buffs.UpdateContents(deltaHealerAttack, 0);
         foreach (var character in characterList)
             character.buffs.UpdateContents(deltaAttack, deltaDefense);
+    }
+
+    public int GetItemBonus(Character owner)
+    {
+        var warrior = characterList[0];
+        var healer = characterList[3];
+
+        if (owner == warrior) return itemDefense;
+        if (owner == healer) return itemAttack + itemHealerAttack;
+        return itemAttack;
     }
 
     // Card effects

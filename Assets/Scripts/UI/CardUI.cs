@@ -21,7 +21,6 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     public CardData CardData { get; private set; }
 
     private Character owner;
-    private int itemAttack = 0;
     private LocalizedString localizedDescription;
     private string targetType;
     private Canvas canvas;
@@ -46,6 +45,9 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     void OnDestroy()
     {
         localizedDescription.StringChanged -= OnStringChanged;
+        if (owner == null) return;
+        owner.attackChanged -= RefreshDescription;
+        fieldPanel.itemEffectsChanged -= RefreshDescription;
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -147,16 +149,8 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
         localizedDescription.RefreshString();
 
         if (owner == null) return;
-        if (!owner.IsDead())
-        {
-            itemAttack = PlayerPrefs.GetInt("ItemSword");
-
-            if (owner.name == "Healer")
-                itemAttack += PlayerPrefs.GetInt("ItemMagicBook");
-
-            localizedDescription.RefreshString();
-        }
-        owner.attackChanged += () => localizedDescription.RefreshString();
+        owner.attackChanged += RefreshDescription;
+        fieldPanel.itemEffectsChanged += RefreshDescription;
     }
     public void SetCardOrigin(Vector3 parentPos, Vector2 anchorPos, Vector3 localRotation)
     {
@@ -195,13 +189,17 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
         else X.gameObject.SetActive(activate);
     }
 
+    private void RefreshDescription()
+    {
+        localizedDescription.RefreshString();
+    }
     private void OnStringChanged(string value)
     {
         cardDescriptionText.text = value.FormatSmart(GetCardValue());
     }
     private int GetCardValue()
     {
-        if (owner != null) return owner.Attack + itemAttack;
+        if (owner != null) return owner.Attack + fieldPanel.GetItemBonus(owner);
         if (cardNameText.text.StartsWith("Shield")) return 3;
         if (cardNameText.text.StartsWith("Attack")) return 4;
         if (cardNameText.text.StartsWith("Heal")) return 2;
