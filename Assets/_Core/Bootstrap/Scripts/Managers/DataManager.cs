@@ -1,8 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using Language = LanguageSetting.Language;
-using ScreenMode = ScreenModeSetting.ScreenMode;
-using ScreenResolution = ScreenResolutionSetting.ScreenResolution;
 
 public class DataManager : MonoBehaviour
 {
@@ -23,7 +20,6 @@ public class DataManager : MonoBehaviour
 
     public IEnumerator Initialize()
     {
-        InitializeSettings();
         InitializeNewGame();
         yield break;
     }
@@ -36,15 +32,6 @@ public class DataManager : MonoBehaviour
         InitializePotions();
     }
 
-    private void InitializeSettings()
-    {
-        PlayerPrefs.SetInt("Language", (int)Language.English);
-        PlayerPrefs.SetInt("ScreenMode", (int)ScreenMode.FullScreenWindow);
-        PlayerPrefs.SetInt("ScreenResolution", (int)ScreenResolution.FullHD);
-        PlayerPrefs.SetFloat("MasterVolume", 1f);
-        PlayerPrefs.SetFloat("BGMVolume", 1f);
-        PlayerPrefs.SetFloat("SFXVolume", 1f);
-    }
     private void InitializePlayer()
     {
         PlayerPrefs.SetInt("level", 1);
