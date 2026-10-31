@@ -8,8 +8,9 @@ public class Bootstrapper : AutoFieldValidator
 {
     [SerializeField] private Image logo;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         StartCoroutine(Initialize());
     }
 

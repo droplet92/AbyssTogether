@@ -20,8 +20,9 @@ public class TeamTalkPanel : AutoFieldValidator
     private int removeIndex = -1;
     private int copyIndex = -1;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         removeString.StringChanged += OnLabelChanged;
         removeString.RefreshString();
         

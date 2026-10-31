@@ -17,8 +17,9 @@ public class SettingsPanel : AutoFieldValidator
     private float bgmVolume;
     private float sfxVolume;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         okButton.onClick.AddListener(Confirm);
         cancelButton.onClick.AddListener(Rollback);
     }

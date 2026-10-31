@@ -16,8 +16,9 @@ public class CampManager : AutoFieldValidator
 
     private int level = 0;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         level = PlayerPrefs.GetInt("level");
         levelText.text = level.ToString();
 

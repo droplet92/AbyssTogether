@@ -19,8 +19,9 @@ public class TurnManager : AutoFieldValidator
     private int nDraws = 4;
     private int playerCharacter;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
 
         int level = PlayerPrefs.GetInt("level");

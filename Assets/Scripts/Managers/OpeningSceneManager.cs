@@ -6,8 +6,9 @@ public class OpeningSceneManager : AutoFieldValidator
     [SerializeField] private CanvasRenderer settingsPanel;
     [SerializeField] private VideoPlayerManager videoPlayerManager;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         videoPlayerManager.OnAllVideoEnd += PlayGame;
     }
     void Start()

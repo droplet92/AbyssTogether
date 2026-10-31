@@ -26,8 +26,9 @@ public class RewardPanel : AutoFieldValidator
         { "Necklace",  3 },
     };
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         Debug.Assert(potionList.Count == 3, "SerializeField size changed: Potion List");
     }
     void OnDestroy()

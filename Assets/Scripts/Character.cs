@@ -23,8 +23,9 @@ public class Character : AutoFieldValidator, ITarget
     public int Attack { get => attack; }
     public int Defense { get => defense; }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         CurrentHealth = PlayerPrefs.GetInt($"Hp{gameObject.name}", maxHealth);
         
         if (IsDead()) gameObject.SetActive(false);

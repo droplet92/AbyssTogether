@@ -8,8 +8,9 @@ public class CharacterSelectManager : AutoFieldValidator
 {
     [SerializeField] private List<Button> buttons;
     
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         Debug.Assert(buttons.Count == 4, "SerializeField size changed: Buttons");
 
         for (int i = 0; i < buttons.Count; ++i)

@@ -7,8 +7,9 @@ public class SfxManager : AutoFieldValidator
 
     public static SfxManager Instance { get; private set; }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (Instance == null)
         {
             Instance = this;

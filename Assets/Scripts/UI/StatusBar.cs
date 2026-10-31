@@ -8,8 +8,9 @@ public class StatusBar : AutoFieldValidator
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button deckButton;
     
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         settingsButton.onClick.AddListener(ToggleSettingsPanel);
         deckButton.onClick.AddListener(ToggleDeckPanel);
     }

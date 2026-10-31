@@ -13,8 +13,9 @@ public class ResultPanel : AutoFieldValidator
     [SerializeField] private Button itemButton;
     [SerializeField] private Button okButton;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         potionButton.onClick.AddListener(ActivatePotionReward);
         itemButton.onClick.AddListener(ActivateItemReward);
         rewardPanel.AddConfirmListener(() => rewardPanel.gameObject.SetActive(false));

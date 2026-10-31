@@ -14,8 +14,9 @@ public class Buffs : AutoFieldValidator, IPointerEnterHandler, IPointerExitHandl
     private int attack = 0;
     private int defense = 0;
     
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         bool isCharacter = transform.parent.GetComponent<Character>() != null;
         var localPosition = transform.parent.localPosition + (isCharacter ? new Vector3(0, 200f) : Vector3.zero);
         tooltip = BuffTooltip.FromPrefab(tooltipPrefab, field, localPosition);

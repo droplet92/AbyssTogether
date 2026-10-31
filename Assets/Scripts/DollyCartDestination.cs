@@ -7,8 +7,9 @@ public class DollyCartDestination : AutoFieldValidator
 {
     [SerializeField] private List<GameObject> levels;
     
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         int level = PlayerPrefs.GetInt("level");
         var smoothPath = GetComponent<CinemachineSmoothPath>();
         var destination = smoothPath.m_Waypoints[1];

@@ -23,8 +23,9 @@ public class BuffTooltip : AutoFieldValidator
         return obj.GetComponent<BuffTooltip>();
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         localizedAttack.StringChanged += OnAttackChanged;
         localizedDefense.StringChanged += OnDefenseChanged;
         localizedAttack.RefreshString();

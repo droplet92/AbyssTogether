@@ -9,8 +9,9 @@ public class OpeningCanvas : AutoFieldValidator
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button exitButton;
     
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         startButton.onClick.AddListener(StartGame);
         settingsButton.onClick.AddListener(ToggleSettingsPanel);
         exitButton.onClick.AddListener(ExitGame);

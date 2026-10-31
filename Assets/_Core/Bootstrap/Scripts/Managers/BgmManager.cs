@@ -13,8 +13,9 @@ public class BgmManager : AutoFieldValidator
     
     private Dictionary<BgmType, AudioSource> toAudioSource;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (Instance == null)
         {
             Instance = this;

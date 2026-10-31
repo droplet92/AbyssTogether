@@ -3,7 +3,7 @@ using System.Reflection;
 
 public class AutoFieldValidator : MonoBehaviour
 {
-    void Awake()
+    protected virtual void Awake()
     {
         ValidateSerializedFields();
     }

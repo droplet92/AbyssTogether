@@ -35,8 +35,9 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     private bool isFreeze = false;
     private bool uiOnly = false;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         canvas = GetComponentInParent<Canvas>();
         fieldPanel = canvas.GetComponentInChildren<FieldManager>();
         handPanel = GetComponentInParent<HandUI>();
