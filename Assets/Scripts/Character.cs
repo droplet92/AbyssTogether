@@ -74,15 +74,17 @@ public class Character : AutoFieldValidator, ITarget
     public void UpdateAttack(int delta)
     {
         if (IsDead()) return;
+        int before = attack;
         attack = math.max(attack + delta, 0);
-        buffs.UpdateContents(delta, 0);
+        buffs.UpdateContents(attack - before, 0);
         attackChanged();
     }
     public void UpdateDefense(int delta)
     {
         if (IsDead()) return;
+        int before = defense;
         defense = math.max(defense + delta, 0);
-        buffs.UpdateContents(0, delta);
+        buffs.UpdateContents(0, defense - before);
     }
 
     public void AnimateAttack()
