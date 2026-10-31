@@ -75,9 +75,10 @@ public class FieldManager : MonoBehaviour
         var nextItemResistDebuff = !characterList[2].IsDead() ? PlayerPrefs.GetInt("ItemRing") : 0;
         var nextItemHealerAttack = !characterList[3].IsDead() ? PlayerPrefs.GetInt("ItemMagicBook") : 0;
     
-        bool hasBuffChanged = itemDefense != nextItemDefense
-            || itemAttack != nextItemAttack
-            || itemHealerAttack != nextItemHealerAttack;
+        int deltaDefense = nextItemDefense - itemDefense;
+        int deltaAttack = nextItemAttack - itemAttack;
+        int deltaHealerAttack = nextItemHealerAttack - itemHealerAttack;
+        bool hasBuffChanged = deltaDefense != 0 || deltaAttack != 0 || deltaHealerAttack != 0;
 
         itemDefense = nextItemDefense;
         itemAttack = nextItemAttack;
@@ -85,13 +86,13 @@ public class FieldManager : MonoBehaviour
         itemHealerAttack = nextItemHealerAttack;
 
         if (hasBuffChanged)
-            UpdateCharacterBuffs();
+            UpdateCharacterBuffs(deltaAttack, deltaDefense, deltaHealerAttack);
     }
-    private void UpdateCharacterBuffs()
+    private void UpdateCharacterBuffs(int deltaAttack, int deltaDefense, int deltaHealerAttack)
     {
-        characterList[3].buffs.UpdateContents(itemHealerAttack, 0);
+        characterList[3].buffs.UpdateContents(deltaHealerAttack, 0);
         foreach (var character in characterList)
-            character.buffs.UpdateContents(itemAttack, itemDefense);
+            character.buffs.UpdateContents(deltaAttack, deltaDefense);
     }
 
     // Card effects
