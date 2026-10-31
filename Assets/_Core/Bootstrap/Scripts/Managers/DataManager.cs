@@ -24,11 +24,16 @@ public class DataManager : MonoBehaviour
     public IEnumerator Initialize()
     {
         InitializeSettings();
+        InitializeNewGame();
+        yield break;
+    }
+
+    public void InitializeNewGame()
+    {
         InitializePlayer();
         InitializeHealths();
         InitializeItems();
         InitializePotions();
-        yield break;
     }
 
     private void InitializeSettings()
