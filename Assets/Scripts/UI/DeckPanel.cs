@@ -9,7 +9,7 @@ public class DeckPanel : AutoFieldValidator
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Button okButton;
 
-    void OnEnable()
+    void Start()
     {
         Initialize();
         okButton.onClick.AddListener(ClosePanel);
