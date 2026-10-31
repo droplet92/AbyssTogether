@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 
-public class TeamTalkPanelPanel : AutoFieldValidator
+public class TeamTalkPanel : AutoFieldValidator
 {
     [SerializeField] private CampManager campManager;
     [SerializeField] private DeckManager deckManager;
