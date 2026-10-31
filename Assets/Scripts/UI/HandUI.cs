@@ -73,6 +73,9 @@ public class HandUI : AutoFieldValidator
     public IEnumerator DiscardAll()
     {
         foreach (var card in handCards)
+            card.GetComponent<CardUI>().Exhibit();
+
+        foreach (var card in handCards)
         {
             Sequence seq = DOTween.Sequence()
                 .Join(card.DOScale(0.5f, 0.1f))
