@@ -16,7 +16,7 @@ public class EndingManager : MonoBehaviour
     {
         string startTime = PlayerPrefs.GetString("StartTime");
         var diff = DateTime.Now - DateTime.Parse(startTime);
-        escapeTime.text = $"{diff.Minutes}:{diff.Seconds}";
+        escapeTime.text = $"{(int)diff.TotalMinutes}:{diff.Seconds:D2}";
 
         int playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
         background.sprite = backgroundList[playerCharacter];
