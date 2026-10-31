@@ -61,16 +61,14 @@ public class HandUI : AutoFieldValidator
     }
     public void Discard(RectTransform card)
     {
+        handCards.Remove(card);
+        usedCards.Add(card.GetComponent<CardUI>().CardData);
+
         DOTween.Sequence()
             .Join(card.DOScale(0.5f, 0.1f))
             .Join(card.DOLocalMove(grave.localPosition, 0.1f))
             .SetEase(Ease.OutQuad)
-            .OnComplete(() =>
-            {
-                usedCards.Add(card.GetComponent<CardUI>().CardData);
-                handCards.Remove(card);
-                Destroy(card.gameObject);
-            });
+            .OnComplete(() => Destroy(card.gameObject));
     }
     public IEnumerator DiscardAll()
     {
