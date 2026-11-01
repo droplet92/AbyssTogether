@@ -247,6 +247,10 @@ MonoBehaviour:
     m_Key: CopyCard
     m_Metadata:
       m_Items: []
+  - m_Id: 238283110686384128
+    m_Key: RewardPotionDiscarded
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

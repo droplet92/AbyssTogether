@@ -11,6 +11,8 @@ public class RewardPanel : AutoFieldValidator
     [SerializeField] private EquipmentDatabase equipmentDatabase;
     [SerializeField] private Image image;
     [SerializeField] private TMP_Text description;
+    [SerializeField] private TMP_Text notice;
+    [SerializeField] private LocalizedString potionDiscardedNotice;
     [SerializeField] private Button potionButton;
     [SerializeField] private Button itemButton;
     [SerializeField] private List<ItemUI> itemList;
@@ -18,6 +20,7 @@ public class RewardPanel : AutoFieldValidator
     [SerializeField] private Button okButton;
 
     private LocalizedString localizedDescription;
+    private LocalizedString localizedNotice;
     private Dictionary<string, int> toIndex = new Dictionary<string, int>()
     {
         { "MagicBook", 0 },
@@ -34,6 +37,7 @@ public class RewardPanel : AutoFieldValidator
     void OnDestroy()
     {
         localizedDescription.StringChanged -= OnStringChanged;
+        HideNotice();
     }
 
     public void AddConfirmListener(Action action)
@@ -51,6 +55,7 @@ public class RewardPanel : AutoFieldValidator
         localizedDescription.StringChanged += OnStringChanged;
         localizedDescription.RefreshString();
 
+        HideNotice();
         for (int i = 0; i < 3; i++)
         {
             if (PlayerPrefs.GetString($"Potion{i + 1}").Length == 0)
@@ -60,6 +65,7 @@ public class RewardPanel : AutoFieldValidator
                 return;
             }
         }
+        ShowNotice(potionDiscardedNotice);
     }
     public void ShowItem()
     {
@@ -79,5 +85,25 @@ public class RewardPanel : AutoFieldValidator
     private void OnStringChanged(string value)
     {
         description.text = value;
+    }
+
+    private void ShowNotice(LocalizedString text)
+    {
+        localizedNotice = text;
+        localizedNotice.StringChanged += OnNoticeChanged;
+        localizedNotice.RefreshString();
+        notice.gameObject.SetActive(true);
+    }
+    private void HideNotice()
+    {
+        if (localizedNotice != null)
+            localizedNotice.StringChanged -= OnNoticeChanged;
+
+        localizedNotice = null;
+        notice.gameObject.SetActive(false);
+    }
+    private void OnNoticeChanged(string value)
+    {
+        notice.text = value;
     }
 }

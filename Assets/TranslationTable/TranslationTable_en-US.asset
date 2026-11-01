@@ -252,6 +252,10 @@ MonoBehaviour:
     m_Localized: Select 1 card to <color=#FFD369>copy</color> from your deck
     m_Metadata:
       m_Items: []
+  - m_Id: 238283110686384128
+    m_Localized: Potion slots are full, so it was discarded
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
