@@ -1,8 +1,11 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.Video;
 
 public class VideoPlayerManager : MonoBehaviour
 {
+    private const string IntroFileName = "intro.mp4";
+
     [SerializeField] private VideoPlayer introPlayer;
 
     public delegate void AllVideoEndHandler();
@@ -11,7 +14,8 @@ public class VideoPlayerManager : MonoBehaviour
     void Start()
     {
     #if !UNITY_WEBGL
-        introPlayer.Play();
+        introPlayer.url = Path.Combine(Application.streamingAssetsPath, IntroFileName);
+        introPlayer.Prepare();
     #else
         OnAllVideoEnd?.Invoke();
     #endif
@@ -20,6 +24,7 @@ public class VideoPlayerManager : MonoBehaviour
 #if !UNITY_WEBGL
     void Awake()
     {
+        introPlayer.prepareCompleted += vp => vp.Play();
         introPlayer.loopPointReached += PlayGame;
     }
     void Update()
