@@ -123,7 +123,7 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         if (hoveredTarget?.CanApply(targetType) ?? false)
         {
             fieldPanel.SetHighlight(targetType, hoveredTarget, false);
-            fieldPanel.ApplyEffect(targetType, null, hoveredTarget, cardNameText.text);
+            fieldPanel.ApplyEffect(targetType, null, hoveredTarget, CardData.cardName);
             hoveredTarget = null;
             
             Exhibit();

@@ -1,6 +1,5 @@
 using DG.Tweening;
 using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,14 +18,16 @@ public class Character : MonoBehaviour, ITarget
     public delegate void OnAttackChanged();
     public event OnAttackChanged attackChanged = () => {};
 
-    public int CurrentHealth { get; set; } = 0;
-    public int Attack { get => attack; }
-    public int Defense { get => defense; }
+    public int CurrentHealth { get => unit?.CurrentHealth ?? 0; set => unit.CurrentHealth = value; }
+    public int Attack => unit?.Attack ?? attack;
+    public int Defense => unit?.Defense ?? defense;
+
+    private Unit unit;
 
     public void Initialize()
     {
         buffs.Initialize();
-        CurrentHealth = SaveData.GetHealth(gameObject.name, maxHealth);
+        unit = new Unit(maxHealth, SaveData.GetHealth(gameObject.name, maxHealth), attack, defense);
         
         if (IsDead()) gameObject.SetActive(false);
         else healthBar.SetHealth(CurrentHealth, maxHealth);
@@ -45,14 +46,15 @@ public class Character : MonoBehaviour, ITarget
     }
     public bool IsDead()
     {
-        return CurrentHealth <= 0;
+        return unit == null || unit.IsDead;
     }
 
     public void UpdateHealth(int delta)
     {
-        if (IsDead()) return;
-        int deltaHp = math.min(delta, maxHealth);
-        CurrentHealth = math.min(CurrentHealth + deltaHp, maxHealth);
+        int? applied = unit?.ChangeHealth(delta);
+        if (applied == null) return;
+
+        int deltaHp = applied.Value;
         healthBar.SetHealth(CurrentHealth, maxHealth);
 
         hpDiff.gameObject.SetActive(true);
@@ -74,18 +76,18 @@ public class Character : MonoBehaviour, ITarget
     }
     public void UpdateAttack(int delta)
     {
-        if (IsDead()) return;
-        int before = attack;
-        attack = math.max(attack + delta, 0);
-        buffs.UpdateContents(attack - before, 0);
+        int? change = unit?.ChangeAttack(delta);
+        if (change == null) return;
+
+        buffs.UpdateContents(change.Value, 0);
         attackChanged();
     }
     public void UpdateDefense(int delta)
     {
-        if (IsDead()) return;
-        int before = defense;
-        defense = math.max(defense + delta, 0);
-        buffs.UpdateContents(0, defense - before);
+        int? change = unit?.ChangeDefense(delta);
+        if (change == null) return;
+
+        buffs.UpdateContents(0, change.Value);
     }
 
     public void AnimateAttack()

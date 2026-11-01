@@ -11,9 +11,8 @@ public class HandUI : MonoBehaviour
     [SerializeField] private RectTransform deckTransform;
     [SerializeField] private RectTransform grave;
     
-    private int nFreeze = 0;
     private List<RectTransform> handCards = new List<RectTransform>();
-    private List<CardData> usedCards = new List<CardData>();
+    private Dictionary<RectTransform, DeckCard> deckCards = new Dictionary<RectTransform, DeckCard>();
     private static Dictionary<string, int> cardToCharacterIndex = new Dictionary<string, int>()
     {
         { "Shield",     0 },
@@ -29,25 +28,19 @@ public class HandUI : MonoBehaviour
 
     public void DrawCard()
     {
-        CardData drawnCard = deckManager.DrawCard();
-        if (drawnCard == null)
-        {
-            deckManager.ResetDeck(usedCards);
-            deckManager.ShuffleDeck();
-            drawnCard = deckManager.DrawCard();
-            usedCards.Clear();
-        }
+        DeckCard drawnCard = deckManager.Deck.Draw();
         var cardUI = Instantiate(cardPrefab, transform).GetComponent<CardUI>();
         cardUI.transform.localScale = Vector3.one / 2;
         cardUI.transform.position = deckTransform.position;
 
-        var owner = characters[cardToCharacterIndex[drawnCard.cardName]];
-        cardUI.SetCardData(drawnCard, owner);
+        var owner = characters[cardToCharacterIndex[drawnCard.Data.cardName]];
+        cardUI.SetCardData(drawnCard.Data, owner);
         if (owner.IsDead())
             cardUI.Disable();
 
-        bool freeze = nFreeze > 0;
-        if (freeze) nFreeze--;
+        bool freeze = deckManager.Deck.ConsumeFreeze();
+        var cardRect = cardUI.GetComponent<RectTransform>();
+        deckCards[cardRect] = drawnCard;
 
         DOTween.Sequence()
             .Join(cardUI.transform.DOScale(1f, 0.5f))
@@ -58,14 +51,15 @@ public class HandUI : MonoBehaviour
                 if (freeze)
                     cardUI.Freeze();
 
-                handCards.Add(cardUI.GetComponent<RectTransform>());
+                handCards.Add(cardRect);
                 ArrangeHand();
             });
     }
     public void Discard(RectTransform card)
     {
         handCards.Remove(card);
-        usedCards.Add(card.GetComponent<CardUI>().CardData);
+        deckManager.Deck.Play(deckCards[card]);
+        deckCards.Remove(card);
 
         DOTween.Sequence()
             .Join(card.DOScale(0.5f, 0.1f))
@@ -78,6 +72,8 @@ public class HandUI : MonoBehaviour
         foreach (var card in handCards)
             card.GetComponent<CardUI>().Exhibit();
 
+        deckManager.Deck.DiscardHand();
+
         foreach (var card in handCards)
         {
             Sequence seq = DOTween.Sequence()
@@ -86,16 +82,16 @@ public class HandUI : MonoBehaviour
                 .SetEase(Ease.OutQuad);
             yield return seq.WaitForCompletion();
 
-            usedCards.Add(card.GetComponent<CardUI>().CardData);
             Destroy(card.gameObject);
             yield return new WaitForSeconds(0.1f);
         }
         handCards.Clear();
+        deckCards.Clear();
         yield break;
     }
     public void SetFreeze(int n)
     {
-        nFreeze = n;
+        deckManager.Deck.SetFreeze(n);
     }
 
     private void ArrangeHand()

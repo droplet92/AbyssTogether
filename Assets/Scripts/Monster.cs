@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,13 +21,11 @@ public class Monster : MonoBehaviour, ITarget
     [SerializeField] private FieldManager fieldManager;
     [SerializeField] private HandUI handPanel;
 
-    public int Attack { get => attack; }
-    public int Defense { get => defense; }
-    
-    private int maxHealth = 0;
-    private int currentHealth = 0;
-    private int attack = 0;
-    private int defense = 0;
+    public int CurrentHealth => unit?.CurrentHealth ?? 0;
+    public int Attack => unit?.Attack ?? 0;
+    public int Defense => unit?.Defense ?? 0;
+
+    private Unit unit;
     private List<string> actions;
     private Dictionary<string, Sprite> actionSpriteCache = new Dictionary<string, Sprite>();
 
@@ -46,21 +43,19 @@ public class Monster : MonoBehaviour, ITarget
     }
     public bool IsDead()
     {
-        return currentHealth <= 0;
+        return unit == null || unit.IsDead;
     }
 
     public void Initialize(MonsterData data)
     {
         buffs.Initialize();
-        maxHealth = currentHealth = data.health;
-        attack = data.attack;
-        defense = data.defense;
+        unit = new Unit(data.health, data.health, data.attack, data.defense);
         actions = new List<string>(data.actions);   // copy
 
         body.sprite = data.body;
         bodyHighlight.sprite = data.bodyHightlight;
         nextAction.sprite = GetActionSprite(actions.First());
-        healthBar.Initialize(maxHealth);
+        healthBar.Initialize(unit.MaxHealth);
     }
     public IEnumerator DoAction()
     {
@@ -77,10 +72,11 @@ public class Monster : MonoBehaviour, ITarget
 
     public void UpdateHealth(int delta)
     {
-        if (IsDead()) return;
-        int deltaHp = math.min(delta, maxHealth);
-        currentHealth = math.min(currentHealth + deltaHp, maxHealth);
-        healthBar.SetHealth(currentHealth, maxHealth);
+        int? applied = unit?.ChangeHealth(delta);
+        if (applied == null) return;
+
+        int deltaHp = applied.Value;
+        healthBar.SetHealth(unit.CurrentHealth, unit.MaxHealth);
 
         hpDiff.text = deltaHp.ToString();
         hpDiff.color = GetHpDiffColor(deltaHp);
@@ -101,17 +97,17 @@ public class Monster : MonoBehaviour, ITarget
     }
     public void UpdateAttack(int delta)
     {
-        if (IsDead()) return;
-        int before = attack;
-        attack = math.max(attack + delta, 0);
-        buffs.UpdateContents(attack - before, 0);
+        int? change = unit?.ChangeAttack(delta);
+        if (change == null) return;
+
+        buffs.UpdateContents(change.Value, 0);
     }
     public void UpdateDefense(int delta)
     {
-        if (IsDead()) return;
-        int before = defense;
-        defense = math.max(defense + delta, 0);
-        buffs.UpdateContents(0, defense - before);
+        int? change = unit?.ChangeDefense(delta);
+        if (change == null) return;
+
+        buffs.UpdateContents(0, change.Value);
     }
     
     public void AnimateAttack()
