@@ -26,6 +26,7 @@ public class VideoPlayerManager : MonoBehaviour
     {
         introPlayer.prepareCompleted += vp => vp.Play();
         introPlayer.loopPointReached += PlayGame;
+        introPlayer.errorReceived += (vp, message) => PlayGame(vp);
     }
     void Update()
     {
