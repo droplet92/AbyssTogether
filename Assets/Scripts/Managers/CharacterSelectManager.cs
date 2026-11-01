@@ -21,8 +21,8 @@ public class CharacterSelectManager : MonoBehaviour
 
     private void SetPlayerCharacter(int playerCharacter)
     {
-        PlayerPrefs.SetInt("PlayerCharacter", playerCharacter);
-        PlayerPrefs.SetString("StartTime", DateTime.UtcNow.Ticks.ToString());
+        SaveData.PlayerCharacter = playerCharacter;
+        SaveData.StartTime = DateTime.UtcNow.Ticks.ToString();
         SceneManager.LoadScene(SceneName.Level.ToSceneString());
     }
 }

@@ -21,7 +21,7 @@ public class ScreenModeSetting : MonoBehaviour
         enabled = false;
         dropdown.interactable = false;
     #else
-        int value = PlayerPrefs.GetInt("ScreenMode", (int)ScreenMode.FullScreenWindow);
+        int value = GameSettings.ScreenMode;
         SetScreenMode(value);
     #endif
     }
@@ -43,7 +43,7 @@ public class ScreenModeSetting : MonoBehaviour
         var selection = (ScreenMode)value;
         dropdown.value = value;
 
-        PlayerPrefs.SetInt("ScreenMode", value);
+        GameSettings.ScreenMode = value;
 
         switch (selection)
         {

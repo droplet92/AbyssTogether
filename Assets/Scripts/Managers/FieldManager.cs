@@ -72,10 +72,10 @@ public class FieldManager : MonoBehaviour
 
     private void UpdateItemEffects()
     {
-        var nextItemDefense = !characterList[0].IsDead() ? PlayerPrefs.GetInt("ItemNecklace") : 0;
-        var nextItemAttack = !characterList[1].IsDead() ? PlayerPrefs.GetInt("ItemSword") : 0;
-        var nextItemResistDebuff = !characterList[2].IsDead() ? PlayerPrefs.GetInt("ItemRing") : 0;
-        var nextItemHealerAttack = !characterList[3].IsDead() ? PlayerPrefs.GetInt("ItemMagicBook") : 0;
+        var nextItemDefense = !characterList[0].IsDead() ? (SaveData.HasItem("Necklace") ? 1 : 0) : 0;
+        var nextItemAttack = !characterList[1].IsDead() ? (SaveData.HasItem("Sword") ? 1 : 0) : 0;
+        var nextItemResistDebuff = !characterList[2].IsDead() ? (SaveData.HasItem("Ring") ? 1 : 0) : 0;
+        var nextItemHealerAttack = !characterList[3].IsDead() ? (SaveData.HasItem("MagicBook") ? 1 : 0) : 0;
     
         int deltaDefense = nextItemDefense - itemDefense;
         int deltaAttack = nextItemAttack - itemAttack;

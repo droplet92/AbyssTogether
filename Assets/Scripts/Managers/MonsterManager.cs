@@ -30,7 +30,7 @@ public class MonsterManager : MonoBehaviour
 
     void Awake()
     {
-        var level = PlayerPrefs.GetInt("level");
+        var level = SaveData.Level;
         var monsters = levelMap[level - 1];
 
         for (int i = 0; i < monsterSlots.Count; i++)

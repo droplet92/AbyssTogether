@@ -25,7 +25,7 @@ public class Character : MonoBehaviour, ITarget
 
     void Awake()
     {
-        CurrentHealth = PlayerPrefs.GetInt($"Hp{gameObject.name}", maxHealth);
+        CurrentHealth = SaveData.GetHealth(gameObject.name, maxHealth);
         
         if (IsDead()) gameObject.SetActive(false);
         else healthBar.SetHealth(CurrentHealth, maxHealth);

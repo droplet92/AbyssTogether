@@ -16,7 +16,7 @@ public class LanguageSetting : MonoBehaviour
 
     void Awake()
     {
-        var defaultLanguage = PlayerPrefs.GetInt("Language", (int)Language.English);
+        var defaultLanguage = GameSettings.Language;
         SetLanguage(defaultLanguage);
     }
     public void SetLanguage(int value)
@@ -24,7 +24,7 @@ public class LanguageSetting : MonoBehaviour
         var selection = (Language)value;
         dropdown.value = value;
 
-        PlayerPrefs.SetInt("Language", value);
+        GameSettings.Language = value;
 
         switch (selection)
         {

@@ -14,11 +14,11 @@ public class EndingManager : MonoBehaviour
 
     void Awake()
     {
-        string startTime = PlayerPrefs.GetString("StartTime");
+        string startTime = SaveData.StartTime;
         var diff = DateTime.UtcNow - new DateTime(long.Parse(startTime), DateTimeKind.Utc);
         escapeTime.text = $"{(int)diff.TotalMinutes}:{diff.Seconds:D2}";
 
-        int playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
+        int playerCharacter = SaveData.PlayerCharacter - 1;
         background.sprite = backgroundList[playerCharacter];
 
         openingButton.onClick.AddListener(ToOpening);

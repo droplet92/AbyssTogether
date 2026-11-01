@@ -18,7 +18,7 @@ public class OpeningCanvas : MonoBehaviour
 
     private void StartGame()
     {
-        PlayerPrefs.SetString("StartTime", null);
+        SaveData.StartTime = null;
         DataManager.Instance.InitializeNewGame();
         BgmManager.Instance.CrossFade(BgmType.Opening, BgmType.NonBattle);
         SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.CharacterSelect);

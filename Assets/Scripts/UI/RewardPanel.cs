@@ -58,11 +58,11 @@ public class RewardPanel : MonoBehaviour
         localizedDescription.RefreshString();
 
         HideNotice();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < SaveData.PotionSlotCount; i++)
         {
-            if (PlayerPrefs.GetString($"Potion{i + 1}").Length == 0)
+            if (SaveData.GetPotion(i + 1).Length == 0)
             {
-                PlayerPrefs.SetString($"Potion{i + 1}", potion.name);
+                SaveData.SetPotion(i + 1, potion.name);
                 potionList[i].SetPotionData();
                 return;
             }
@@ -81,10 +81,10 @@ public class RewardPanel : MonoBehaviour
         localizedDescription.RefreshString();
 
         HideNotice();
-        if (PlayerPrefs.GetInt($"Item{item.name}") == 1)
+        if (SaveData.HasItem(item.name))
             ShowNotice(itemOwnedNotice);
 
-        PlayerPrefs.SetInt($"Item{item.name}", 1);
+        SaveData.SetItem(item.name, true);
         itemList[toIndex[item.name]].SetItemData();
     }
 

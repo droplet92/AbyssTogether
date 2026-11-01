@@ -9,7 +9,7 @@ public class DollyCartDestination : MonoBehaviour
     
     void Awake()
     {
-        int level = PlayerPrefs.GetInt("level");
+        int level = SaveData.Level;
         var smoothPath = GetComponent<CinemachineSmoothPath>();
         var destination = smoothPath.m_Waypoints[1];
         

@@ -18,7 +18,7 @@ public class CampManager : MonoBehaviour
 
     void Awake()
     {
-        level = PlayerPrefs.GetInt("level");
+        level = SaveData.Level;
         levelText.text = level.ToString();
 
         restButton.onClick.AddListener(Rest);
@@ -31,7 +31,7 @@ public class CampManager : MonoBehaviour
 
     public void ExitCamp()
     {
-        PlayerPrefs.SetInt("level", level + 1);
+        SaveData.Level = level + 1;
 
         fadeOut.gameObject.SetActive(true);
         fadeOut.DOFade(1f, 1f)
@@ -40,12 +40,12 @@ public class CampManager : MonoBehaviour
 
     private void Rest()
     {
-        foreach (var key in new[] { "HpHealer", "HpMagician", "HpSwordsman", "HpWarrior" })
+        foreach (var member in SaveData.PartyMembers)
         {
-            int hp = PlayerPrefs.GetInt(key);
+            int hp = SaveData.GetHealth(member);
             if (hp <= 0) continue;
 
-            PlayerPrefs.SetInt(key, Mathf.Min(hp + 6, 30));
+            SaveData.SetHealth(member, Mathf.Min(hp + 6, SaveData.MaxHealth));
         }
     }
     private void OpenRewardPanel()

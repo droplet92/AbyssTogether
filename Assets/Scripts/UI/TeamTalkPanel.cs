@@ -84,13 +84,10 @@ public class TeamTalkPanel : MonoBehaviour
     }
     private void OverwriteCard()
     {
-        var data = PlayerPrefs.GetString("Deck");
-        Debug.Assert(data.Length > 0, "Empty deck");
-
-        var deck = JsonUtility.FromJson<DeckDataJson>(data);
-        var copy = deck.cards[copyIndex];
-        deck.cards.RemoveAt(removeIndex);
-        deck.cards.Insert(removeIndex, copy);
-        PlayerPrefs.SetString("Deck", JsonUtility.ToJson(deck));
+        var deck = SaveData.LoadDeck();
+        var copy = deck[copyIndex];
+        deck.RemoveAt(removeIndex);
+        deck.Insert(removeIndex, copy);
+        SaveData.SaveDeck(deck);
     }
 }

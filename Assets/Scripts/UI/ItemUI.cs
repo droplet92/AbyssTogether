@@ -16,19 +16,19 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private Tooltip tooltip;
     private bool isActive = false;
-    private Dictionary<string, string> toPreferenceName = new Dictionary<string, string>()
+    private Dictionary<string, string> toOwner = new Dictionary<string, string>()
     {
-        { "Necklace",    "HpWarrior" },
-        { "Sword",       "HpSwordsman" },
-        { "Ring",        "HpMagician" },
-        { "MagicBook",   "HpHealer" },
+        { "Necklace",    "Warrior" },
+        { "Sword",       "Swordsman" },
+        { "Ring",        "Magician" },
+        { "MagicBook",   "Healer" },
     };
 
     void Start()
     {
         SetItemData();
         
-        bool isPlayerCharacter = name == $"ItemSlot{PlayerPrefs.GetInt("PlayerCharacter")}";
+        bool isPlayerCharacter = name == $"ItemSlot{SaveData.PlayerCharacter}";
         if (isPlayerCharacter)
             marker.gameObject.SetActive(true);
     }
@@ -55,7 +55,7 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private bool IsCharacterDead()
     {
-        if (character == null) return PlayerPrefs.GetInt(toPreferenceName[itemName]) <= 0;
+        if (character == null) return SaveData.GetHealth(toOwner[itemName]) <= 0;
         return character.IsDead();
     }
     private void DisableColor()
@@ -65,7 +65,7 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void SetItemData()
     {
-        if (PlayerPrefs.GetInt($"Item{itemName}") == 0) return;
+        if (!SaveData.HasItem(itemName)) return;
 
         isActive = true;
         image.gameObject.SetActive(true);

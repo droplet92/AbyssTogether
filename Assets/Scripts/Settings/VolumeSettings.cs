@@ -18,9 +18,9 @@ public class VolumeSettings : MonoBehaviour
 
     void Awake()
     {
-        float defaultMaster = PlayerPrefs.GetFloat(MASTER_VOL, 1f);
-        float defaultBGM    = PlayerPrefs.GetFloat(BGM_VOL,    1f);
-        float defaultSFX    = PlayerPrefs.GetFloat(SFX_VOL,    1f);
+        float defaultMaster = GameSettings.MasterVolume;
+        float defaultBGM    = GameSettings.BgmVolume;
+        float defaultSFX    = GameSettings.SfxVolume;
 
         masterSlider.value = defaultMaster;
         bgmSlider.value    = defaultBGM;
@@ -38,7 +38,7 @@ public class VolumeSettings : MonoBehaviour
 
         masterSlider.SetValueWithoutNotify(value);
         audioMixer.SetFloat(MASTER_VOL, dB);
-        PlayerPrefs.SetFloat(MASTER_VOL, value);
+        GameSettings.MasterVolume = value;
     }
 
     public void SetBGMVolume(float value)
@@ -48,7 +48,7 @@ public class VolumeSettings : MonoBehaviour
 
         bgmSlider.SetValueWithoutNotify(value);
         audioMixer.SetFloat(BGM_VOL, dB);
-        PlayerPrefs.SetFloat(BGM_VOL, value);
+        GameSettings.BgmVolume = value;
     }
 
     public void SetSFXVolume(float value)
@@ -58,6 +58,6 @@ public class VolumeSettings : MonoBehaviour
         
         sfxSlider.SetValueWithoutNotify(value);
         audioMixer.SetFloat(SFX_VOL, dB);
-        PlayerPrefs.SetFloat(SFX_VOL, value);
+        GameSettings.SfxVolume = value;
     }
 }

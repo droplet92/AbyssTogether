@@ -21,9 +21,9 @@ public class TurnManager : MonoBehaviour
 
     void Awake()
     {
-        playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
+        playerCharacter = SaveData.PlayerCharacter - 1;
 
-        int level = PlayerPrefs.GetInt("level");
+        int level = SaveData.Level;
         levelText.text = level.ToString();
 
         endTurnButton.onClick.AddListener(EndTurn);
@@ -36,7 +36,7 @@ public class TurnManager : MonoBehaviour
         if (monsterList.All((Monster monster) => monster.IsDead()))
         {
             foreach (var character in characterList)
-                PlayerPrefs.SetInt($"Hp{character.gameObject.name}", character.CurrentHealth);
+                SaveData.SetHealth(character.gameObject.name, character.CurrentHealth);
 
             if (levelText.text == "17")
             {

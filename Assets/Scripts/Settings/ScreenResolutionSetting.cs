@@ -24,7 +24,7 @@ public class ScreenResolutionSetting : MonoBehaviour
         enabled = false;
         dropdown.interactable = false;
     #else
-        int value = PlayerPrefs.GetInt("ScreenResolution", (int)ScreenResolution.FullHD);
+        int value = GameSettings.ScreenResolution;
         SetScreenResolution(value);
     #endif
     }
@@ -33,7 +33,7 @@ public class ScreenResolutionSetting : MonoBehaviour
         var selection = (ScreenResolution)value;
         dropdown.value = value;
 
-        PlayerPrefs.SetInt("ScreenResolution", value);
+        GameSettings.ScreenResolution = value;
 
         switch (selection)
         {

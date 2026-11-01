@@ -22,7 +22,7 @@ public class ResultPanel : MonoBehaviour
 
     public void ShowWin()
     {
-        int level = PlayerPrefs.GetInt("level");
+        int level = SaveData.Level;
 
         ActivateItemButton(level);
         labelLose.gameObject.SetActive(false);
@@ -46,7 +46,7 @@ public class ResultPanel : MonoBehaviour
     }
     private void Win(int level)
     {
-        PlayerPrefs.SetInt("level", level + 1);
+        SaveData.Level = level + 1;
         SceneTransitionManager.Instance.LoadSceneWithCrossfade(SceneName.Level);
     }
     private void Defeat()

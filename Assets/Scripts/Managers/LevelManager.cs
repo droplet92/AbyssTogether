@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
-        int level = PlayerPrefs.GetInt("level");
+        int level = SaveData.Level;
         levelText.text = level.ToString();
 
         for (int i = 0; i < level - 1; i++)
@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
         if (hit.collider == null) return;
         
-        int level = PlayerPrefs.GetInt("level");
+        int level = SaveData.Level;
         if (levels.IndexOf(hit.collider.gameObject) + 1 != level) return;
 
         if (hit.collider.gameObject.name.StartsWith("camp"))

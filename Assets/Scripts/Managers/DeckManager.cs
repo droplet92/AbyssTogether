@@ -48,25 +48,7 @@ public class DeckManager : MonoBehaviour
     
     private void LoadDeck()
     {
-        var data = PlayerPrefs.GetString("Deck");
-        if (data.Length == 0)
-        {
-            DeckDataJson newData = new DeckDataJson()
-            {
-                cards = new List<string>()
-                {
-                    "Attack", "Attack", "AttackAll",
-                    "Shield", "Shield", "ShieldAll",
-                    "Heal", "Heal", "HealAll",
-                    "Buff", "Debuff", "Skill"
-                }
-            };
-            data = JsonUtility.ToJson(newData);
-            PlayerPrefs.SetString("Deck", data);
-        }
-        var deck = JsonUtility.FromJson<DeckDataJson>(data);
-
-        foreach (var cardName in deck.cards)
+        foreach (var cardName in SaveData.LoadDeck())
             CardList.Add(db.GetCard(cardName));
     }
 }

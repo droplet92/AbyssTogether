@@ -82,7 +82,7 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             isActive = false;
             image.color = new Color32(0, 0, 0, 0);
 
-            PlayerPrefs.SetString($"Potion{slotCount}", null);
+            SaveData.SetPotion(slotCount, null);
             tooltip.gameObject.SetActive(false);
             fieldPanel.SetHighlight(targetType, hoveredTarget, false);
             fieldPanel.ApplyEffect(targetType, null, hoveredTarget, potionName);
@@ -105,7 +105,7 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void SetPotionData()
     {
-        string name = PlayerPrefs.GetString($"Potion{slotCount}");
+        string name = SaveData.GetPotion(slotCount);
         if (name.Length == 0) return;
         
         isActive = true;
