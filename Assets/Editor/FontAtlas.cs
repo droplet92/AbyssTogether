@@ -15,6 +15,7 @@ public static class FontAtlas
     static readonly string[][] FallbackChains =
     {
         new[] { "Assets/Resources/Fonts/WavvePADO-Regular.asset", "Assets/Resources/Fonts/MPLUS2-Bold.asset" },
+        new[] { "Assets/Resources/Fonts/WavvePADO-Regular-SDF.asset", "Assets/Resources/Fonts/MPLUS2-Bold-SDF.asset" },
     };
 
     [MenuItem("Tools/Rebuild Font Atlases")]
