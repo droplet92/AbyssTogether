@@ -1,0 +1,95 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  notes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check release notes
+        run: |
+          notes="ReleaseNotes/${GITHUB_REF_NAME}.md"
+          if [ ! -s "$notes" ]; then
+            echo "::error file=$notes::Release notes for ${GITHUB_REF_NAME} are missing or empty."
+            exit 1
+          fi
+
+  build:
+    needs: notes
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - targetPlatform: WebGL
+            package: WebGL
+          - targetPlatform: StandaloneWindows64
+            package: Windows
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/cache@v6
+        with:
+          path: Library
+          key: Library-${{ matrix.targetPlatform }}-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}
+          restore-keys: Library-${{ matrix.targetPlatform }}-
+
+      - id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - uses: game-ci/unity-builder@v5
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: ${{ matrix.targetPlatform }}
+          buildName: AbyssTogether
+          versioning: Custom
+          version: ${{ steps.version.outputs.version }}
+
+      - name: Package
+        run: |
+          zip_path="$GITHUB_WORKSPACE/AbyssTogether-${GITHUB_REF_NAME}-${{ matrix.package }}.zip"
+          if [ "${{ matrix.targetPlatform }}" = "WebGL" ]; then
+            cd build/WebGL/AbyssTogether
+          else
+            cd build/StandaloneWindows64
+          fi
+          zip -r "$zip_path" . -x '*_DoNotShip/*'
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ${{ matrix.package }}
+          path: AbyssTogether-${{ github.ref_name }}-${{ matrix.package }}.zip
+          if-no-files-found: error
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v8
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/*.zip \
+            --verify-tag \
+            --title "$GITHUB_REF_NAME" \
+            --notes-file "ReleaseNotes/${GITHUB_REF_NAME}.md" \
+            --generate-notes
