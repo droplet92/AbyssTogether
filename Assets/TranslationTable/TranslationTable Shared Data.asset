@@ -251,6 +251,10 @@ MonoBehaviour:
     m_Key: RewardPotionDiscarded
     m_Metadata:
       m_Items: []
+  - m_Id: 238283308066136064
+    m_Key: RewardEquipmentOwned
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

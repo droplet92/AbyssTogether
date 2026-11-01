@@ -6300,6 +6300,15 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  itemOwnedNotice:
+    m_TableReference:
+      m_TableCollectionName: GUID:9d3efb68ec8fa064a8086ddd09c64eb1
+    m_TableEntryReference:
+      m_KeyId: 238283308066136064
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   potionButton: {fileID: 0}
   itemButton: {fileID: 0}
   itemList:

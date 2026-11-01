@@ -13,6 +13,7 @@ public class RewardPanel : AutoFieldValidator
     [SerializeField] private TMP_Text description;
     [SerializeField] private TMP_Text notice;
     [SerializeField] private LocalizedString potionDiscardedNotice;
+    [SerializeField] private LocalizedString itemOwnedNotice;
     [SerializeField] private Button potionButton;
     [SerializeField] private Button itemButton;
     [SerializeField] private List<ItemUI> itemList;
@@ -77,7 +78,11 @@ public class RewardPanel : AutoFieldValidator
         localizedDescription = item.description;
         localizedDescription.StringChanged += OnStringChanged;
         localizedDescription.RefreshString();
-        
+
+        HideNotice();
+        if (PlayerPrefs.GetInt($"Item{item.name}") == 1)
+            ShowNotice(itemOwnedNotice);
+
         PlayerPrefs.SetInt($"Item{item.name}", 1);
         itemList[toIndex[item.name]].SetItemData();
     }

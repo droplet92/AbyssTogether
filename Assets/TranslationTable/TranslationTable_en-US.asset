@@ -256,6 +256,10 @@ MonoBehaviour:
     m_Localized: Potion slots are full, so it was discarded
     m_Metadata:
       m_Items: []
+  - m_Id: 238283308066136064
+    m_Localized: You already have this equipment
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
