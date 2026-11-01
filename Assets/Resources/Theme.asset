@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14a611ef8bd8eb4593baf843e363614, type: 3}
   m_Name: Theme
   m_EditorClassIdentifier: 
-  palette: {fileID: 11400000, guid: b23c7f5b11b977f40a13baf642102b68, type: 2}
+  palette: {fileID: 11400000, guid: 6765aa017a6d8964280edb7d14dbfeda, type: 2}
