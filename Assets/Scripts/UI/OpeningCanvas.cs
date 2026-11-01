@@ -16,6 +16,12 @@ public class OpeningCanvas : MonoBehaviour
         exitButton.onClick.AddListener(ExitGame);
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && settingsPanel.gameObject.activeSelf)
+            settingsPanel.GetComponent<SettingsPanel>().Cancel();
+    }
+
     private void StartGame()
     {
         SaveData.StartTime = null;

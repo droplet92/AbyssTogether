@@ -20,7 +20,7 @@ public class SettingsPanel : MonoBehaviour
     void Awake()
     {
         okButton.onClick.AddListener(Confirm);
-        cancelButton.onClick.AddListener(Rollback);
+        cancelButton.onClick.AddListener(Cancel);
     }
     void OnEnable()
     {
@@ -36,7 +36,7 @@ public class SettingsPanel : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    private void Rollback()
+    public void Cancel()
     {
         languageSetting.SetLanguage(language);
         screenModeSetting.SetScreenMode(screenMode);

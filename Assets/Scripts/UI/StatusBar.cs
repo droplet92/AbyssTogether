@@ -21,6 +21,16 @@ public class StatusBar : MonoBehaviour
         deckButton.onClick.AddListener(ToggleDeckPanel);
     }
 
+    void Update()
+    {
+        if (!Input.GetKeyDown(KeyCode.Escape)) return;
+
+        if (deckPanel.gameObject.activeSelf)
+            deckPanel.Close();
+        else if (settingsPanel.gameObject.activeSelf)
+            settingsPanel.Cancel();
+    }
+
     public void InitializeSlots(IReadOnlyList<Character> characters)
     {
         foreach (var item in items)

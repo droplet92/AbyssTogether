@@ -18,7 +18,7 @@ public class DeckPanel : MonoBehaviour
     {
         CreateCards();
         ScrollToTop();
-        okButton.onClick.AddListener(ClosePanel);
+        okButton.onClick.AddListener(Close);
     }
     void Update()
     {
@@ -46,7 +46,7 @@ public class DeckPanel : MonoBehaviour
         scrollRect.verticalNormalizedPosition = 1f;
     }
 
-    private void ClosePanel()
+    public void Close()
     {
         gameObject.SetActive(false);
     }
