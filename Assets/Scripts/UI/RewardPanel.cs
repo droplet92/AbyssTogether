@@ -37,7 +37,9 @@ public class RewardPanel : AutoFieldValidator
     }
     void OnDestroy()
     {
-        localizedDescription.StringChanged -= OnStringChanged;
+        if (localizedDescription != null)
+            localizedDescription.StringChanged -= OnStringChanged;
+
         HideNotice();
     }
 
