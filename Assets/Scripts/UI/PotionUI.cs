@@ -39,11 +39,17 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (!isActive || eventData.dragging) return;
         tooltip.gameObject.SetActive(true);
+
+        if (isDraggable)
+            transform.DOScale(1.15f, 0.1f);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
         if (!isActive || eventData.dragging) return;
         tooltip.gameObject.SetActive(false);
+
+        if (isDraggable)
+            transform.DOScale(1f, 0.1f);
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
