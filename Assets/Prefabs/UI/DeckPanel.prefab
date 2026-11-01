@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 7363538678643010767}
   - component: {fileID: 8569457273431760515}
   - component: {fileID: 6791491647588326776}
+  - component: {fileID: 2151560173100473800}
   m_Layer: 5
   m_Name: DeckPanel
   m_TagString: Untagged
@@ -295,6 +296,20 @@ MonoBehaviour:
   content: {fileID: 7900887012817963909}
   cardPrefab: {fileID: 7436702937592397325, guid: 2966a05ab03206142936640a9a292d9d, type: 3}
   okButton: {fileID: 7321862378333063034}
+--- !u!114 &2151560173100473800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624125758052226653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e18325976e1a241a4b08efae2f04b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  token: 1
+  alpha: 1
 --- !u!1 &2879745069653632317
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +321,7 @@ GameObject:
   - component: {fileID: 521995891804711481}
   - component: {fileID: 7573625228797507287}
   - component: {fileID: 2569068143874483698}
+  - component: {fileID: 8464391693249831221}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -370,6 +386,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8464391693249831221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2879745069653632317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e18325976e1a241a4b08efae2f04b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  token: 24
+  alpha: 1
 --- !u!1 &3105672218336226397
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +412,7 @@ GameObject:
   - component: {fileID: 8236327981246612153}
   - component: {fileID: 2050446775563874718}
   - component: {fileID: 1190269875096006086}
+  - component: {fileID: 7912947228102154512}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -479,6 +510,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7912947228102154512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3105672218336226397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e18325976e1a241a4b08efae2f04b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  token: 4
+  alpha: 0.392
 --- !u!1 &3173229368607378951
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +535,7 @@ GameObject:
   - component: {fileID: 714952636488434745}
   - component: {fileID: 7596505655387148473}
   - component: {fileID: 3075972280161774494}
+  - component: {fileID: 3334059122065127893}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -554,6 +600,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3334059122065127893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3173229368607378951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e18325976e1a241a4b08efae2f04b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  token: 24
+  alpha: 1
 --- !u!1 &3430836013638690995
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +626,7 @@ GameObject:
   - component: {fileID: 1838130539529253583}
   - component: {fileID: 325410373220164400}
   - component: {fileID: 3298046378294487688}
+  - component: {fileID: 8754240242282490788}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -729,6 +790,20 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &8754240242282490788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3430836013638690995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e18325976e1a241a4b08efae2f04b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  token: 13
+  alpha: 1
 --- !u!1 &4114651482998050065
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +816,8 @@ GameObject:
   - component: {fileID: 6080306184127632218}
   - component: {fileID: 3397177317272538811}
   - component: {fileID: 4287452262934708279}
+  - component: {fileID: 4784627787471444540}
+  - component: {fileID: 608185725252228598}
   m_Layer: 5
   m_Name: Scrollbar Horizontal
   m_TagString: Untagged
@@ -855,6 +932,47 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4784627787471444540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4114651482998050065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e18325976e1a241a4b08efae2f04b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  token: 22
+  alpha: 1
+--- !u!114 &608185725252228598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4114651482998050065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24136386f7a49cd4c8abd08bd77cd196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normal:
+    token: 0
+    alpha: 1
+  highlighted:
+    token: 25
+    alpha: 1
+  pressed:
+    token: 26
+    alpha: 1
+  selected:
+    token: 28
+    alpha: 1
+  disabled:
+    token: 29
+    alpha: 0.5019608
 --- !u!1 &4425780621623047342
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +986,7 @@ GameObject:
   - component: {fileID: 5766668687705157136}
   - component: {fileID: 7321862378333063034}
   - component: {fileID: 2355381628712172855}
+  - component: {fileID: 6453493441214087049}
   m_Layer: 5
   m_Name: OkButton
   m_TagString: Untagged
@@ -989,6 +1108,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3331c26c64f934d959754fa315ec91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6453493441214087049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4425780621623047342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24136386f7a49cd4c8abd08bd77cd196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normal:
+    token: 20
+    alpha: 1
+  highlighted:
+    token: 25
+    alpha: 1
+  pressed:
+    token: 27
+    alpha: 1
+  selected:
+    token: 28
+    alpha: 1
+  disabled:
+    token: 29
+    alpha: 0.5019608
 --- !u!1 &5851420671911687070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,6 +1147,8 @@ GameObject:
   - component: {fileID: 4100037594197390969}
   - component: {fileID: 6562880218854808677}
   - component: {fileID: 2213581990465783431}
+  - component: {fileID: 6018870153726533088}
+  - component: {fileID: 9185023358827087166}
   m_Layer: 5
   m_Name: Scrollbar Vertical
   m_TagString: Untagged
@@ -1115,6 +1263,47 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6018870153726533088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851420671911687070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e18325976e1a241a4b08efae2f04b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  token: 22
+  alpha: 1
+--- !u!114 &9185023358827087166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5851420671911687070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24136386f7a49cd4c8abd08bd77cd196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normal:
+    token: 0
+    alpha: 1
+  highlighted:
+    token: 25
+    alpha: 1
+  pressed:
+    token: 26
+    alpha: 1
+  selected:
+    token: 28
+    alpha: 1
+  disabled:
+    token: 29
+    alpha: 0.5019608
 --- !u!1 &7332783591124470650
 GameObject:
   m_ObjectHideFlags: 0
