@@ -6579,7 +6579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 986d8241ec736324daa9509e6c651d49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deckManager: {fileID: 0}
+  deckManager: {fileID: 1134363027}
   scrollRect: {fileID: 1959439254}
   content: {fileID: 697464028}
   cardPrefab: {fileID: 7436702937592397325, guid: 2966a05ab03206142936640a9a292d9d, type: 3}
