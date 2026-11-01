@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class LevelSceneManager : MonoBehaviour
@@ -13,6 +15,10 @@ public class LevelSceneManager : MonoBehaviour
     [SerializeField] private SettingsPanel settingsPanel;
     [SerializeField] private DeckPanel deckPanel;
 
+    private Transform currentNode;
+    private Vector3 currentNodeScale;
+    private bool isNodeHovered = false;
+
     void Awake()
     {
         int level = SaveData.Level;
@@ -23,6 +29,9 @@ public class LevelSceneManager : MonoBehaviour
 
         for (int i = level; i < levels.Count; i++)
             levels[i].SetActive(false);
+
+        currentNode = levels[level - 1].transform;
+        currentNodeScale = currentNode.localScale;
 
         dollyCartDestination.Initialize();
         deckManager.Initialize();
@@ -35,17 +44,37 @@ public class LevelSceneManager : MonoBehaviour
     }
     void Update()
     {
-        if (!Input.GetMouseButtonUp(0)) return;
-        
-        Vector2 screenPos = Input.mousePosition;
-        Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
-        if (hit.collider == null) return;
-        
-        int level = SaveData.Level;
-        if (levels.IndexOf(hit.collider.gameObject) + 1 != level) return;
+        bool hovered = IsCurrentNodeUnderMouse();
+        if (hovered != isNodeHovered)
+            SetNodeHovered(hovered);
 
-        if (hit.collider.gameObject.name.StartsWith("camp"))
+        if (hovered && Input.GetMouseButtonUp(0))
+            EnterCurrentLevel();
+    }
+
+    private bool IsCurrentNodeUnderMouse()
+    {
+        if (EventSystem.current.IsPointerOverGameObject()) return false;
+
+        Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+        return hit.collider != null && hit.collider.transform == currentNode;
+    }
+
+    private void SetNodeHovered(bool hovered)
+    {
+        isNodeHovered = hovered;
+        currentNode.DOScale(hovered ? currentNodeScale * 1.2f : currentNodeScale, 0.15f);
+
+        if (hovered)
+            SfxManager.Instance.PlayFocusSound();
+    }
+
+    private void EnterCurrentLevel()
+    {
+        SfxManager.Instance.PlayClickSound();
+
+        if (currentNode.name.StartsWith("camp"))
         {
             SceneManager.LoadScene(SceneName.Camp.ToSceneString());
         }
