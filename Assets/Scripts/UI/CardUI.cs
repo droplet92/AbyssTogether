@@ -34,6 +34,9 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     private ITarget hoveredTarget;
     private bool isFreeze = false;
     private bool uiOnly = false;
+    private bool isInHand = false;
+    private bool isHovered = false;
+    private bool isDragging = false;
 
     protected override void Awake()
     {
@@ -52,8 +55,9 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (eventData.dragging || uiOnly) return;
+        if (eventData.dragging || uiOnly || !isInHand) return;
 
+        isHovered = true;
         originSiblingIndex = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
 
@@ -64,8 +68,9 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (eventData.dragging || uiOnly) return;
+        if (eventData.dragging || uiOnly || !isHovered) return;
 
+        isHovered = false;
         transform.SetSiblingIndex(originSiblingIndex);
         
         DOTween.Sequence()
@@ -76,8 +81,9 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (isFreeze) return;
+        if (isFreeze || !isInHand) return;
 
+        isDragging = true;
         DOTween.Sequence()
             .Join(rectTransform.DOScale(0.5f, 0.2f))
             .Join(rectTransform.DOMove(eventData.position, 0))
@@ -85,7 +91,7 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (isFreeze) return;
+        if (isFreeze || !isDragging) return;
             
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
@@ -103,6 +109,9 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     }
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!isDragging) return;
+
+        isDragging = false;
         if (isFreeze)
         {
             if (hoveredTarget != null)
@@ -158,6 +167,7 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
         originPos = parentPos;
         originAnchorPos = anchorPos;
         originLocalRotation = localRotation;
+        isInHand = true;
     }
     public void Freeze()
     {
