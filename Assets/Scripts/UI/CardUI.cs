@@ -193,12 +193,19 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     public void AddTeamTalkEvent(Action selectCard)
     {
         var eventTrigger = gameObject.AddComponent<EventTrigger>();
-        var clickEntry = new EventTrigger.Entry()
+        var scale = transform.localScale;
+
+        AddTrigger(eventTrigger, EventTriggerType.PointerEnter, () =>
         {
-            eventID = EventTriggerType.PointerClick
-        };
-        clickEntry.callback.AddListener((data) => selectCard());
-        eventTrigger.triggers.Add(clickEntry);
+            transform.DOScale(scale * 1.06f, 0.1f);
+            SfxManager.Instance.PlayFocusSound();
+        });
+        AddTrigger(eventTrigger, EventTriggerType.PointerExit, () => transform.DOScale(scale, 0.1f));
+        AddTrigger(eventTrigger, EventTriggerType.PointerClick, () =>
+        {
+            SfxManager.Instance.PlayClickSound();
+            selectCard();
+        });
     }
     public void SetOX(bool isO, bool activate)
     {
@@ -206,6 +213,12 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         else X.gameObject.SetActive(activate);
     }
 
+    private static void AddTrigger(EventTrigger eventTrigger, EventTriggerType type, Action action)
+    {
+        var entry = new EventTrigger.Entry { eventID = type };
+        entry.callback.AddListener(_ => action());
+        eventTrigger.triggers.Add(entry);
+    }
     private void RefreshDescription()
     {
         localizedDescription.RefreshString();
