@@ -47,6 +47,7 @@ public class HandUI : MonoBehaviour
         handCards.Remove(card);
         deckManager.Deck.Play(deckCards[card]);
         deckCards.Remove(card);
+        ArrangeHand();
 
         DOTween.Sequence()
             .Join(card.DOScale(0.5f, 0.1f))
@@ -83,43 +84,18 @@ public class HandUI : MonoBehaviour
 
     private void ArrangeHand()
     {
-        if (handCards.Count == 0) return;
-        const float totalArc = 45f;   // degree 45~135
+        const float angleStep = 15f;
         const float radius = 1000f;
-        Vector2 center = Vector2.zero;
+        float startAngle = -180f + angleStep * (handCards.Count - 1) / 2;
 
-        if (handCards.Count == 1)
+        for (int i = 0; i < handCards.Count; i++)
         {
-            RectTransform onlyCard = handCards[0];
-            onlyCard.GetComponent<CardUI>().SetCardOrigin(transform.position, center, Vector3.zero);
-            
-            DOTween.Sequence()
-                .Join(onlyCard.DOAnchorPos(center, 0.3f))
-                .Join(onlyCard.DOLocalRotateQuaternion(Quaternion.identity, 0.3f))
-                .SetEase(Ease.OutQuad);
-        }
-        else
-        {
-            const float startAngle = -totalArc / 2 - 135f;
-            float angleStep = totalArc / (handCards.Count - 1);
+            float angle = startAngle - angleStep * i;
+            float rad = angle * Mathf.Deg2Rad;
+            var anchorPos = new Vector2(radius * Mathf.Sin(rad), -radius - radius * Mathf.Cos(rad));
+            var localRotate = new Vector3(0, 0, angle + 180f);
 
-            for (int i = 0; i < handCards.Count; i++)
-            {
-                float angle = startAngle - (angleStep * i);
-                float rad = angle * Mathf.Deg2Rad;
-                float x = center.x + radius * Mathf.Sin(rad);
-                float y = center.y - radius - radius * Mathf.Cos(rad);
-                var anchorPos = new Vector2(x, y);
-                var localRotate = new Vector3(0, 0, angle + 180f);
-
-                RectTransform cardRect = handCards[i];
-                cardRect.GetComponent<CardUI>().SetCardOrigin(transform.position, anchorPos, localRotate);
-                
-                DOTween.Sequence()
-                    .Join(cardRect.DOAnchorPos(anchorPos, 0.3f))
-                    .Join(cardRect.DOLocalRotate(localRotate, 0.3f))
-                    .SetEase(Ease.InQuad);
-            }
+            handCards[i].GetComponent<CardUI>().MoveToHandSlot(transform.position, anchorPos, localRotate);
         }
     }
 }

@@ -161,12 +161,19 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         owner.attackChanged += RefreshDescription;
         fieldPanel.itemEffectsChanged += RefreshDescription;
     }
-    public void SetCardOrigin(Vector3 parentPos, Vector2 anchorPos, Vector3 localRotation)
+    public void MoveToHandSlot(Vector3 parentPos, Vector2 anchorPos, Vector3 localRotation)
     {
         originPos = parentPos;
         originAnchorPos = anchorPos;
         originLocalRotation = localRotation;
         isInHand = true;
+
+        if (isHovered || isDragging) return;
+
+        DOTween.Sequence()
+            .Join(rectTransform.DOAnchorPos(anchorPos, 0.3f))
+            .Join(rectTransform.DOLocalRotate(localRotation, 0.3f))
+            .SetEase(Ease.InQuad);
     }
     public void Freeze()
     {
