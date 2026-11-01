@@ -23,8 +23,9 @@ public class Character : MonoBehaviour, ITarget
     public int Attack { get => attack; }
     public int Defense { get => defense; }
 
-    void Awake()
+    public void Initialize()
     {
+        buffs.Initialize();
         CurrentHealth = SaveData.GetHealth(gameObject.name, maxHealth);
         
         if (IsDead()) gameObject.SetActive(false);

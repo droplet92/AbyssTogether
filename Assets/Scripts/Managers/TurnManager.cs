@@ -19,7 +19,7 @@ public class TurnManager : MonoBehaviour
     private int nDraws = 4;
     private int playerCharacter;
 
-    void Awake()
+    public void Initialize()
     {
         playerCharacter = SaveData.PlayerCharacter - 1;
 

@@ -9,7 +9,7 @@ public class OpeningCanvas : MonoBehaviour
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button exitButton;
     
-    void Awake()
+    public void Initialize()
     {
         startButton.onClick.AddListener(StartGame);
         settingsButton.onClick.AddListener(ToggleSettingsPanel);

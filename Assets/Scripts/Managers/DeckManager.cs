@@ -9,7 +9,7 @@ public class DeckManager : MonoBehaviour
     private List<CardData> playDeck = new List<CardData>();
     private List<CardData> hand = new List<CardData>();
 
-    void Awake()
+    public void Initialize()
     {
         LoadDeck();
         ResetDeck();

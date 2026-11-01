@@ -24,7 +24,7 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         { "MagicBook",   "Healer" },
     };
 
-    void Start()
+    public void Initialize()
     {
         SetItemData();
         

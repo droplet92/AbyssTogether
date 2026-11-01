@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 38796354}
   - component: {fileID: 38796355}
   m_Layer: 0
-  m_Name: CampManager
+  m_Name: CampSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -307,6 +307,8 @@ MonoBehaviour:
   teamTalkButton: {fileID: 130978377}
   fadeOut: {fileID: 2052333848}
   levelText: {fileID: 85679655}
+  deckManager: {fileID: 1134363027}
+  statusBar: {fileID: 728906582}
 --- !u!1 &85679653
 GameObject:
   m_ObjectHideFlags: 0
@@ -4955,6 +4957,15 @@ MonoBehaviour:
   deckPanel: {fileID: 1014176418}
   settingsButton: {fileID: 285640598}
   deckButton: {fileID: 491032723}
+  items:
+  - {fileID: 121021698}
+  - {fileID: 506626896}
+  - {fileID: 449898746}
+  - {fileID: 1921505859}
+  potions:
+  - {fileID: 206406047}
+  - {fileID: 1323104374}
+  - {fileID: 1403427321}
 --- !u!1 &739088825
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,13 +33,13 @@ public class VideoPlayerManager : MonoBehaviour
     }
 #endif
 
-    void Awake()
+    public void Initialize()
     {
         introPlayer.prepareCompleted += vp => TryPlay();
         introPlayer.loopPointReached += PlayGame;
         introPlayer.errorReceived += (vp, message) => PlayGame(vp);
     }
-    void Start()
+    public void Begin()
     {
         introPlayer.url = Path.Combine(Application.streamingAssetsPath, IntroFileName);
         introPlayer.Prepare();

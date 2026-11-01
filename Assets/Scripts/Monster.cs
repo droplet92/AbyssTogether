@@ -51,6 +51,7 @@ public class Monster : MonoBehaviour, ITarget
 
     public void Initialize(MonsterData data)
     {
+        buffs.Initialize();
         maxHealth = currentHealth = data.health;
         attack = data.attack;
         defense = data.defense;

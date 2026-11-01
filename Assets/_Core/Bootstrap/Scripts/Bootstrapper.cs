@@ -7,9 +7,17 @@ using UnityEngine.UI;
 public class Bootstrapper : MonoBehaviour
 {
     [SerializeField] private Image logo;
+    [SerializeField] private DataManager dataManager;
+    [SerializeField] private BgmManager bgmManager;
+    [SerializeField] private SfxManager sfxManager;
+    [SerializeField] private SceneTransitionManager sceneTransitionManager;
 
     void Awake()
     {
+        dataManager.Register();
+        bgmManager.Register();
+        sfxManager.Register();
+        sceneTransitionManager.Register();
         StartCoroutine(Initialize());
     }
 

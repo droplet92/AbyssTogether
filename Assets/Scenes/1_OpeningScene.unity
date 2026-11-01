@@ -7146,6 +7146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 952752024}
+  openingCanvas: {fileID: 952752026}
   settingsPanel: {fileID: 443876569}
   videoPlayerManager: {fileID: 894232495}
 --- !u!4 &1930522478

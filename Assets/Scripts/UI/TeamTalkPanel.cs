@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TeamTalkPanel : MonoBehaviour
 {
-    [SerializeField] private CampManager campManager;
+    [SerializeField] private CampSceneManager campManager;
     [SerializeField] private DeckManager deckManager;
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private Transform content;

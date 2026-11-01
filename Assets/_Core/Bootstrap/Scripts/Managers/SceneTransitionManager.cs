@@ -18,7 +18,7 @@ public class SceneTransitionManager : MonoBehaviour
         { SceneName.Ending,             BgmType.NonBattle },
     };
 
-    void Awake()
+    public void Register()
     {
         if (Instance == null)
         {

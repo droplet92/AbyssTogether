@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 761848722}
   - component: {fileID: 761848721}
   m_Layer: 0
-  m_Name: EndingManager
+  m_Name: EndingSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

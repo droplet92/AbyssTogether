@@ -23,7 +23,7 @@ public class PotionUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private string potionName;
     private string targetType;
 
-    void Start()
+    public void Initialize()
     {
         tooltip = Tooltip.FromPrefab(tooltipPrefab, statusBar, transform.parent.localPosition);
         canvas = GetComponentInParent<Canvas>();

@@ -3758,7 +3758,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   db: {fileID: 11400000, guid: 50227468ff0b34448a59f602bb138d06, type: 2}
-  hand: []
 --- !u!4 &604910018
 Transform:
   m_ObjectHideFlags: 0
@@ -4364,6 +4363,9 @@ MonoBehaviour:
   - {fileID: 1750496068}
   - {fileID: 1851487406}
   levelText: {fileID: 128788561}
+  dollyCartDestination: {fileID: 425149834}
+  deckManager: {fileID: 604910017}
+  statusBar: {fileID: 1820700246}
 --- !u!1 &744550600
 GameObject:
   m_ObjectHideFlags: 0
@@ -11323,6 +11325,15 @@ MonoBehaviour:
   deckPanel: {fileID: 1817983254}
   settingsButton: {fileID: 442356965}
   deckButton: {fileID: 619225275}
+  items:
+  - {fileID: 1702007773}
+  - {fileID: 1063880402}
+  - {fileID: 1701380113}
+  - {fileID: 2124642368}
+  potions:
+  - {fileID: 1366779997}
+  - {fileID: 777852871}
+  - {fileID: 1355402816}
 --- !u!1 &1830543512
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CharacterSelectManager : MonoBehaviour
+public class CharacterSelectSceneManager : MonoBehaviour
 {
     [SerializeField] private List<Button> buttons;
     

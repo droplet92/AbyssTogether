@@ -14,7 +14,7 @@ public class Buffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private int attack = 0;
     private int defense = 0;
     
-    void Awake()
+    public void Initialize()
     {
         bool isCharacter = transform.parent.GetComponent<Character>() != null;
         var localPosition = transform.parent.localPosition + (isCharacter ? new Vector3(0, 200f) : Vector3.zero);

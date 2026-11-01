@@ -13,7 +13,7 @@ public class ResultPanel : MonoBehaviour
     [SerializeField] private Button itemButton;
     [SerializeField] private Button okButton;
 
-    void Awake()
+    public void Initialize()
     {
         potionButton.onClick.AddListener(ActivatePotionReward);
         itemButton.onClick.AddListener(ActivateItemReward);

@@ -7,7 +7,7 @@ public class DollyCartDestination : MonoBehaviour
 {
     [SerializeField] private List<GameObject> levels;
     
-    void Awake()
+    public void Initialize()
     {
         int level = SaveData.Level;
         var smoothPath = GetComponent<CinemachineSmoothPath>();

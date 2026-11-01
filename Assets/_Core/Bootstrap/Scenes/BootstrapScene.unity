@@ -1294,6 +1294,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logo: {fileID: 575154148}
+  dataManager: {fileID: 1220932134}
+  bgmManager: {fileID: 1543289251}
+  sfxManager: {fileID: 601668310}
+  sceneTransitionManager: {fileID: 1600180515}
 --- !u!1 &2060295120
 GameObject:
   m_ObjectHideFlags: 0

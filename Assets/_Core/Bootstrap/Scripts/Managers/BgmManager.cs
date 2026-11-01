@@ -13,7 +13,7 @@ public class BgmManager : MonoBehaviour
     
     private Dictionary<BgmType, AudioSource> toAudioSource;
 
-    void Awake()
+    public void Register()
     {
         if (Instance == null)
         {

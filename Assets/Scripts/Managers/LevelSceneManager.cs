@@ -3,10 +3,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour
+public class LevelSceneManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> levels;
     [SerializeField] private TMP_Text levelText;
+    [SerializeField] private DollyCartDestination dollyCartDestination;
+    [SerializeField] private DeckManager deckManager;
+    [SerializeField] private StatusBar statusBar;
 
     void Awake()
     {
@@ -18,6 +21,14 @@ public class LevelManager : MonoBehaviour
 
         for (int i = level; i < levels.Count; i++)
             levels[i].SetActive(false);
+
+        dollyCartDestination.Initialize();
+        deckManager.Initialize();
+        statusBar.Initialize();
+    }
+    void Start()
+    {
+        statusBar.InitializeSlots();
     }
     void Update()
     {

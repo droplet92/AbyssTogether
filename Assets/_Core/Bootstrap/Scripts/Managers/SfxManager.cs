@@ -7,7 +7,7 @@ public class SfxManager : MonoBehaviour
 
     public static SfxManager Instance { get; private set; }
 
-    void Awake()
+    public void Register()
     {
         if (Instance == null)
         {

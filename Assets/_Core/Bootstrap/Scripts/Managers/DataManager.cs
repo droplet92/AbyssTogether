@@ -5,7 +5,7 @@ public class DataManager : MonoBehaviour
 {
     public static DataManager Instance { get; private set; }
 
-    void Awake()
+    public void Register()
     {
         if (Instance == null)
         {

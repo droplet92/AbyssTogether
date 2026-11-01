@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class EndingManager : MonoBehaviour
+public class EndingSceneManager : MonoBehaviour
 {
     [SerializeField] private Image background;
     [SerializeField] private TMP_Text escapeTime;

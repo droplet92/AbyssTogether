@@ -18,7 +18,7 @@ public class FieldManager : MonoBehaviour
 
     public event Action itemEffectsChanged = () => {};
 
-    void Start()
+    public void Initialize()
     {
         UpdateItemEffects();
         monsterList.RemoveAll((Monster monster) => monster.IsDead());

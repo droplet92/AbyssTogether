@@ -30,7 +30,7 @@ public class RewardPanel : MonoBehaviour
         { "Necklace",  3 },
     };
 
-    void Awake()
+    public void Initialize()
     {
         Debug.Assert(potionList.Count == 3, "SerializeField size changed: Potion List");
     }

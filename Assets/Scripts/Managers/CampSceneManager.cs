@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CampManager : MonoBehaviour
+public class CampSceneManager : MonoBehaviour
 {
     [SerializeField] private RewardPanel rewardPanel;
     [SerializeField] private GameObject teamTalkPanel;
@@ -13,6 +13,8 @@ public class CampManager : MonoBehaviour
     [SerializeField] private Button teamTalkButton;
     [SerializeField] private Image fadeOut;
     [SerializeField] private TMP_Text levelText;
+    [SerializeField] private DeckManager deckManager;
+    [SerializeField] private StatusBar statusBar;
 
     private int level = 0;
 
@@ -27,6 +29,14 @@ public class CampManager : MonoBehaviour
 
         restButton.onClick.AddListener(() => ExitCamp());
         rewardPanel.AddConfirmListener(() => ExitCamp());
+
+        deckManager.Initialize();
+        statusBar.Initialize();
+        rewardPanel.Initialize();
+    }
+    void Start()
+    {
+        statusBar.InitializeSlots();
     }
 
     public void ExitCamp()
