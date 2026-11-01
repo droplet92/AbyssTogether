@@ -46,13 +46,16 @@ public class HandUI : AutoFieldValidator
         if (owner.IsDead())
             cardUI.Disable();
 
+        bool freeze = nFreeze > 0;
+        if (freeze) nFreeze--;
+
         DOTween.Sequence()
             .Join(cardUI.transform.DOScale(1f, 0.5f))
             .Join(cardUI.transform.DOMove(transform.position, 0.5f))
             .SetEase(Ease.OutQuad)
             .OnComplete(() =>
             {
-                if (handCards.Count < nFreeze)
+                if (freeze)
                     cardUI.Freeze();
 
                 handCards.Add(cardUI.GetComponent<RectTransform>());
