@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Globalization;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,12 +15,19 @@ public class Bootstrapper : MonoBehaviour
 
     void Awake()
     {
+        UseInvariantNumberFormat();
         Palette.ApplyTextStyles();
         dataManager.Register();
         bgmManager.Register();
         sfxManager.Register();
         sceneTransitionManager.Register();
         StartCoroutine(Initialize());
+    }
+
+    private static void UseInvariantNumberFormat()
+    {
+        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+        CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
     }
 
     private IEnumerator Initialize()
