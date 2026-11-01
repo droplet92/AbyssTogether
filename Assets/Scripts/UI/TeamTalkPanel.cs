@@ -38,6 +38,8 @@ public class TeamTalkPanel : MonoBehaviour
             int index = i;
             cardUI.AddTeamTalkEvent(() => SelectCard(cardUI, index));
         }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
+        scrollRect.verticalNormalizedPosition = 1f;
     }
     void Update()
     {

@@ -10,9 +10,14 @@ public class DeckPanel : MonoBehaviour
 
     private DeckManager deckManager;
 
+    void OnEnable()
+    {
+        ScrollToTop();
+    }
     void Start()
     {
         CreateCards();
+        ScrollToTop();
         okButton.onClick.AddListener(ClosePanel);
     }
     void Update()
@@ -33,6 +38,12 @@ public class DeckPanel : MonoBehaviour
             cardUI.SetCardData(cardData, null);
             cardUI.Exhibit();
         }
+    }
+
+    private void ScrollToTop()
+    {
+        LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
+        scrollRect.verticalNormalizedPosition = 1f;
     }
 
     private void ClosePanel()
