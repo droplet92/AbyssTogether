@@ -24,7 +24,7 @@ public class ScreenResolutionSetting : MonoBehaviour
         enabled = false;
         dropdown.interactable = false;
     #else
-        int value = PlayerPrefs.GetInt("ScreenMode", (int)ScreenResolution.FullHD);
+        int value = PlayerPrefs.GetInt("ScreenResolution", (int)ScreenResolution.FullHD);
         SetScreenResolution(value);
     #endif
     }
