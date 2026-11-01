@@ -10,4 +10,7 @@ public class CardData : ScriptableObject
     public string cardName;
     public LocalizedString description;
     public string targetType;
+    public PartyMember owner;
+    [Tooltip("Value shown when the card is not held by a party member, such as in the deck view.")]
+    public int baseValue;
 }

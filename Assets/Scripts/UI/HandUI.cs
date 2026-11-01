@@ -13,19 +13,6 @@ public class HandUI : MonoBehaviour
     
     private List<RectTransform> handCards = new List<RectTransform>();
     private Dictionary<RectTransform, DeckCard> deckCards = new Dictionary<RectTransform, DeckCard>();
-    private static Dictionary<string, int> cardToCharacterIndex = new Dictionary<string, int>()
-    {
-        { "Shield",     0 },
-        { "ShieldAll",  0 },
-        { "Attack",     1 },
-        { "AttackAll",  1 },
-        { "Buff",       2 },
-        { "Debuff",     2 },
-        { "Skill",      2 },
-        { "Heal",       3 },
-        { "HealAll",    3 },
-    };
-
     public void DrawCard()
     {
         DeckCard drawnCard = deckManager.Deck.Draw();
@@ -33,7 +20,7 @@ public class HandUI : MonoBehaviour
         cardUI.transform.localScale = Vector3.one / 2;
         cardUI.transform.position = deckTransform.position;
 
-        var owner = characters[cardToCharacterIndex[drawnCard.Data.cardName]];
+        var owner = characters[(int)drawnCard.Data.owner];
         cardUI.SetCardData(drawnCard.Data, owner);
         if (owner.IsDead())
             cardUI.Disable();

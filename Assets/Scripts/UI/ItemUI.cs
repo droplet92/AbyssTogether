@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,15 +13,10 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private GameObject tooltipPrefab;
     [SerializeField] private string itemName;
 
+    public string ItemName => itemName;
+
     private Tooltip tooltip;
     private bool isActive = false;
-    private Dictionary<string, string> toOwner = new Dictionary<string, string>()
-    {
-        { "Necklace",    "Warrior" },
-        { "Sword",       "Swordsman" },
-        { "Ring",        "Magician" },
-        { "MagicBook",   "Healer" },
-    };
 
     public void Initialize()
     {
@@ -55,7 +49,7 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private bool IsCharacterDead()
     {
-        if (character == null) return SaveData.GetHealth(toOwner[itemName]) <= 0;
+        if (character == null) return SaveData.GetHealth(db.GetEquipment(itemName).owner.ToString()) <= 0;
         return character.IsDead();
     }
     private void DisableColor()

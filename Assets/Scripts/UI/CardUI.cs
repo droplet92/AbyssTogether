@@ -210,9 +210,6 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     private int GetCardValue()
     {
         if (owner != null) return owner.Attack + fieldPanel.GetItemBonus(owner);
-        if (cardNameText.text.StartsWith("Shield")) return 3;
-        if (cardNameText.text.StartsWith("Attack")) return 4;
-        if (cardNameText.text.StartsWith("Heal")) return 2;
-        return 9;
+        return CardData.baseValue;
     }
 }

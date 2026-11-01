@@ -7,4 +7,5 @@ public class EquipmentData : ScriptableObject
     public LocalizedString equipmentName;
     public Sprite equipmentImage;
     public LocalizedString description;
+    public PartyMember owner;
 }

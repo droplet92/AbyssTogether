@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -22,13 +23,6 @@ public class RewardPanel : MonoBehaviour
 
     private LocalizedString localizedDescription;
     private LocalizedString localizedNotice;
-    private Dictionary<string, int> toIndex = new Dictionary<string, int>()
-    {
-        { "MagicBook", 0 },
-        { "Ring",      1 },
-        { "Sword",     2 },
-        { "Necklace",  3 },
-    };
 
     public void Initialize()
     {
@@ -85,7 +79,7 @@ public class RewardPanel : MonoBehaviour
             ShowNotice(itemOwnedNotice);
 
         SaveData.SetItem(item.name, true);
-        itemList[toIndex[item.name]].SetItemData();
+        itemList.First(slot => slot.ItemName == item.name).SetItemData();
     }
 
     private void OnStringChanged(string value)
