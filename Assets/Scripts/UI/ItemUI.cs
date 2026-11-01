@@ -1,10 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField, Optional] private Character character;
     [SerializeField] private Transform statusBar;
     [SerializeField] private EquipmentDatabase db;
     [SerializeField] private Image portrait;
@@ -15,11 +16,15 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public string ItemName => itemName;
 
+    private Character character;
     private Tooltip tooltip;
     private bool isActive = false;
 
-    public void Initialize()
+    public void Initialize(IReadOnlyList<Character> characters)
     {
+        var owner = db.GetEquipment(itemName).owner.ToString();
+        character = characters?.FirstOrDefault(c => c.name == owner);
+
         SetItemData();
         
         bool isPlayerCharacter = name == $"ItemSlot{SaveData.PlayerCharacter}";

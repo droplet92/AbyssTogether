@@ -3,15 +3,16 @@ using UnityEngine.UI;
 
 public class DeckPanel : MonoBehaviour
 {
-    [SerializeField] private DeckManager deckManager;
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private Transform content;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private Button okButton;
 
+    private DeckManager deckManager;
+
     void Start()
     {
-        Initialize();
+        CreateCards();
         okButton.onClick.AddListener(ClosePanel);
     }
     void Update()
@@ -19,7 +20,12 @@ public class DeckPanel : MonoBehaviour
         scrollRect.verticalNormalizedPosition += Input.mouseScrollDelta.y * 0.1f;
     }
 
-    public void Initialize()
+    public void Initialize(DeckManager deckManager)
+    {
+        this.deckManager = deckManager;
+    }
+
+    private void CreateCards()
     {
         foreach (var cardData in deckManager.CardList)
         {

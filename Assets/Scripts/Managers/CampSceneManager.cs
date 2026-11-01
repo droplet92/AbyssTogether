@@ -15,6 +15,8 @@ public class CampSceneManager : MonoBehaviour
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private DeckManager deckManager;
     [SerializeField] private StatusBar statusBar;
+    [SerializeField] private SettingsPanel settingsPanel;
+    [SerializeField] private DeckPanel deckPanel;
 
     private int level = 0;
 
@@ -31,12 +33,13 @@ public class CampSceneManager : MonoBehaviour
         rewardPanel.AddConfirmListener(() => ExitCamp());
 
         deckManager.Initialize();
-        statusBar.Initialize();
+        deckPanel.Initialize(deckManager);
+        statusBar.Initialize(settingsPanel, deckPanel);
         rewardPanel.Initialize();
     }
     void Start()
     {
-        statusBar.InitializeSlots();
+        statusBar.InitializeSlots(null);
     }
 
     public void ExitCamp()

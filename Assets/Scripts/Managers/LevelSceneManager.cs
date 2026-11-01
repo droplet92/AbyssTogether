@@ -10,6 +10,8 @@ public class LevelSceneManager : MonoBehaviour
     [SerializeField] private DollyCartDestination dollyCartDestination;
     [SerializeField] private DeckManager deckManager;
     [SerializeField] private StatusBar statusBar;
+    [SerializeField] private SettingsPanel settingsPanel;
+    [SerializeField] private DeckPanel deckPanel;
 
     void Awake()
     {
@@ -24,11 +26,12 @@ public class LevelSceneManager : MonoBehaviour
 
         dollyCartDestination.Initialize();
         deckManager.Initialize();
-        statusBar.Initialize();
+        deckPanel.Initialize(deckManager);
+        statusBar.Initialize(settingsPanel, deckPanel);
     }
     void Start()
     {
-        statusBar.InitializeSlots();
+        statusBar.InitializeSlots(null);
     }
     void Update()
     {

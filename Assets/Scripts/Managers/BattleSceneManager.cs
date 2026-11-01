@@ -8,6 +8,8 @@ public class BattleSceneManager : MonoBehaviour
     [SerializeField] private DeckManager deckManager;
     [SerializeField] private FieldManager fieldManager;
     [SerializeField] private StatusBar statusBar;
+    [SerializeField] private SettingsPanel settingsPanel;
+    [SerializeField] private DeckPanel deckPanel;
     [SerializeField] private ResultPanel resultPanel;
     [SerializeField] private RewardPanel rewardPanel;
     [SerializeField] private TurnManager turnManager;
@@ -19,7 +21,8 @@ public class BattleSceneManager : MonoBehaviour
 
         monsterManager.Initialize();
         deckManager.Initialize();
-        statusBar.Initialize();
+        deckPanel.Initialize(deckManager);
+        statusBar.Initialize(settingsPanel, deckPanel);
         resultPanel.Initialize();
         rewardPanel.Initialize();
         turnManager.Initialize();
@@ -27,6 +30,6 @@ public class BattleSceneManager : MonoBehaviour
     void Start()
     {
         fieldManager.Initialize();
-        statusBar.InitializeSlots();
+        statusBar.InitializeSlots(characters);
     }
 }
