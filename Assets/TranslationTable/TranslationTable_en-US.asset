@@ -108,48 +108,48 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1680742388453376
-    m_Localized: Damage <color=#4E9F3D>{0}</color> (Target)
+    m_Localized: Damage <style="Positive">{0}</style> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1682143718002688
-    m_Localized: Damage <color=#4E9F3D>{0}</color> (Target)
+    m_Localized: Damage <style="Positive">{0}</style> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1680775640895488
-    m_Localized: Damage <color=#4E9F3D>{0}</color> (All)
+    m_Localized: Damage <style="Positive">{0}</style> (All)
     m_Metadata:
       m_Items: []
   - m_Id: 1680796415283200
-    m_Localized: Attack <color=#393E46>+3</color> (Target)
+    m_Localized: Attack <style="ValueNeutral">+3</style> (Target)
     m_Metadata:
       m_Items:
       - rid: 7564831983321743367
   - m_Id: 1680815407091712
-    m_Localized: Attack <color=#393E46>-1</color> (Target)
+    m_Localized: Attack <style="ValueNeutral">-1</style> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1681965237784576
-    m_Localized: Heal <color=#4E9F3D>+{0}</color> (Target)
+    m_Localized: Heal <style="Positive">+{0}</style> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1681969230761984
-    m_Localized: Heal <color=#4E9F3D>+{0}</color> (Party)
+    m_Localized: Heal <style="Positive">+{0}</style> (Party)
     m_Metadata:
       m_Items: []
   - m_Id: 1681971613126656
-    m_Localized: Defense <color=#4E9F3D>+{0}</color> (Target)
+    m_Localized: Defense <style="Positive">+{0}</style> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1681973362151424
-    m_Localized: Defense <color=#4E9F3D>+{0}</color> (Party)
+    m_Localized: Defense <style="Positive">+{0}</style> (Party)
     m_Metadata:
       m_Items: []
   - m_Id: 1683936636162048
-    m_Localized: Attack <color=#4E9F3D>{0}</color>
+    m_Localized: Attack <style="Positive">{0}</style>
     m_Metadata:
       m_Items: []
   - m_Id: 1683955695079424
-    m_Localized: Defense <color=#4E9F3D>{0}</color>
+    m_Localized: Defense <style="Positive">{0}</style>
     m_Metadata:
       m_Items: []
   - m_Id: 1684214173257728
@@ -185,19 +185,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1685783610511360
-    m_Localized: Attack <color=#FFD369>+1</color> (Healer)
+    m_Localized: Attack <style="Accent">+1</style> (Healer)
     m_Metadata:
       m_Items: []
   - m_Id: 1685788073250816
-    m_Localized: Attack <color=#FFD369>+1</color> (Party)
+    m_Localized: Attack <style="Accent">+1</style> (Party)
     m_Metadata:
       m_Items: []
   - m_Id: 1685785451810816
-    m_Localized: Defense <color=#FFD369>+1</color> (Party)
+    m_Localized: Defense <style="Accent">+1</style> (Party)
     m_Metadata:
       m_Items: []
   - m_Id: 1685786764627968
-    m_Localized: All Debuffs <color=#FFD369>-1</color>
+    m_Localized: All Debuffs <style="Accent">-1</style>
     m_Metadata:
       m_Items: []
   - m_Id: 1687064169271296
@@ -221,23 +221,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1687730509959168
-    m_Localized: Attack <color=#FFD369>+1</color> (Healer)
+    m_Localized: Attack <style="Accent">+1</style> (Healer)
     m_Metadata:
       m_Items: []
   - m_Id: 1687736214212608
-    m_Localized: Defense <color=#FFD369>+99</color> (Target)
+    m_Localized: Defense <style="Accent">+99</style> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1687738865012736
-    m_Localized: Defense <color=#FFD369>+2</color> (Target)
+    m_Localized: Defense <style="Accent">+2</style> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1687743898177536
-    m_Localized: Attack <color=#FFD369>+2</color> (Target)
+    m_Localized: Attack <style="Accent">+2</style> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1687820872044544
-    m_Localized: Attack <color=#FFD369>-2</color> (Target)
+    m_Localized: Attack <style="Accent">-2</style> (Target)
     m_Metadata:
       m_Items: []
   - m_Id: 1704988296728576
@@ -245,11 +245,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2876879971667968
-    m_Localized: Select 1 card to <color=#FFD369>remove</color> from your deck
+    m_Localized: Select 1 card to <style="Accent">remove</style> from your deck
     m_Metadata:
       m_Items: []
   - m_Id: 2876882198843392
-    m_Localized: Select 1 card to <color=#FFD369>copy</color> from your deck
+    m_Localized: Select 1 card to <style="Accent">copy</style> from your deck
     m_Metadata:
       m_Items: []
   - m_Id: 238283110686384128

@@ -14,6 +14,7 @@ public class Bootstrapper : MonoBehaviour
 
     void Awake()
     {
+        Palette.ApplyTextStyles();
         dataManager.Register();
         bgmManager.Register();
         sfxManager.Register();
