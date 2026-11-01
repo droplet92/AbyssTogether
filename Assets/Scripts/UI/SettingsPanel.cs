@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsPanel : AutoFieldValidator
+public class SettingsPanel : MonoBehaviour
 {
     [SerializeField] private LanguageSetting languageSetting;
     [SerializeField] private ScreenModeSetting screenModeSetting;
@@ -17,9 +17,8 @@ public class SettingsPanel : AutoFieldValidator
     private float bgmVolume;
     private float sfxVolume;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         okButton.onClick.AddListener(Confirm);
         cancelButton.onClick.AddListener(Rollback);
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BgmManager : AutoFieldValidator
+public class BgmManager : MonoBehaviour
 {
     [SerializeField] private AudioSource openingBGM;
     [SerializeField] private AudioSource battleBGM;
@@ -13,9 +13,8 @@ public class BgmManager : AutoFieldValidator
     
     private Dictionary<BgmType, AudioSource> toAudioSource;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         if (Instance == null)
         {
             Instance = this;

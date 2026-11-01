@@ -4,7 +4,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Character : AutoFieldValidator, ITarget
+public class Character : MonoBehaviour, ITarget
 {
     [Header("캐릭터 기본 설정")]
     [SerializeField] private Image body;
@@ -23,9 +23,8 @@ public class Character : AutoFieldValidator, ITarget
     public int Attack { get => attack; }
     public int Defense { get => defense; }
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         CurrentHealth = PlayerPrefs.GetInt($"Hp{gameObject.name}", maxHealth);
         
         if (IsDead()) gameObject.SetActive(false);

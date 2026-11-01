@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CharacterSelectManager : AutoFieldValidator
+public class CharacterSelectManager : MonoBehaviour
 {
     [SerializeField] private List<Button> buttons;
     
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         Debug.Assert(buttons.Count == 4, "SerializeField size changed: Buttons");
 
         for (int i = 0; i < buttons.Count; ++i)

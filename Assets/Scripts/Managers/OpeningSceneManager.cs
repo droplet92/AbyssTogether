@@ -1,14 +1,13 @@
 using UnityEngine;
 
-public class OpeningSceneManager : AutoFieldValidator
+public class OpeningSceneManager : MonoBehaviour
 {
     [SerializeField] private Canvas canvas;
     [SerializeField] private CanvasRenderer settingsPanel;
     [SerializeField] private VideoPlayerManager videoPlayerManager;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         videoPlayerManager.OnAllVideoEnd += PlayGame;
     }
     void Start()

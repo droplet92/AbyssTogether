@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class SfxManager : AutoFieldValidator
+public class SfxManager : MonoBehaviour
 {
     [SerializeField] private AudioSource clickSound;
     [SerializeField] private AudioSource focusSound;
 
     public static SfxManager Instance { get; private set; }
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         if (Instance == null)
         {
             Instance = this;

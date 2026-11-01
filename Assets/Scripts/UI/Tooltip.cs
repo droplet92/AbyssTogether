@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 
-public class Tooltip : AutoFieldValidator
+public class Tooltip : MonoBehaviour
 {
     [SerializeField] private Image frameImage;
     [SerializeField] private TMP_Text itemName;

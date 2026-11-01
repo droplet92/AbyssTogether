@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Buffs : AutoFieldValidator, IPointerEnterHandler, IPointerExitHandler
+public class Buffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Transform field;
     [SerializeField] private Image attackImage;
@@ -14,9 +14,8 @@ public class Buffs : AutoFieldValidator, IPointerEnterHandler, IPointerExitHandl
     private int attack = 0;
     private int defense = 0;
     
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         bool isCharacter = transform.parent.GetComponent<Character>() != null;
         var localPosition = transform.parent.localPosition + (isCharacter ? new Vector3(0, 200f) : Vector3.zero);
         tooltip = BuffTooltip.FromPrefab(tooltipPrefab, field, localPosition);

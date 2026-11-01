@@ -2,16 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using BgmType = BgmManager.BgmType;
 
-public class OpeningCanvas : AutoFieldValidator
+public class OpeningCanvas : MonoBehaviour
 {
     [SerializeField] private CanvasRenderer settingsPanel;
     [SerializeField] private Button startButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button exitButton;
     
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         startButton.onClick.AddListener(StartGame);
         settingsButton.onClick.AddListener(ToggleSettingsPanel);
         exitButton.onClick.AddListener(ExitGame);

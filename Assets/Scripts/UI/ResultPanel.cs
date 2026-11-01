@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResultPanel : AutoFieldValidator
+public class ResultPanel : MonoBehaviour
 {
     [SerializeField] private RewardPanel rewardPanel;
     [SerializeField] private TMP_Text labelWin;
@@ -13,9 +13,8 @@ public class ResultPanel : AutoFieldValidator
     [SerializeField] private Button itemButton;
     [SerializeField] private Button okButton;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         potionButton.onClick.AddListener(ActivatePotionReward);
         itemButton.onClick.AddListener(ActivateItemReward);
         rewardPanel.AddConfirmListener(() => rewardPanel.gameObject.SetActive(false));

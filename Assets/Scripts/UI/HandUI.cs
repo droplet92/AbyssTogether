@@ -3,7 +3,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System.Collections;
 
-public class HandUI : AutoFieldValidator
+public class HandUI : MonoBehaviour
 {
     [SerializeField] private List<Character> characters;
     [SerializeField] private DeckManager deckManager;

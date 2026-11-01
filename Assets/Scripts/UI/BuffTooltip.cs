@@ -4,7 +4,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.SmartFormat;
 using UnityEngine.UI;
 
-public class BuffTooltip : AutoFieldValidator
+public class BuffTooltip : MonoBehaviour
 {
     [SerializeField] private Image frameImage;
     [SerializeField] private TMP_Text attackText;
@@ -23,9 +23,8 @@ public class BuffTooltip : AutoFieldValidator
         return obj.GetComponent<BuffTooltip>();
     }
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         localizedAttack.StringChanged += OnAttackChanged;
         localizedDefense.StringChanged += OnDefenseChanged;
         localizedAttack.RefreshString();

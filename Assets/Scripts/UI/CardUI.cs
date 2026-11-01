@@ -7,7 +7,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.SmartFormat;
 using System;
 
-public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private Image cardFrame;
     [SerializeField] private Image cardImage;
@@ -38,9 +38,8 @@ public class CardUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHand
     private bool isHovered = false;
     private bool isDragging = false;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         canvas = GetComponentInParent<Canvas>();
         fieldPanel = canvas.GetComponentInChildren<FieldManager>();
         handPanel = GetComponentInParent<HandUI>();

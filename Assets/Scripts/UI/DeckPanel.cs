@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DeckPanel : AutoFieldValidator
+public class DeckPanel : MonoBehaviour
 {
     [SerializeField] private DeckManager deckManager;
     [SerializeField] private ScrollRect scrollRect;

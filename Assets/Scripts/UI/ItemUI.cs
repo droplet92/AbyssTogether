@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemUI : AutoFieldValidator, IPointerEnterHandler, IPointerExitHandler
+public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Character character;
+    [SerializeField, Optional] private Character character;
     [SerializeField] private Transform statusBar;
     [SerializeField] private EquipmentDatabase db;
     [SerializeField] private Image portrait;

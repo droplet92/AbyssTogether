@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 
-public class RewardPanel : AutoFieldValidator
+public class RewardPanel : MonoBehaviour
 {
     [SerializeField] private PotionDatabase potionDatabase;
     [SerializeField] private EquipmentDatabase equipmentDatabase;
@@ -14,8 +14,8 @@ public class RewardPanel : AutoFieldValidator
     [SerializeField] private TMP_Text notice;
     [SerializeField] private LocalizedString potionDiscardedNotice;
     [SerializeField] private LocalizedString itemOwnedNotice;
-    [SerializeField] private Button potionButton;
-    [SerializeField] private Button itemButton;
+    [SerializeField, Optional] private Button potionButton;
+    [SerializeField, Optional] private Button itemButton;
     [SerializeField] private List<ItemUI> itemList;
     [SerializeField] private List<PotionUI> potionList;
     [SerializeField] private Button okButton;
@@ -30,9 +30,8 @@ public class RewardPanel : AutoFieldValidator
         { "Necklace",  3 },
     };
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         Debug.Assert(potionList.Count == 3, "SerializeField size changed: Potion List");
     }
     void OnDestroy()

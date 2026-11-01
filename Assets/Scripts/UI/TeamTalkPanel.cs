@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.UI;
 
-public class TeamTalkPanel : AutoFieldValidator
+public class TeamTalkPanel : MonoBehaviour
 {
     [SerializeField] private CampManager campManager;
     [SerializeField] private DeckManager deckManager;
@@ -20,9 +20,8 @@ public class TeamTalkPanel : AutoFieldValidator
     private int removeIndex = -1;
     private int copyIndex = -1;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         removeString.StringChanged += OnLabelChanged;
         removeString.RefreshString();
         

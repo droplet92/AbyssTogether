@@ -1,16 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatusBar : AutoFieldValidator
+public class StatusBar : MonoBehaviour
 {
     [SerializeField] private CanvasRenderer settingsPanel;
     [SerializeField] private CanvasRenderer deckPanel;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button deckButton;
     
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         settingsButton.onClick.AddListener(ToggleSettingsPanel);
         deckButton.onClick.AddListener(ToggleDeckPanel);
     }

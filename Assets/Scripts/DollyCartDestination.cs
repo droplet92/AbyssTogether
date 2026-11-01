@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class DollyCartDestination : AutoFieldValidator
+public class DollyCartDestination : MonoBehaviour
 {
     [SerializeField] private List<GameObject> levels;
     
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         int level = PlayerPrefs.GetInt("level");
         var smoothPath = GetComponent<CinemachineSmoothPath>();
         var destination = smoothPath.m_Waypoints[1];

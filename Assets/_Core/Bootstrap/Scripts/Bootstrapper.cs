@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Bootstrapper : AutoFieldValidator
+public class Bootstrapper : MonoBehaviour
 {
     [SerializeField] private Image logo;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         StartCoroutine(Initialize());
     }
 

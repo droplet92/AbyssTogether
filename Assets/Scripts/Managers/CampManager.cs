@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CampManager : AutoFieldValidator
+public class CampManager : MonoBehaviour
 {
     [SerializeField] private RewardPanel rewardPanel;
     [SerializeField] private GameObject teamTalkPanel;
@@ -16,9 +16,8 @@ public class CampManager : AutoFieldValidator
 
     private int level = 0;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         level = PlayerPrefs.GetInt("level");
         levelText.text = level.ToString();
 

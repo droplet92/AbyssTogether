@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TurnManager : AutoFieldValidator
+public class TurnManager : MonoBehaviour
 {
     [SerializeField] private CanvasGroup nextTurn;
     [SerializeField] private TMP_Text levelText;
@@ -19,9 +19,8 @@ public class TurnManager : AutoFieldValidator
     private int nDraws = 4;
     private int playerCharacter;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         playerCharacter = PlayerPrefs.GetInt("PlayerCharacter") - 1;
 
         int level = PlayerPrefs.GetInt("level");
