@@ -43,6 +43,8 @@ public class ScreenModeSetting : MonoBehaviour
         var selection = (ScreenMode)value;
         dropdown.value = value;
 
+        PlayerPrefs.SetInt("ScreenMode", value);
+
         switch (selection)
         {
             case ScreenMode.FullScreenWindow:

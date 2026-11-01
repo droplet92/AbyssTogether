@@ -33,6 +33,8 @@ public class ScreenResolutionSetting : MonoBehaviour
         var selection = (ScreenResolution)value;
         dropdown.value = value;
 
+        PlayerPrefs.SetInt("ScreenResolution", value);
+
         switch (selection)
         {
             case ScreenResolution.nHD:
