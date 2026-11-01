@@ -59,8 +59,8 @@ public class ItemUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     private void DisableColor()
     {
-        image.color = Color.gray;
-        portrait.color = Color.gray;
+        image.color = Palette.Get(ColorToken.StateInactive);
+        portrait.color = Palette.Get(ColorToken.StateInactive);
     }
     public void SetItemData()
     {

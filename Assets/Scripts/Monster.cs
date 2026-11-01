@@ -139,9 +139,9 @@ public class Monster : MonoBehaviour, ITarget
     }
     private Color32 GetHpDiffColor(int delta)
     {
-        if (delta < 0) return new Color32(0xBC, 0x01, 0x19, 0xFF);  // red
-        if (delta > 0) return new Color32(0x31, 0x62, 0x57, 0xFF);  // green
-        return Color.white;
+        if (delta < 0) return Palette.Get(ColorToken.StatusDamage);
+        if (delta > 0) return Palette.Get(ColorToken.StatusHeal);
+        return Palette.Get(ColorToken.TextPrimary);
     }
     private Character GetRandomCharacter()
     {

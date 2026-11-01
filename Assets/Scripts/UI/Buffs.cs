@@ -56,7 +56,7 @@ public class Buffs : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void UpdateIconColor()
     {
-        attackImage.color = (attack > 0) ? Color.red : Color.blue;
-        defenseImage.color = (defense > 0) ? Color.red : Color.blue;
+        attackImage.color = Palette.Get(attack > 0 ? ColorToken.StatusBuffUp : ColorToken.StatusBuffDown);
+        defenseImage.color = Palette.Get(defense > 0 ? ColorToken.StatusBuffUp : ColorToken.StatusBuffDown);
     }
 }

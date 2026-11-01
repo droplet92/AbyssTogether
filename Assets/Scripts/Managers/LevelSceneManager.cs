@@ -25,7 +25,7 @@ public class LevelSceneManager : MonoBehaviour
         levelText.text = level.ToString();
 
         for (int i = 0; i < level - 1; i++)
-            levels[i].GetComponent<SpriteRenderer>().color = Color.gray;
+            levels[i].GetComponent<SpriteRenderer>().color = Palette.Get(ColorToken.StateInactive);
 
         for (int i = level; i < levels.Count; i++)
             levels[i].SetActive(false);

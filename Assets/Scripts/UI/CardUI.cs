@@ -178,7 +178,7 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     public void Freeze()
     {
         isFreeze = true;
-        cardFrame.color = Color.black;
+        cardFrame.color = Palette.Get(ColorToken.StateBlocked);
     }
     public void Exhibit()
     {
@@ -188,7 +188,7 @@ public class CardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     public void Disable()
     {
         Exhibit();
-        cardFrame.color = Color.black;
+        cardFrame.color = Palette.Get(ColorToken.StateBlocked);
     }
     public void AddTeamTalkEvent(Action selectCard)
     {
