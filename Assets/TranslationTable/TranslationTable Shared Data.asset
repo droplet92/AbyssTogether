@@ -255,6 +255,10 @@ MonoBehaviour:
     m_Key: RewardEquipmentOwned
     m_Metadata:
       m_Items: []
+  - m_Id: 238324856808005632
+    m_Key: ClickToStart
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

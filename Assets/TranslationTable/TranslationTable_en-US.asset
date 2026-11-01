@@ -260,6 +260,10 @@ MonoBehaviour:
     m_Localized: You already have this equipment
     m_Metadata:
       m_Items: []
+  - m_Id: 238324856808005632
+    m_Localized: Click to Start
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
